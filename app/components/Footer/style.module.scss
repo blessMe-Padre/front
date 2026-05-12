@@ -1,0 +1,9 @@
+@use '@/app/mixins' as *;
+
+// @include adaptiv-value("margin-top", 100, 30);
+
+.header {
+    color: #fff;
+    padding: 10px;
+    @include adaptiv-value("font-size", 200, 30);
+}

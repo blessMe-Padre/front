@@ -1,0 +1,20 @@
+@use "sass:math";
+
+$maxWidth: 1920;
+$maxWidthContainer: 1480;
+
+@mixin adaptiv-value($property, $startSize, $minSize) {
+    // Размеры — в rem (масштабируются от html font-size).
+    // Брейкпоинты — в px (не "плавают" при увеличении шрифта).
+    $minSizeRem: math.div($minSize, 16) * 1rem;
+    $startSizeRem: math.div($startSize, 16) * 1rem;
+    $addSizeRem: $startSizeRem - $minSizeRem;
+
+    $breakpointMinPx: 768px;
+    $maxWidthPx: $maxWidth * 1px;
+    $widthDifferencePx: $maxWidthPx - $breakpointMinPx;
+
+    #{$property}: clamp($minSizeRem,
+        calc(#{$minSizeRem} + #{$addSizeRem} * ((100vw - #{$breakpointMinPx}) / #{$widthDifferencePx})),
+        $startSizeRem );
+}
