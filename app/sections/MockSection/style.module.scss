@@ -1,0 +1,8 @@
+@use '@/app/mixins' as *;
+// @include adaptiv-value("margin-top", 100, 30);
+
+.mockSection {
+    background-color: #515151;
+    padding: 100px 0;
+    height: 100vh;
+}

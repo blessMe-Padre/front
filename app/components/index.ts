@@ -5,3 +5,4 @@ export { default as Form } from "./Form/Form";
 export { default as Navigation } from "./Navigation/Navigation";
 export { default as HeaderCatalogMenu } from "./HeaderCatalogMenu/HeaderCatalogMenu";
 export { default as Search } from "./Search/Search";
+export { default as Sidebar } from "./Sidebar/Sidebar";
