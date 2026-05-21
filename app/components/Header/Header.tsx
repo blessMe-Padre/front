@@ -4,12 +4,13 @@ import HeaderPopupButton from "./HeaderPopupButton";
 import styles from "./style.module.scss";
 import { Contact, StrapiSingleResponse } from "@/app/types/types";
 import normalizePhone from "@/app/utils/NormalizePhone";
+import Image from "next/image";
+import { HeaderCatalogMenu, Search } from "@/app/components";
 
 
 export default async function Header() {
     const contacts = await fetchData<StrapiSingleResponse<Contact>>("/api/kontakty");
-    const phone = contacts.data?.phone;
-    console.log("contacts", contacts.data);
+    const phone = contacts.data?.phone || "";
 
     return (
         <header className= { styles.header } >
@@ -20,8 +21,14 @@ export default async function Header() {
                         <a type="tel" href={normalizePhone(phone)}>{phone}</a>
                     </div>
                 </div>
-                <h1>Header</h1>
-                <HeaderPopupButton />
+
+                <div className= {styles.header_wrapper }>
+                    <Image src="/logo.svg" alt="logo" width={131} height={65} priority/>
+                    <HeaderCatalogMenu />
+                    <Search />
+                    <HeaderPopupButton />
+                </div>
+
             </div>
         </header>
     );

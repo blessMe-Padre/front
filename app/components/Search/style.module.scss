@@ -1,0 +1,123 @@
+@use '@/app/mixins' as *;
+
+// @include adaptiv-value("margin-top", 100, 30);
+.search_wrapper {
+    width: 100%;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background-color: #fff;
+    position: relative;
+}
+
+.input_area {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.input {
+    display: flex;
+    width: 100%;
+    background: linear-gradient(90deg, #e6ecf3 0%, #fff 100%);
+    padding: 15px 30px;
+    color: var(--black);
+    border-radius: 100px;
+    color: #000;
+
+    font-family: "Montserrat", sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    border: none;
+
+    @media (max-width: 560px) {
+        padding: 10px 15px;
+    }
+}
+
+.input::placeholder {
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 16px;
+    color: var(--black);
+}
+
+.delete {
+    background-color: var(--white);
+    border: none;
+    padding: 0 10px;
+    cursor: pointer;
+}
+
+.primary_button {
+    background: var(--button-gradient);
+    color: white;
+    padding: 10px 20px;
+    border: 1px solid var(--button-border);
+    border-radius: 30px;
+    cursor: pointer;
+}
+
+
+.list {
+    background-color: var(--white);
+    color: var(--black);
+    position: absolute;
+    left: 0;
+    top: 64px;
+    padding: 0 20px 20px 20px;
+    width: 90%;
+    z-index: 1000;
+
+    max-height: 300px;
+    overflow: auto;
+
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.image {
+    position: relative;
+    display: block;
+    animation-name: anim_rotation;
+    animation-duration: 600ms;
+    animation-iteration-count: infinite;
+    animation-timing-function: steps(12, start);
+    width: 20px;
+    height: 20px;
+    margin: 0 auto;
+}
+
+@keyframes anim_rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.list_item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.item_atr {
+    padding-left: 10px;
+}
+
+.item_image {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.item_image_text {
+    margin-bottom: 10px;
+    font-weight: 700;
+}

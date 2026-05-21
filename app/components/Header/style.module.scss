@@ -2,16 +2,7 @@
 
 // @include adaptiv-value("margin-top", 100, 30);
 
-.header {
-    color: #fff;
-    padding: 10px;
-
-    h1 {
-        font-weight: 700;
-        line-height: 1.2;
-        margin-bottom: 20px;
-    }
-}
+.header {}
 
 .header_top {
     display: flex;
@@ -19,4 +10,25 @@
     align-items: center;
     gap: 20px;
     padding: 10px 0;
+}
+
+.header_wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+    gap: 20px;
+}
+
+.headerPopupButton {
+    background-color: #c7c7c7;
+    padding: 15px 25px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 23px;
+    color: #fff;
+    transition: background-color 0.3s ease;
 }

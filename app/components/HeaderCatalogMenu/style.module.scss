@@ -1,0 +1,48 @@
+@use '@/app/mixins' as *;
+// @include adaptiv-value("margin-top", 100, 30);
+
+.headerCatalogMenuButton {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+
+    background-color: #515151;
+    padding: 15px 25px;
+    border-radius: 10px;
+}
+
+.headerCatalogMenu {
+    position: absolute;
+    top: 65px;
+    left: 0;
+    width: 876px;
+    background-color: #f2f2f2;
+    border-radius: 15px;
+    padding: 20px;
+    z-index: 1000;
+
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease;
+
+    &.active {
+        opacity: 1;
+        visibility: visible;
+    }
+}
+
+.headerCatalogMenuList {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.headerCatalogMenuItem a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #000;
+}
