@@ -3,12 +3,13 @@ import fetchData from "./utils/fetchData";
 import { StrapiSingleResponse, Contact } from "./types/types";
 
 export default async function Home() {
-  const contacts = await fetchData<StrapiSingleResponse<Contact>>("/api/kontakty");
-  console.log("contacts", contacts.data);
+  // const contacts = await fetchData<StrapiSingleResponse<Contact>>("/api/kontakty");
+  // console.log("contacts", contacts.data);
 
   return (
         <div className="container">
           <h1>RiftVL</h1>
+          222222
         </div>
   );
 }

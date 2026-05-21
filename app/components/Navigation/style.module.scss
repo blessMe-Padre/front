@@ -1,0 +1,20 @@
+@use '@/app/mixins' as *;
+// @include adaptiv-value("margin-top", 100, 30);
+
+
+.navigation {
+    ul {
+        display: flex;
+        gap: 20px;
+        align-items: center;
+    }
+
+    li {
+        list-style: none;
+    }
+
+    a {
+        text-decoration: none;
+        color: #fff;
+    }
+}
