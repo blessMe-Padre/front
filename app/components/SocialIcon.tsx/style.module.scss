@@ -1,0 +1,14 @@
+@use '@/app/mixins' as *;
+
+// @include adaptiv-value("margin-top", 100, 30);
+
+.social_icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background-color: #555555;
+    margin-bottom: 10px;
+}

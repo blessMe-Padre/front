@@ -1,7 +1,7 @@
 import Image from "next/image";
 import fetchData from "./utils/fetchData";
 import { StrapiSingleResponse, Contact } from "./types/types";
-import { Hero, MockSection } from "./sections";
+import { Hero, MockSection, WhyChoose } from "./sections";
 
 export default async function Home() {
   // const contacts = await fetchData<StrapiSingleResponse<Contact>>("/api/kontakty");
@@ -10,6 +10,7 @@ export default async function Home() {
   return (
     <div className="container">
       <Hero />
+      <WhyChoose />
       <MockSection />
       <MockSection />
       <MockSection />

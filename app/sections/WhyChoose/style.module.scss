@@ -1,0 +1,98 @@
+@use '@/app/mixins' as *;
+
+.whyChoose {
+    @include adaptiv-value("padding-top", 60, 24);
+    @include adaptiv-value("padding-bottom", 60, 24);
+}
+
+.panel {
+    background-color: #d9d9d9;
+    border-radius: 35px;
+    @include adaptiv-value("padding", 44, 20);
+    @include adaptiv-value("padding-bottom", 36, 24);
+}
+
+.title {
+    @include adaptiv-value("font-size", 24, 18);
+    font-weight: 400;
+    line-height: normal;
+    color: #000;
+    margin-bottom: 24px;
+}
+
+.intro {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 24px;
+    max-width: 996px;
+    margin: 0 auto;
+    @include adaptiv-value("margin-bottom", 48, 32);
+}
+
+.introText {
+    @include adaptiv-value("font-size", 16, 14);
+    font-weight: 400;
+    line-height: normal;
+    color: #000;
+    max-width: 559px;
+}
+
+.headline {
+    @include adaptiv-value("font-size", 36, 22);
+    font-weight: 400;
+    line-height: normal;
+    color: #000;
+
+    strong {
+        font-weight: 600;
+    }
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    @media (max-width: 1200px) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (max-width: 600px) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.card {
+    background-color: #fff;
+    border-radius: 15px;
+    min-height: 240px;
+    @include adaptiv-value("padding", 18, 16);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.cardValue {
+    @include adaptiv-value("font-size", 40, 28);
+    font-weight: 400;
+    line-height: normal;
+    color: #000;
+    white-space: nowrap;
+}
+
+.cardText {
+    @include adaptiv-value("font-size", 16, 14);
+    font-weight: 400;
+    line-height: normal;
+    color: #000;
+    margin-top: auto;
+}
+
+.cardAccent {
+    display: block;
+}

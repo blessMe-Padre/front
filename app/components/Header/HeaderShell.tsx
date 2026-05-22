@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Sidebar from "../Sidebar/Sidebar";
 import HeaderContent from "./HeaderContent";
 import styles from "./style.module.scss";
 import type { NavigationItem } from "../Navigation/Navigation";
@@ -9,9 +8,10 @@ import type { NavigationItem } from "../Navigation/Navigation";
 type HeaderShellProps = {
     phone: string;
     navigationList: NavigationItem[];
+    address: string;
 };
 
-export default function HeaderShell({ phone, navigationList }: HeaderShellProps) {
+export default function HeaderShell({ phone, navigationList, address }: HeaderShellProps) {
     const [isScrolled, setIsScrolled] = useState(false);
 
     useEffect(() => {
@@ -43,10 +43,9 @@ export default function HeaderShell({ phone, navigationList }: HeaderShellProps)
                     phone={phone}
                     navigationList={navigationList}
                     isScrolled={isScrolled}
+                    address={address}
                 />
             </div>
-
-            <Sidebar />
         </header>
     );
 }

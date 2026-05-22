@@ -8,14 +8,19 @@ import Image from "next/image";
 import { HeaderCatalogMenu, Search } from "@/app/components";
 import styles from "./style.module.scss";
 import type { NavigationItem } from "../Navigation/Navigation";
+import Sidebar from "../Sidebar/Sidebar";
+import { useState } from "react";
 
 type HeaderContentProps = {
     phone: string;
     navigationList: NavigationItem[];
     isScrolled: boolean;
+    address: string;
 };
 
-export default function HeaderContent({ phone, navigationList, isScrolled }: HeaderContentProps) {
+export default function HeaderContent({ phone, navigationList, isScrolled, address }: HeaderContentProps) {
+    const [isOpen, setIsOpen] = useState(false);
+
     return (
         <>
             <div className={`${styles.header_top} ${isScrolled ? styles.header_top_hidden : ""}`}>
@@ -29,6 +34,7 @@ export default function HeaderContent({ phone, navigationList, isScrolled }: Hea
                 <button
                     type="button"
                     className={`${styles.header_menu_button} ${isScrolled ? styles.header_menu_button_visible : ""}`}
+                    onClick={() => {setIsOpen(true);}}
                 >
                     <Image src="/icons/burger.svg" alt="menu" width={34} height={23} />
                 </button>
@@ -37,6 +43,14 @@ export default function HeaderContent({ phone, navigationList, isScrolled }: Hea
                 <Search />
                 <HeaderPopupButton />
             </div>
+
+            <Sidebar 
+                isOpen={isOpen} 
+                setIsOpen={setIsOpen} 
+                navigationList={navigationList} 
+                phone={phone}
+                address={address}
+            />
         </>
     );
 }
