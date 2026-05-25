@@ -71,3 +71,12 @@ ul {
 .relative {
   position: relative;
 }
+
+.swiper-pagination-bullet {
+  background: #9E9E9E !important;
+  width: 15px !important;
+  height: 15px !important;
+  border-radius: 50%;
+  opacity: 1;
+  transition: all 0.3s ease;
+}

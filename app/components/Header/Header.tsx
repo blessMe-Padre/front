@@ -13,6 +13,9 @@ export default async function Header() {
     const contacts = await fetchData<StrapiSingleResponse<Contact>>("/api/kontakty");
     const phone = contacts.data?.phone || "";
     const address = contacts.data?.address || "";
+    const telegram = contacts.data?.telegram || "";
+    const max = contacts.data?.max || "";
+    const email = contacts.data?.email || "";
 
     const navigation = await fetchData<NavigationResponse>("/api/glavnoe-menyus?populate=*");
     const navigationList = navigation.data?.[0]?.list || [];
@@ -22,6 +25,9 @@ export default async function Header() {
             phone={phone}
             navigationList={navigationList}
             address={address}
+            telegram={telegram}
+            max={max}
+            email={email}
         />
     );
 }

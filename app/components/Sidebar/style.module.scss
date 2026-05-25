@@ -108,3 +108,21 @@
     font-size: 24px;
     color: #313131;
 }
+
+.sidebar_email {
+    font-weight: 500;
+    font-size: 24px;
+    color: #313131;
+    text-decoration: none;
+    margin-bottom: 30px;
+}
+
+.social_wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+
+    margin-top: 30px;
+    margin-bottom: 30px;
+}

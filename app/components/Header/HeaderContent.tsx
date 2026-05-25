@@ -16,9 +16,12 @@ type HeaderContentProps = {
     navigationList: NavigationItem[];
     isScrolled: boolean;
     address: string;
+    telegram: string;
+    max: string;
+    email: string;
 };
 
-export default function HeaderContent({ phone, navigationList, isScrolled, address }: HeaderContentProps) {
+export default function HeaderContent({ phone, navigationList, isScrolled, address, telegram, max, email }: HeaderContentProps) {
     const [isOpen, setIsOpen] = useState(false);
 
     return (
@@ -50,6 +53,9 @@ export default function HeaderContent({ phone, navigationList, isScrolled, addre
                 navigationList={navigationList} 
                 phone={phone}
                 address={address}
+                telegram={telegram}
+                max={max}
+                email={email}
             />
         </>
     );

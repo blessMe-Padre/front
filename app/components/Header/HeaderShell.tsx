@@ -9,9 +9,12 @@ type HeaderShellProps = {
     phone: string;
     navigationList: NavigationItem[];
     address: string;
+    telegram: string;
+    max: string;
+    email: string;
 };
 
-export default function HeaderShell({ phone, navigationList, address }: HeaderShellProps) {
+export default function HeaderShell({ phone, navigationList, address, telegram, max, email }: HeaderShellProps) {
     const [isScrolled, setIsScrolled] = useState(false);
 
     useEffect(() => {
@@ -44,6 +47,9 @@ export default function HeaderShell({ phone, navigationList, address }: HeaderSh
                     navigationList={navigationList}
                     isScrolled={isScrolled}
                     address={address}
+                    telegram={telegram}
+                    max={max}
+                    email={email}
                 />
             </div>
         </header>

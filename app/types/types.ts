@@ -9,4 +9,7 @@ export type Contact = {
     documentId?: string;
     phone?: string;
     address?: string;
+    telegram?: string;
+    max?: string;
+    email?: string;
 };

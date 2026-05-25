@@ -4,13 +4,12 @@ import styles from "./style.module.scss";
 export default function SocialIcon({ href, type }: { href: string, type: string }) {
 
     const socialIcons = {
-
         telegram: {
             width: 22,
             height: 18,
             icon: "/icons/telegram-icon.svg",
         },
-        nax: {
+        max: {
             width: 20,
             height: 20,
             icon: "/icons/max-icon.svg",
@@ -21,7 +20,6 @@ export default function SocialIcon({ href, type }: { href: string, type: string 
             icon: "/icons/email-icon.svg",
         },
     }
-
 
     return (
         <div className={styles.social_icon}>

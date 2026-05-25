@@ -6,12 +6,23 @@ import styles from "./style.module.scss";
 import { NavigationItem } from "../Navigation/Navigation";
 import normalizePhone from "@/app/utils/NormalizePhone";
 import { SocialIcon } from "..";
+import { useEffect } from "react";
 
-export default function Sidebar({ isOpen, setIsOpen, navigationList, phone, address }: { isOpen: boolean, setIsOpen: (isOpen: boolean) => void, navigationList: NavigationItem[], phone: string, address: string }) {
+export default function Sidebar({ isOpen, setIsOpen, navigationList, phone, address, telegram, max, email }: { isOpen: boolean, setIsOpen: (isOpen: boolean) => void, navigationList: NavigationItem[], phone: string, address: string, telegram: string, max: string, email: string }) {
 
     const handleBackdropClick = () => {
         setIsOpen(false);
     };
+
+    // закрытие по esc
+    useEffect(() => {
+        const handleKeyDown = (event: KeyboardEvent) => {
+            if (event.key === "Escape" || event.key === "Esc") {
+                setIsOpen(false);
+            }
+        };
+        window.addEventListener("keydown", handleKeyDown);
+    }, [setIsOpen]);
 
     return (
         <aside
@@ -50,9 +61,13 @@ export default function Sidebar({ isOpen, setIsOpen, navigationList, phone, addr
                     <a className={styles.sidebar_phone} href={normalizePhone(phone)}>{phone}</a>
                 </div>
 
-                <SocialIcon href="https://t.me/example" type="telegram" />
-                <SocialIcon href="https://nax.com/example" type="nax" />
-                <SocialIcon href="example@example.com" type="email" />
+                <div className={styles.social_wrapper}>
+                    <SocialIcon href={telegram} type="telegram" />
+                    <SocialIcon href={max} type="max" />
+                    <SocialIcon href={email} type="email" />
+                </div>
+
+                <a href={`mailto:${email}`} className={styles.sidebar_email}>{email}</a>
             </div>
         </aside>
     );
