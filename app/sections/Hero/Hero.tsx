@@ -1,10 +1,7 @@
 'use client';
 
-import { useState, useEffect } from "react";
 import Image from "next/image";
-import fetchData from "@/app/utils/fetchData";
 import styles from "./style.module.scss";
-
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from 'swiper/modules';
@@ -13,7 +10,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 
-type HeroSlider = {
+export type HeroSlider = {
     id: number;
     title?: string;
     descriptions?: string;
@@ -22,32 +19,21 @@ type HeroSlider = {
     } | null;
 };
 
-type HeroSliderResponse = {
-    data?: {
-        slides?: HeroSlider[];
-    }[];
+type HeroProps = {
+    slides: HeroSlider[] | null;
 };
 
-const url = "/api/sekcziya-glavnyj-slajders?populate[slides][populate]=image";
 const imageServer = process.env.NEXT_PUBLIC_IMAGE_SERVER;
 
-export default function Hero() {
-    const [heroData, setHeroData] = useState<HeroSlider[] | null>(null);
+export default function Hero({ slides }: HeroProps) {
 
-    useEffect(() => {
-        const fetchHeroData = async () => {
-            const response = await fetchData<HeroSliderResponse>(url);
-            setHeroData(response.data?.[0]?.slides ?? null);
-        };
-        fetchHeroData();
-    }, []);
-
+   
     return (
         <section className={styles.hero}>
-            <h1 className="visually-hidden">Hero</h1>
+            <h2 className="visually-hidden">{slides?.[0]?.title ?? "Композитные материалы для производства, судостроения и промышленности"}</h2>
             <Swiper
                 spaceBetween={20}
-                modules={[Navigation, Pagination]}
+                modules={[Pagination]}
                 navigation={{
                     nextEl: '.custom-navigation .swiper-button-next',
                     prevEl: '.custom-navigation .swiper-button-prev',
@@ -56,12 +42,9 @@ export default function Hero() {
                     clickable: true,
                     el: '.custom-pagination',
                 }}
-                breakpoints={{
-                    320: { slidesPerView: 1 },
-                }}
                 className={styles.swiper}
             >
-                {heroData && heroData.map((slide) => {
+                {slides && slides.length > 0 && slides.map((slide) => {
                     const imageSrc = slide.image?.url
                         ? `${imageServer}${slide.image.url}`
                         : "/placeholder.svg";
@@ -78,6 +61,7 @@ export default function Hero() {
                                     alt={slide.title ?? "Слайд"}
                                     width={1440}
                                     height={427}
+                                    sizes="100vw"
                                     placeholder="blur"
                                     blurDataURL="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTQ0MiIgaGVpZ2h0PSIxMTg5IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9IiNjY2MiIC8+PC9zdmc+"
                                     priority
