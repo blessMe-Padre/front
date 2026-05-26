@@ -22,14 +22,25 @@ type HeroProps = {
     slides: HeroSlider[] | null;
 };
 
-const imageServer = process.env.NEXT_PUBLIC_IMAGE_SERVER;
+const imageServer = process.env.NEXT_PUBLIC_IMAGE_SERVER ?? "";
+const BLUR_DATA_URL_10PX =
+    "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAiIGhlaWdodD0iMTAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjEwIiBoZWlnaHQ9IjEwIiBmaWxsPSIjY2NjIi8+PC9zdmc+";
 
 export default function Hero({ slides }: HeroProps) {
+    if (!slides || slides.length === 0) {
+        return (
+            <section className={styles.hero}>
+                <div className={styles.hero_item}>
+                    <p className={styles.hero_title}>Главный слайдер</p>
+                    <p className={styles.hero_description}>Загрузка...</p>
+                </div>
+            </section>
+        );
+    }
 
-   
     return (
         <section className={styles.hero}>
-            <h2 className="visually-hidden">{slides?.[0]?.title ?? "Композитные материалы для производства, судостроения и промышленности"}</h2>
+            <h2 className="visually-hidden">{slides[0].title ?? "Композитные материалы для производства, судостроения и промышленности"}</h2>
             <Swiper
                 spaceBetween={20}
                 modules={[Pagination]}
@@ -39,7 +50,7 @@ export default function Hero({ slides }: HeroProps) {
                 }}
                 className={styles.swiper}
             >
-                {slides && slides.map((slide, index) => {
+                {slides.map((slide, index) => {
                     const imageSrc = slide.image?.url
                         ? `${imageServer}${slide.image.url}`
                         : "/placeholder.svg";
@@ -53,12 +64,12 @@ export default function Hero({ slides }: HeroProps) {
                                 <Image
                                     className={styles.slide}
                                     src={imageSrc}
-                                    alt={slide.title ?? "Слайд"}
+                                    alt={slide.title ?? "Главный слайд"}
                                     fill
                                     sizes="100vw"
-                                    placeholder="blur"
-                                    blurDataURL="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTQ0MiIgaGVpZ2h0PSIxMTg5IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9IiNjY2MiIC8+PC9zdmc+"
-                                    loading="eager"
+                                    placeholder={index === 0 ? "blur" : "empty"}
+                                    blurDataURL={index === 0 ? BLUR_DATA_URL_10PX : undefined}
+                                    loading={index === 0 ? "eager" : "lazy"}
                                     fetchPriority={index === 0 ? "high" : "auto"}
                                 />
                             </div>

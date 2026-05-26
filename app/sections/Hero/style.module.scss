@@ -1,5 +1,4 @@
 @use '@/app/mixins' as *;
-// @include adaptiv-value("margin-top", 100, 30);
 
 .hero {
     position: relative;
@@ -44,11 +43,10 @@
 
     max-width: 100px;
 
-    position: absolute !important;
-    bottom: 40px !important;
-    right: 40px !important;
-    left: auto !important;
-    z-index: 1 !important;
+    --swiper-pagination-bottom: 40px;
+    --swiper-pagination-right: 40px;
+    --swiper-pagination-left: auto;
+    z-index: 1;
 }
 
 .hero_image {
