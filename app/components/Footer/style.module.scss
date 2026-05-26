@@ -2,8 +2,140 @@
 
 // @include adaptiv-value("margin-top", 100, 30);
 
-.header {
+.footer {
+    background: #fff;
+    color: #000;
+    padding: 25px 0 22px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: minmax(250px, 420px) minmax(150px, 220px) minmax(280px, 1fr) minmax(160px, 220px);
+    gap: 48px;
+    align-items: start;
+}
+
+.companyRows {
+    display: flex;
+    gap: 48px;
+    margin-bottom: 65px;
+    color: #a19e9e;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.2;
+}
+
+.legalList {
+    display: grid;
+    gap: 17px;
+    color: #a19e9e;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.2;
+    text-decoration: underline;
+}
+
+.copyright {
+    margin-top: 27px;
+    color: #a19e9e;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.2;
+}
+
+.navList {
+    display: grid;
+    gap: 10px;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.2;
+}
+
+.contacts {
+    display: grid;
+    gap: 18px;
+}
+
+.email {
+    font-size: clamp(28px, 3vw, 36px);
+    font-weight: 400;
+    line-height: 1.2;
+}
+
+.phones {
+    display: grid;
+    gap: 12px;
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 1.25;
+}
+
+.address {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    margin-top: 85px;
+    font-size: 16px;
+    font-weight: 400;
+    font-style: normal;
+    line-height: 1.2;
+}
+
+.addressIcon {
+    display: flex;
+    flex: 0 0 auto;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 6px;
+    background: #555;
     color: #fff;
-    padding: 10px;
-    @include adaptiv-value("font-size", 200, 30);
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.brandColumn {
+    display: grid;
+    gap: 50px;
+    justify-items: end;
+}
+
+.social {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 76px;
+}
+
+.phoneIcon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 6px;
+    background: #555;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.payments {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 17px;
+}
+
+.payment {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 43px;
+    min-height: 26px;
+    color: #1434cb;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1;
 }

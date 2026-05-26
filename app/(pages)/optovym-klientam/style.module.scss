@@ -1,0 +1,142 @@
+.content {
+    padding-bottom: 92px;
+}
+
+.title {
+    margin: 14px 0 42px;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 1.2;
+    color: #000;
+}
+
+.panel {
+    border-radius: 35px;
+    background: #d9d9d9;
+    padding: 43px 34px 38px;
+    color: #000;
+}
+
+.panelHeader {
+    max-width: 772px;
+    margin: 0 auto 29px;
+    text-align: center;
+}
+
+.heading {
+    margin-bottom: 25px;
+    font-size: clamp(28px, 3vw, 36px);
+    font-weight: 500;
+    line-height: 1.2;
+}
+
+.intro {
+    max-width: 694px;
+    margin: 0 auto;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.2;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 16px;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 240px;
+    border-radius: 15px;
+    background: #fff;
+    padding: 18px 22px;
+}
+
+.cardTitle {
+    font-size: clamp(30px, 4vw, 40px);
+    font-weight: 400;
+    line-height: 1.2;
+}
+
+.cardText {
+    max-width: 291px;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.2;
+}
+
+.notice {
+    display: flex;
+    align-items: flex-start;
+    gap: 17px;
+    margin-top: 37px;
+    color: #000;
+}
+
+.noticeLabel {
+    border-radius: 10px;
+    background: #d9d9d9;
+    padding: 12px 15px;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.2;
+}
+
+.noticeText {
+    max-width: 908px;
+    padding-top: 3px;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.2;
+}
+
+.request {
+    display: grid;
+    grid-template-columns: minmax(0, 971px) minmax(300px, 348px);
+    align-items: center;
+    gap: 70px;
+    margin-top: 92px;
+}
+
+.requestText {
+    display: flex;
+    align-items: center;
+    min-height: 241px;
+    border-radius: 35px;
+    background: #d9d9d9;
+    padding: 40px clamp(32px, 6vw, 200px) 40px 62px;
+}
+
+.requestInner {
+    max-width: 709px;
+}
+
+.requestTitle {
+    max-width: 523px;
+    margin-bottom: 22px;
+    font-size: clamp(28px, 3vw, 36px);
+    font-weight: 700;
+    line-height: 1.15;
+    color: #000;
+}
+
+.requestDescription {
+    max-width: 627px;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.2;
+    color: #000;
+}
+
+.formWrap {
+    width: 100%;
+    max-width: 348px;
+}
+
+.requestButton {
+    padding-right: 24px;
+    padding-left: 24px;
+    text-transform: none;
+}

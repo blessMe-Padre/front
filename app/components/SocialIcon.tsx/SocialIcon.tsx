@@ -19,6 +19,11 @@ export default function SocialIcon({ href, type }: { href: string, type: string 
             height: 16,
             icon: "/icons/email-icon.svg",
         },
+        phone: {
+            width: 23,
+            height: 16,
+            icon: "/icons/phone-icon.svg",
+        },
     }
 
     return (

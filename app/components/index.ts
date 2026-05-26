@@ -7,3 +7,4 @@ export { default as HeaderCatalogMenu } from "./HeaderCatalogMenu/HeaderCatalogM
 export { default as Search } from "./Search/Search";
 export { default as Sidebar } from "./Sidebar/Sidebar";
 export { default as SocialIcon } from "./SocialIcon.tsx/SocialIcon";
+export { default as Breadcrumbs } from "./Breadcrumbs/Breadcrumbs";

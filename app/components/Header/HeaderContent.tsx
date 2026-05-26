@@ -10,6 +10,7 @@ import styles from "./style.module.scss";
 import type { NavigationItem } from "../Navigation/Navigation";
 import Sidebar from "../Sidebar/Sidebar";
 import { useState } from "react";
+import Link from "next/link";
 
 type HeaderContentProps = {
     phone: string;
@@ -41,7 +42,9 @@ export default function HeaderContent({ phone, navigationList, isScrolled, addre
                 >
                     <Image src="/icons/burger.svg" alt="menu" width={34} height={23} />
                 </button>
-                <Image src="/logo.svg" alt="logo" width={131} height={65} priority />
+                <Link href="/">
+                    <Image src="/logo.svg" alt="logo" width={131} height={65} priority />
+                </Link>
                 <HeaderCatalogMenu />
                 <Search />
                 <HeaderPopupButton />
