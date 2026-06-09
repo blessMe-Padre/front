@@ -1,0 +1,44 @@
+@use '@/app/mixins' as *;
+
+// @include adaptiv-value("margin-top", 100, 30);
+
+.section {
+    @include adaptiv-value("margin-top", 100, 30);
+    @include adaptiv-value("margin-bottom", 100, 30);
+}
+
+.section_content {
+    padding: 35px;
+    background-color: #d9d9d9;
+    border-radius: 35px;
+}
+
+.section_content_title {
+    @include adaptiv-value("font-size", 36, 24);
+    font-weight: 700;
+    color: #000;
+    margin-bottom: 36px;
+}
+
+.section_content_list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.section_content_item {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 10px;
+    min-height: 240px;
+
+    padding: 20px;
+    border-radius: 15px;
+    background-color: #fff;
+    color: #000;
+
+    span {
+        @include adaptiv-value("font-size", 40, 24);
+    }
+}
