@@ -19,7 +19,7 @@ export default function Navigation({ navigationList }: { navigationList: Navigat
                         {item.isBlank ? (
                             <a href={item.link} target="_blank" rel="noopener noreferrer">{item.title}</a>
                         ) : (
-                            <Link href={item.link}>{item.title}</Link>
+                            <Link href={`/${item.link}`}>{item.title}</Link>
                         )}
                     </li>
                 ))}

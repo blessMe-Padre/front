@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { ViewTransition } from 'react';
 
 import fetchData from '@/app/utils/fetchData';
-import { KategoriyaNovosti, Novost, StrapiListResponse } from '@/app/types/types';
+import { Novost, StrapiListResponse } from '@/app/types/types';
 import formatDate from '@/app/utils/formatDate';
 
 import styles from './style.module.scss';
@@ -14,32 +14,18 @@ import styles from './style.module.scss';
 const pageSize = 4;
 const imageServer = process.env.NEXT_PUBLIC_IMAGE_SERVER ?? "";
 
-const buildUrl = (page: number, categorySlug?: string) =>
-    `/api/novostis?populate[0]=image&populate[1]=kategorii_novostejs&pagination[page]=${page}&pagination[pageSize]=${pageSize}&sort[0]=createdAt:desc${categorySlug ? `&filters[kategorii_novostejs][slug][$eq]=${categorySlug}` : ''}`;
+
+// /api/akcziis
+
+const buildUrl = (page: number) =>
+    `/api/akcziis?populate[0]=image&pagination[page]=${page}&pagination[pageSize]=${pageSize}&sort[0]=createdAt:desc`;
 
 export default function ContentPage() {
     const [data, setData] = useState<Novost[]>([]);
-    const [categories, setCategories] = useState<KategoriyaNovosti[]>([]);
-    const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
     const [loading, setLoading] = useState(true);
     const [loadingMore, setLoadingMore] = useState(false);
     const [page, setPage] = useState(1);
     const [hasMore, setHasMore] = useState(false);
-
-    useEffect(() => {
-        const loadCategories = async () => {
-            try {
-                const response = await fetchData<StrapiListResponse<KategoriyaNovosti[]>>(
-                    '/api/kategorii-novostejs?sort[0]=name:asc'
-                );
-                setCategories(response?.data ?? []);
-            } catch (error) {
-                console.error('Ошибка загрузки категорий', error);
-            }
-        };
-
-        loadCategories();
-    }, []);
 
     useEffect(() => {
         const loadInitialData = async () => {
@@ -47,7 +33,7 @@ export default function ContentPage() {
 
             try {
                 const response = await fetchData<StrapiListResponse<Novost[]>>(
-                    buildUrl(1, selectedCategory ?? undefined)
+                    buildUrl(1)
                 );
                 const items = response?.data ?? [];
                 const pagination = response?.meta?.pagination;
@@ -63,12 +49,7 @@ export default function ContentPage() {
         };
 
         loadInitialData();
-    }, [selectedCategory]);
-
-    const handleCategoryClick = (categorySlug: string | null) => {
-        if (categorySlug === selectedCategory) return;
-        setSelectedCategory(categorySlug);
-    };
+    }, []);
 
     const loadMore = async () => {
         if (loadingMore || !hasMore) return;
@@ -77,7 +58,7 @@ export default function ContentPage() {
 
         try {
             const response = await fetchData<StrapiListResponse<Novost[]>>(
-                buildUrl(page + 1, selectedCategory ?? undefined)
+                buildUrl(page + 1)
             );
             const items = response?.data ?? [];
             const pagination = response?.meta?.pagination;
@@ -93,39 +74,15 @@ export default function ContentPage() {
     };
 
     return (
-        <ViewTransition name="news">
+        <ViewTransition name="promos">
         <div className="container">
-            <h1 className={styles.title}>Новости и статьи</h1>
-
-            {categories.length > 0 ? (
-                <ul className={styles.categories}>
-                    <li>
-                        <button
-                            type="button"
-                            className={`${styles.category} ${selectedCategory === null ? styles.category_active : ''}`}
-                            onClick={() => handleCategoryClick(null)}
-                        >
-                            Все
-                        </button>
-                    </li>
-                    {categories.map((category) => (
-                        <li key={category.id}>
-                            <button
-                                type="button"
-                                className={`${styles.category} ${selectedCategory === category.slug ? styles.category_active : ''}`}
-                                onClick={() => handleCategoryClick(category.slug ?? null)}
-                            >
-                                {category.name}
-                            </button>
-                        </li>
-                    ))}
-                </ul>
-            ) : null}
+            <h1 className={styles.title}>Акции</h1>
+            <p className={styles.description}>Успейте воспользоваться выгодными предложениями на композитные материалы!</p>
 
             {loading ? <div className={styles.loading}>Загрузка...</div> : null}
 
             {!loading && data.length === 0 ? (
-                <div className={styles.empty}>Новости не найдены</div>
+                <div className={styles.empty}>Акции не найдены</div>
             ) : null}
 
             <ul className={styles.news_list}>
@@ -136,7 +93,7 @@ export default function ContentPage() {
 
                 return(
                     <li className={styles.news_item} key={item.id}>
-                        <Link href={`/news/${item.slug}`}>
+                        <Link href={`/promos/${item.slug}`}>
                             <div className={styles.news_image}>
                                 <Image
                                     src={imageSrc}

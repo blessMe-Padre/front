@@ -8,18 +8,18 @@ import { SpamSection } from '@/app/sections';
 
 
 export const metadata: Metadata = {
-    title: 'RiftVL | Новости',
-    description: 'Новости и статьи о RiftVL',
-    keywords: 'Новости, статьи, RiftVL',
+    title: 'RiftVL | Акции',
+    description: 'Акции и скидки на RiftVL',
+    keywords: 'Акции, скидки, RiftVL',
 }; 
 
 
 
-export default async function NewsPage() {
+export default async function PromosPage() {
 
     return (
         <>
-            <Breadcrumbs secondLabel='Новости' />
+            <Breadcrumbs secondLabel='Акции' />
             <ContentPage />
             <SpamSection />
         </>
