@@ -11,6 +11,8 @@ import type { NavigationItem } from "../Navigation/Navigation";
 import Sidebar from "../Sidebar/Sidebar";
 import { useState } from "react";
 import Link from "next/link";
+import Cart from "../Cart/Cart";
+import CartNotification from "../CartNotification/CartNotification";
 
 type HeaderContentProps = {
     phone: string;
@@ -48,7 +50,10 @@ export default function HeaderContent({ phone, navigationList, isScrolled, addre
                 <HeaderCatalogMenu />
                 <Search />
                 <HeaderPopupButton />
+                <Cart />
             </div>
+
+            <CartNotification />
 
             <Sidebar 
                 isOpen={isOpen} 

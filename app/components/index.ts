@@ -9,3 +9,5 @@ export { default as Sidebar } from "./Sidebar/Sidebar";
 export { default as SocialIcon } from "./SocialIcon.tsx/SocialIcon";
 export { default as Breadcrumbs } from "./Breadcrumbs/Breadcrumbs";
 export { default as ContentRenderer } from "./ContentRenderer/ContentRenderer";
+export { default as ProductCard } from "./ProductCard/ProductCard";
+export { default as CartNotification } from "./CartNotification/CartNotification";
