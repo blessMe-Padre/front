@@ -2,6 +2,7 @@
 
 
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { useForm, type SubmitHandler } from 'react-hook-form';
 
 import useCartStore from '@/app/store/cartStore';
@@ -23,6 +24,7 @@ type FormData = {
     kpp?: string;
     legal_address?: string;
     orderItems?: OrderItem[];
+    comment?: string;
 };
 
 type OrderItem = {
@@ -73,6 +75,7 @@ export default function CheckoutForm() {
 
 
     const [isSending, setIsSending] = useState(false);
+    const router = useRouter();
 
     const onSubmit: SubmitHandler<FormData> = async (formData) => {
         setIsSending(true);
@@ -99,12 +102,17 @@ export default function CheckoutForm() {
                 orderItems,
             });
 
-            console.log(response);
             console.log(data);
 
             if (response.ok) {
-                clearCart();
                 reset();
+                clearCart();
+                const orderUnicNumber = data?.data?.orderUnicNumber;
+                const successUrl = orderUnicNumber
+                    ? `/checkout/success?order=${encodeURIComponent(orderUnicNumber)}`
+                    : '/checkout/success';
+
+                router.push(successUrl);
             }
         } finally {
             setIsSending(false);
@@ -245,6 +253,13 @@ export default function CheckoutForm() {
 
 
                     </div>
+
+                    <div className={`${styles.form_item} ${styles.comment_item}`}>
+                        <textarea placeholder="Комментарий к заказу" {...register('comment')} className={`${styles.input} ${errors.comment ? styles.error : ''}`} />
+                        <div className={styles.error_message}>{errors.comment?.message}</div>
+                    </div>
+
+                    {/* Выберете способ оплаты */}
                 </div>
 
                 <div className={styles.total_block}>

@@ -1,0 +1,23 @@
+@use '@/app/mixins' as *;
+
+// @include adaptiv-value("margin-top", 100, 30);
+.title {
+    font-size: 24px;
+    margin-bottom: 30px;
+}
+
+.success_wrapper {
+    padding: 40px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+
+    font-weight: 500;
+    font-size: 24px;
+    color: #8d8d8d;
+
+    img {
+        margin-bottom: 40px;
+    }
+}
