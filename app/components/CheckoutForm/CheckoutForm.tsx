@@ -4,6 +4,8 @@
 import { useState } from 'react';
 import { useForm, type SubmitHandler } from 'react-hook-form';
 
+import useCartStore from '@/app/store/cartStore';
+
 import styles from './style.module.scss';
 
 // Иван
@@ -20,8 +22,19 @@ type FormData = {
     inn?: string;
     kpp?: string;
     legal_address?: string;
-    orderUnicNumber: string;
-    tovars?:[];
+    orderItems?: OrderItem[];
+};
+
+type OrderItem = {
+    productId: number;
+    documentId?: string;
+    title: string;
+    sku?: string;
+    id1c?: string;
+    quantity: number;
+    price: number;
+    priceSales?: number | null;
+    total: number;
 };
 
 const url = `${process.env.NEXT_PUBLIC_API_SERVER}/api/zakazies`;
@@ -45,7 +58,7 @@ export async function sendOrderService(orderData: FormData) {
 }
 
 export default function CheckoutForm() {
-    const { register, handleSubmit, formState: { errors }, watch } = useForm<FormData>({
+    const { register, handleSubmit, formState: { errors }, watch, reset } = useForm<FormData>({
         // Задаем значение по умолчанию для поля customer_type
         defaultValues: {
             customer_type: 'individual', 
@@ -55,15 +68,47 @@ export default function CheckoutForm() {
 
     const customerType = watch('customer_type');
     const deliveryType = watch('delivery_type');
+    const cartItems = useCartStore((state) => state.cartItems);
+    const clearCart = useCartStore((state) => state.clearCart);
 
 
     const [isSending, setIsSending] = useState(false);
 
     const onSubmit: SubmitHandler<FormData> = async (formData) => {
-        console.log(formData);
-        const { response, data } = await sendOrderService(formData);
-        console.log(response);
-        console.log(data);
+        setIsSending(true);
+
+        try {
+            const orderItems = cartItems.map((item) => {
+                const price = item.price ?? 0;
+
+                return {
+                    productId: item.id,
+                    documentId: item.documentId,
+                    title: item.title,
+                    sku: item.sku,
+                    id1c: item.id1c,
+                    quantity: item.quantity,
+                    price,
+                    priceSales: item.priceSales ?? null,
+                    total: price * item.quantity,
+                };
+            });
+
+            const { response, data } = await sendOrderService({
+                ...formData,
+                orderItems,
+            });
+
+            console.log(response);
+            console.log(data);
+
+            if (response.ok) {
+                clearCart();
+                reset();
+            }
+        } finally {
+            setIsSending(false);
+        }
     };
 
     return (

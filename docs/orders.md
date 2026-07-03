@@ -74,6 +74,34 @@ if (response.ok) {
 )}
 ```
 
+## Товары заказа
+
+Состав корзины сохраняется в заказе как JSON-снимок в поле Strapi:
+
+```ts
+orderItems
+```
+
+Это не relation к товарам, а копия важных данных на момент оформления заказа. Такой подход сохраняет количество, цену и название даже если карточка товара позже изменится.
+
+`CheckoutForm` берет товары из `cartStore` и перед отправкой добавляет их к данным формы:
+
+```ts
+const orderItems = cartItems.map((item) => ({
+  productId: item.id,
+  documentId: item.documentId,
+  title: item.title,
+  sku: item.sku,
+  id1c: item.id1c,
+  quantity: item.quantity,
+  price: item.price ?? 0,
+  priceSales: item.priceSales ?? null,
+  total: (item.price ?? 0) * item.quantity,
+}));
+```
+
+После успешного создания заказа корзина очищается через `clearCart()`.
+
 ## Почему номер генерируется на backend
 
 Backend является единственным надежным источником номера заказа.
