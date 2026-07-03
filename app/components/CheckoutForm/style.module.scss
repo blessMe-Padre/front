@@ -1,0 +1,62 @@
+@use '@/app/mixins' as *;
+
+// @include adaptiv-value("margin-top", 100, 30);
+
+.form__wrapper {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 30px;
+}
+
+.customer_info_block {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+}
+
+.form_item {
+    position: relative;
+    margin-bottom: 10px;
+
+    .input {
+        width: 100%;
+        padding: 10px 15px;
+        border-radius: 5px;
+        background-color: #a3a3a3;
+        color: #fff;
+
+        &::placeholder {
+            color: #fff;
+        }
+    }
+}
+
+
+.error_message {
+    font-size: 12px;
+    color: red;
+}
+
+.buttons_row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.button_label {
+    border-radius: 7px;
+    padding: 10px;
+    background: #a3a3a3;
+    color: #fff;
+
+    cursor: pointer;
+
+    &.isActive {
+        background-color: #404040;
+    }
+
+    input {
+        display: none;
+    }
+}
