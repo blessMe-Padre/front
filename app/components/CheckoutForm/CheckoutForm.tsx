@@ -1,13 +1,15 @@
 'use client';
 
 
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { useRouter } from 'next/navigation';
 import { useForm, type SubmitHandler } from 'react-hook-form';
 
-import useCartStore from '@/app/store/cartStore';
+import CartItem from "@/app/components/CartItem/CartItem";
+import useCartStore from "@/app/store/cartStore";
 
 import styles from './style.module.scss';
+import Link from 'next/link';
 
 // Иван
 // ivan@gmail.com
@@ -19,12 +21,15 @@ type FormData = {
     phone: string;
     customer_type: 'individual' | 'legal';
     delivery_type: 'pickup' | 'delivery';
+    payment_method: 'order' | 'online' | 'cash';
     company_name?: string;
     inn?: string;
     kpp?: string;
     legal_address?: string;
     orderItems?: OrderItem[];
     comment?: string;
+    policy_agreement?: boolean;
+    oferta_agreement?: boolean;
 };
 
 type OrderItem = {
@@ -65,19 +70,39 @@ export default function CheckoutForm() {
         defaultValues: {
             customer_type: 'individual', 
             delivery_type: 'pickup',
+            payment_method: 'order',
         }
     });
 
     const customerType = watch('customer_type');
     const deliveryType = watch('delivery_type');
-    const cartItems = useCartStore((state) => state.cartItems);
-    const clearCart = useCartStore((state) => state.clearCart);
-
+    const payment_method = watch('payment_method');
 
     const [isSending, setIsSending] = useState(false);
     const router = useRouter();
 
+
+    const cartItems = useCartStore((state) => state.cartItems);
+    const increaseQuantity = useCartStore((state) => state.increaseQuantity);
+    const decreaseQuantity = useCartStore((state) => state.decreaseQuantity);
+    const removeFromCart = useCartStore((state) => state.removeFromCart);
+    const clearCart = useCartStore((state) => state.clearCart);
+
+    const { counter, price } = useMemo(() => {
+        return cartItems.reduce(
+            (totals, item) => ({
+                counter: totals.counter + item.quantity,
+                price: totals.price + (item.price ?? 0) * item.quantity,
+            }),
+            { counter: 0, price: 0 }
+        );
+    }, [cartItems]);
+
+    const isCartEmpty = cartItems.length === 0;
+
     const onSubmit: SubmitHandler<FormData> = async (formData) => {
+        if (isCartEmpty) return;
+
         setIsSending(true);
 
         try {
@@ -260,16 +285,94 @@ export default function CheckoutForm() {
                     </div>
 
                     {/* Выберете способ оплаты */}
+                    <div className={styles.payment_info}>
+                        <h2 className={styles.form_title}>3. Выберете способ оплаты</h2>
+
+                        <div className={styles.buttons_row}>
+                            <label htmlFor="order"
+                            className={`${styles.button_label} ${payment_method === 'order' ? styles.isActive : ''}`}>Счет на оплату
+                                <input type="radio" id="order" {...register('payment_method')} value="order" />
+                            </label>
+                            <label htmlFor="online"
+                            className={`${styles.button_label} ${payment_method === 'online' ? styles.isActive : ''}`}>Онлайн оплата
+                                <input type="radio" id="online" {...register('payment_method')} value="online" />
+                            </label>
+                            <label htmlFor="cash"
+                            className={`${styles.button_label} ${payment_method === 'cash' ? styles.isActive : ''}`}>Наличный расчет
+                                <input type="radio" id="cash" {...register('payment_method')} value="cash" />
+                            </label>
+                        </div>
+                    </div>
+
+                    {/* Товары к оформлению */}
+                    <div className={styles.orders_block}>
+                        <h2 className={styles.form_title}>4. Товары к оформлению</h2>
+                        <div>
+                            {cartItems.length > 0 ? (
+                                <ul className={styles.cart_list}>
+                                    {cartItems.map((item) => (
+                                        <CartItem 
+                                        key={item.id} 
+                                        item={item}
+                                        increaseQuantity={increaseQuantity}
+                                        decreaseQuantity={decreaseQuantity}
+                                        removeFromCart={removeFromCart}
+                                    />
+                                    ))}
+                                </ul>
+                            ) : (
+                                <p>Товаров нет в корзине, вы не можете оформить заказ, вернитесь на <Link href="/">страницу каталога</Link></p>
+                            )}
+                        </div>
+
+                    </div>
                 </div>
 
-                <div className={styles.total_block}>
-                    <button 
-                        className={styles.form_button}
-                        type="submit"
-                        disabled={isSending}
-                        >
-                            {isSending ? 'Отправка...' : 'Оформить заказ'}
-                    </button>
+                {/* Итого */}
+                <div className={styles.total_block_wrapper}>
+                    <div className={styles.total_block}>
+                        <div className={styles.total_block_item}>
+                            Итого: <span>{price} руб.</span>
+                        </div>
+                        <div className={styles.total_block_item}>
+                            Товаров: {counter}
+                        </div>
+                        <div className={styles.total_delivery_item}>
+                            <span>Доставка:</span>
+                            <span>{deliveryType === 'pickup' ? 'Самовывоз' : 'Транспортная компания'}</span>
+                        </div>
+                        <button 
+                            className={styles.form_button}
+                            type="submit"
+                            disabled={isSending || isCartEmpty}
+                            >
+                                {isSending ? 'Отправка...' : 'Оформить заказ'}
+                        </button>
+
+                        <div className={`${styles.form_item} ${styles.agreement_item}`}>
+                            <div className={styles.agreement_item_row}>
+                                <input 
+                                type="checkbox" 
+                                {...register('policy_agreement', { required: { value: true, message: 'Укажите согласие с политикой конфиденциальности' } })} 
+                                className={`${styles.input} ${errors.policy_agreement ? styles.error : ''}`}
+                                />
+                                <label htmlFor="policy_agreement">Я согласен с <Link href="/policy" target="_blank">политикой конфиденциальности</Link></label>
+                            </div>
+                            <div className={styles.error_message}>{errors.policy_agreement?.message}</div>
+                        </div>
+
+                        <div className={`${styles.form_item} ${styles.agreement_item}`}>
+                            <div className={styles.agreement_item_row}>
+                                <input 
+                                type="checkbox" 
+                                {...register('oferta_agreement', { required: { value: true, message: 'Укажите согласие с публичной офертой' } })} 
+                                className={`${styles.input} ${errors.oferta_agreement ? styles.error : ''}`}
+                                />
+                                <label htmlFor="oferta_agreement">Я согласен с <Link href="/oferta" target="_blank">публичной офертой</Link></label>
+                            </div>
+                            <div className={styles.error_message}>{errors.oferta_agreement?.message}</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </form>

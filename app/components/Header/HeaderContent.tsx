@@ -13,6 +13,7 @@ import { useState } from "react";
 import Link from "next/link";
 import Cart from "../Cart/Cart";
 import CartNotification from "../CartNotification/CartNotification";
+import { CatalogMenuItem } from "@/app/types/types";
 
 type HeaderContentProps = {
     phone: string;
@@ -22,9 +23,10 @@ type HeaderContentProps = {
     telegram: string;
     max: string;
     email: string;
+    catalogMenu: CatalogMenuItem[];
 };
 
-export default function HeaderContent({ phone, navigationList, isScrolled, address, telegram, max, email }: HeaderContentProps) {
+export default function HeaderContent({ phone, navigationList, isScrolled, address, telegram, max, email, catalogMenu }: HeaderContentProps) {
     const [isOpen, setIsOpen] = useState(false);
 
     return (
@@ -47,7 +49,7 @@ export default function HeaderContent({ phone, navigationList, isScrolled, addre
                 <Link href="/">
                     <Image src="/logo.svg" alt="logo" width={131} height={65} priority />
                 </Link>
-                <HeaderCatalogMenu />
+                <HeaderCatalogMenu catalogMenu={catalogMenu || []} />
                 <Search />
                 <HeaderPopupButton />
                 <Cart />

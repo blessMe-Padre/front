@@ -1,25 +1,29 @@
-import { ProductCard } from "@/app/components";
-import styles from './style.module.scss';
-import fetchData from "@/app/utils/fetchData";
-import { StrapiListResponse } from "@/app/types/types";
-import { Product } from "@/app/types/types";
+import { CatalogMenuItem, StrapiListResponse } from "@/app/types/types";
+import fetchData from '@/app/utils/fetchData';
+import Breadcrumbs from "@/app/components/Breadcrumbs/Breadcrumbs";
+import { buildRootCategoriesUrl } from "@/app/utils/catalogQueries";
+import CategoryCardList from "./components/CategoryCardList";
+
+
+export const metadata = {
+    title: "RiftVL | Каталог продукции",
+    description: "Каталог продукции RiftVL",
+    keywords: "Каталог продукции, RiftVL",
+}
 
 export default async function CatalogPage() {
-
-    const response = await fetchData<StrapiListResponse<Product[]>>(
-        `/api/tovars?populate[0]=images`
-    );
-    const products = response.data;
+    const catalogMenu = await fetchData<StrapiListResponse<CatalogMenuItem[]>>(buildRootCategoriesUrl());
 
     return (
-        <div className="container">
-            <h1>Каталог</h1>
+        <>
+        <Breadcrumbs secondLink='/catalog' secondLabel='Каталог продукции' />
 
-            <ul className={styles.products_list}>
-                {products.map((product) => (
-                    <ProductCard key={product.id} product={product} />
-                ))}
-            </ul>
+        <div className="container">
+            <h1>Каталог продукции</h1>
+
+            <CategoryCardList categories={catalogMenu.data || []} />
         </div>
+
+        </>
     );
 }

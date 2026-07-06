@@ -3,9 +3,15 @@
 // @include adaptiv-value("margin-top", 100, 30);
 
 .form__wrapper {
+    position: relative;
     display: grid;
     grid-template-columns: 2fr 1fr;
     gap: 30px;
+}
+
+.total_block {
+    position: sticky;
+    top: 120px;
 }
 
 .customer_info_block {
@@ -62,5 +68,40 @@
 
     input {
         display: none;
+    }
+}
+
+.orders_block {
+    grid-column: span 2;
+}
+
+.form_button {
+    width: 100%;
+    border-radius: 10px;
+    padding: 17px;
+    background-color: #555555;
+    color: #fff;
+    font-size: 16px;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+
+    &:disabled {
+        background-color: #a3a3a3;
+        cursor: not-allowed;
+    }
+}
+
+.agreement_item_row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    input {
+        width: 21px !important;
+        height: 21px !important;
+        border-radius: 5px;
+        background-color: #a3a3a3;
+        color: #fff;
     }
 }

@@ -10,6 +10,31 @@ type FormData = {
     checkbox: boolean;
 };
 
+const url = `${process.env.NEXT_PUBLIC_API_SERVER}/api/contact-form/send`;
+
+async function sendContactFormService(formData: FormData) {
+    const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            data: {
+                contact: formData.phone,
+                consent: formData.checkbox,
+            },
+        }),
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+        throw new Error(data?.error?.message || 'Не удалось отправить заявку');
+    }
+
+    return data;
+}
+
 type FormProps = {
     active?: boolean;
     submitLabel?: string;
@@ -25,8 +50,7 @@ export default function Form({
     buttonStyle,
     buttonClassName,
 }: FormProps) {
-    const { register, handleSubmit, formState: { errors }, setFocus } = useForm<FormData>();
-    //const [isSuccess, setIsSuccess] = useState(false); если response.ok
+    const { register, handleSubmit, formState: { errors }, setFocus, reset } = useForm<FormData>();
     const [error, setError] = useState<string | null>(null);
     const [isSending, setIsSending] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
@@ -38,11 +62,20 @@ export default function Form({
         }
     }, [active, setFocus]);
 
-    const onSubmit: SubmitHandler<FormData> = async () => {
+    const onSubmit: SubmitHandler<FormData> = async (formData) => {
         setIsSending(true);
         setError(null);
-        setIsSuccess(true);
-        setIsSending(false);
+        setIsSuccess(false);
+
+        try {
+            await sendContactFormService(formData);
+            reset();
+            setIsSuccess(true);
+        } catch (error) {
+            setError(error instanceof Error ? error.message : 'Не удалось отправить заявку');
+        } finally {
+            setIsSending(false);
+        }
     };
 
     return (

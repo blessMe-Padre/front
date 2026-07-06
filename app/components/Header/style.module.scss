@@ -34,6 +34,7 @@
 }
 
 .header_top_hidden {
+    transition: all 0.3s ease;
     max-height: 0;
     padding: 0;
     opacity: 0;
@@ -44,8 +45,6 @@
     position: relative;
     display: flex;
     align-items: center;
-    padding: 10px 0;
-    // gap: 20px;
 
     >* {
         &:not(:last-child) {

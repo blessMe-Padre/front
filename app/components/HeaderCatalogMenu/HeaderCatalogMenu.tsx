@@ -5,61 +5,16 @@ import { useState, useEffect, useRef } from "react";
 import styles from "./style.module.scss";
 import Image from "next/image";
 import Link from "next/link";
+import { CatalogMenuItem } from "@/app/types/types";
 
-const catalogItems = [
-    {
-        id: 1,
-        title: "Полиэфирная смола",
-        image: "/placeholder.svg",
-        link: "/catalog",
-    },
-    {
-        id: 2,
-        title: "Гелькоуты",
-        image: "/placeholder.svg",
-        link: "/catalog",
-    },
-    {
-        id: 3,
-        title: "Гелькоуты",
-        image: "/placeholder.svg",
-        link: "/catalog",
-    },
-    {
-        id: 4,
-        title: "Разделительные составы",
-        image: "/placeholder.svg",
-        link: "/catalog",
-    },
-    {
-        id: 5,
-        title: "Все для катеров, яхт",
-        image: "/placeholder.svg",
-        link: "/catalog",
-    },
-    {
-        id: 6,
-        title: "Производимые изделия",
-        image: "/placeholder.svg",
-        link: "/catalog",
-    },
-    {
-        id: 7,
-        title: "Эпоксидные смолы",
-        image: "/placeholder.svg",
-        link: "/catalog",
-    },
-    {
-        id: 8,
-        title: "Армирующие материалы",
-        image: "/placeholder.svg",
-        link: "/catalog",
-    },
 
-];
+const imageServer = process.env.NEXT_PUBLIC_IMAGE_SERVER ?? "";
 
-export default function HeaderCatalogMenu() {
+type HeaderCatalogMenuProps = {
+    catalogMenu: CatalogMenuItem[];
+};
 
+export default function HeaderCatalogMenu({ catalogMenu }: HeaderCatalogMenuProps) {
     const [isActive, setIsActive] = useState(false);
     const menuRef = useRef<HTMLDivElement>(null);
 
@@ -86,14 +41,23 @@ export default function HeaderCatalogMenu() {
 
             <div className={`${styles.headerCatalogMenu} ${isActive ? styles.active : ''}`}>
                 <ul className={styles.headerCatalogMenuList}>
-                    {catalogItems.map((item) => (
-                        <li key={item.id} className={styles.headerCatalogMenuItem}>
-                            <Link href={item.link}>
-                                <Image src={item.image} alt={item.title} width={61} height={61} />
-                                <span>{item.title}</span>
-                            </Link>
-                        </li>
-                    ))}
+                    {catalogMenu.map((item) => {
+                        const imageSrc = item.image?.url ? `${imageServer}${item.image.url}` : "/placeholder.svg";
+
+                        return (
+                            <li key={item.id} className={styles.headerCatalogMenuItem}>
+                                <Link href={`/catalog/${item?.slug || ""}`}>
+
+                                    <Image src={imageSrc}
+                                        width={61}
+                                        height={61}
+                                        alt={item.name || ""}
+                                     />
+                                    <span>{item?.name}</span>
+                                </Link>
+                            </li>
+                        );
+                    })}
                 </ul>
             </div>
         </div>

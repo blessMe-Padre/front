@@ -36,6 +36,28 @@
     }
 }
 
+.allCatalog {
+    position: relative;
+    padding: 20px;
+    height: 200px;
+    border: 1px solid var(--blue);
+    border-radius: 15px;
+
+    font-family: var(--font-family);
+    font-weight: 600;
+    font-size: 16px;
+    color: var(--white);
+
+    a {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        flex-direction: column;
+        justify-content: flex-end;
+    }
+}
+
 .image {
     position: absolute;
     top: 0;
@@ -45,10 +67,4 @@
     object-fit: cover;
     border-radius: 15px;
     overflow: hidden;
-}
-
-.products_list {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(276px, 1fr));
-    gap: 15px;
 }

@@ -2,7 +2,7 @@ import Image from "next/image";
 import fetchData from "./utils/fetchData";
 import { StrapiSingleResponse, Contact } from "./types/types";
 import type { HeroSlider } from "./sections/Hero/Hero";
-import { Hero, WhyChoose } from "./sections";
+import { Hero, WhyChoose, HomeCategory } from "./sections";
 
 type HeroResponse = {
     data?: {
@@ -22,6 +22,7 @@ export default async function Home() {
     return (
         <div className="container">
             <Hero slides={slides} />
+            <HomeCategory />
             <WhyChoose />
         </div>
     );

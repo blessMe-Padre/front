@@ -3,7 +3,7 @@ import { createJSONStorage, persist } from "zustand/middleware";
 import { Product } from "../types/types";
 
 // Товар в корзине хранится как данные продукта + количество выбранных единиц.
-type CartItem = Product & {
+export type CartItem = Product & {
   quantity: number;
 };
 

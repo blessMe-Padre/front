@@ -123,3 +123,23 @@ export type Product = {
     characteristics?: ProductCharacteristic[];
     images?: StrapiImage[];
 };
+
+
+export type CatalogMenuItem = {
+    id: number;
+    documentId?: string;
+    name: string;
+    slug: string;
+    description?: string;
+    isMainParent?: boolean;
+    image?: StrapiImage | null;
+    parent?: CatalogMenuItem | null;
+    children?: CatalogMenuItem[];
+};
+
+export type CatalogSearchParams = {
+    category?: string | string[];
+    priceFrom?: string | string[];
+    priceTo?: string | string[];
+    inStock?: string | string[];
+};

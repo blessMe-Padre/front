@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import HeaderContent from "./HeaderContent";
 import styles from "./style.module.scss";
 import type { NavigationItem } from "../Navigation/Navigation";
+import { CatalogMenuItem } from "@/app/types/types";
 
 type HeaderShellProps = {
     phone: string;
@@ -12,9 +13,10 @@ type HeaderShellProps = {
     telegram: string;
     max: string;
     email: string;
+    catalogMenu: CatalogMenuItem[];
 };
 
-export default function HeaderShell({ phone, navigationList, address, telegram, max, email }: HeaderShellProps) {
+export default function HeaderShell({ phone, navigationList, address, telegram, max, email, catalogMenu }: HeaderShellProps) {
     const [isScrolled, setIsScrolled] = useState(false);
 
     useEffect(() => {
@@ -50,6 +52,7 @@ export default function HeaderShell({ phone, navigationList, address, telegram, 
                     telegram={telegram}
                     max={max}
                     email={email}
+                    catalogMenu={catalogMenu}
                 />
             </div>
         </header>

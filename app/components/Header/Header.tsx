@@ -1,7 +1,8 @@
 import fetchData from "@/app/utils/fetchData";
-import { Contact, StrapiSingleResponse } from "@/app/types/types";
+import { CatalogMenuItem, Contact, StrapiListResponse, StrapiSingleResponse } from "@/app/types/types";
 import HeaderShell from "./HeaderShell";
 import type { NavigationItem } from "../Navigation/Navigation";
+import { buildRootCategoriesUrl } from "@/app/utils/catalogQueries";
 
 type NavigationResponse = {
     data?: {
@@ -20,6 +21,8 @@ export default async function Header() {
     const navigation = await fetchData<NavigationResponse>("/api/glavnoe-menyus?populate=*");
     const navigationList = navigation.data?.[0]?.list || [];
 
+    const catalogMenu = await fetchData<StrapiListResponse<CatalogMenuItem[]>>(buildRootCategoriesUrl());
+    
     return (
         <HeaderShell
             phone={phone}
@@ -28,6 +31,7 @@ export default async function Header() {
             telegram={telegram}
             max={max}
             email={email}
+            catalogMenu={catalogMenu.data || []}
         />
     );
 }
