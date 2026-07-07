@@ -1,24 +1,12 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
   --blue: #314077;
   --white: #fff;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --black: #1f1f1f;
+  --gray: #E3E4E7;
+  --font-family: var(--font-family);
+  --second-family: var(--second-family);
 }
 
 html,
@@ -31,9 +19,13 @@ body {
 
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-family), Arial, Helvetica, sans-serif;
+  color: var(--black);
+
+  scrollbar-width: thin;
+  scrollbar-color: var(--blue) var(--gray);
+  font-size: 16px;
+  /* ползунок дорожка */
 }
 
 * {
@@ -81,4 +73,32 @@ ul {
   border-radius: 50%;
   opacity: 1;
   transition: all 0.3s ease;
+}
+
+
+/* ===== Скроллбар для WebKit (Chrome, Edge, Safari) ===== */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--gray);
+  /* #E3E4E7 */
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--blue);
+  /* #314077 */
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #26325e;
+}
+
+/* ===== Для Firefox ===== */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--blue) var(--gray);
 }

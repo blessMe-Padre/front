@@ -32,41 +32,47 @@ export default function HeaderContent({ phone, navigationList, isScrolled, addre
     return (
         <>
             <div className={`${styles.header_top} ${isScrolled ? styles.header_top_hidden : ""}`}>
-                <Navigation navigationList={navigationList} />
-                <div className={styles.header_top_right}>
-                    <a href={normalizePhone(phone)}>{phone}</a>
+                <div className="container">
+                    <div className={styles.header_top_wrapper}>
+                        <Navigation navigationList={navigationList} />
+                        <div className={styles.header_top_right}>
+                            <a href={normalizePhone(phone)}>{phone}</a>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <div className={styles.header_wrapper}>
-                <button
-                    type="button"
-                    className={`${styles.header_menu_button} ${isScrolled ? styles.header_menu_button_visible : ""}`}
-                    onClick={() => {setIsOpen(true);}}
-                >
-                    <Image src="/icons/burger.svg" alt="menu" width={34} height={23} />
-                </button>
-                <Link href="/">
-                    <Image src="/logo.svg" alt="logo" width={131} height={65} priority />
-                </Link>
-                <HeaderCatalogMenu catalogMenu={catalogMenu || []} />
-                <Search />
-                <HeaderPopupButton />
-                <Cart />
-            </div>
+            <div className="container">
+                <div className={styles.header_wrapper}>
+                    <button
+                        type="button"
+                        className={`${styles.header_menu_button} ${isScrolled ? styles.header_menu_button_visible : ""}`}
+                        onClick={() => {setIsOpen(true);}}
+                    >
+                        <Image src="/icons/burger.svg" alt="menu" width={34} height={23} />
+                    </button>
+                    <Link href="/" className={styles.header_logo}>
+                        <Image src="/logo.svg" alt="logo" width={131} height={65} priority />
+                    </Link>
+                    <HeaderCatalogMenu catalogMenu={catalogMenu || []} />
+                    <Search />
+                    <HeaderPopupButton />
+                    <Cart />
+                </div>
 
-            <CartNotification />
+                <CartNotification />
 
-            <Sidebar 
-                isOpen={isOpen} 
-                setIsOpen={setIsOpen} 
-                navigationList={navigationList} 
-                phone={phone}
-                address={address}
-                telegram={telegram}
-                max={max}
-                email={email}
-            />
+                <Sidebar 
+                    isOpen={isOpen} 
+                    setIsOpen={setIsOpen} 
+                    navigationList={navigationList} 
+                    phone={phone}
+                    address={address}
+                    telegram={telegram}
+                    max={max}
+                    email={email}
+                />
+                </div>
         </>
     );
 }

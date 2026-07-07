@@ -7,16 +7,22 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 5px;
+    gap: 0;
     cursor: pointer;
+
+    span {
+        font-weight: 500;
+        font-size: 14px;
+        color: var(--black);
+    }
 }
 
 .card_count {
     position: absolute;
-    top: 0;
+    top: -15px;
     right: 0;
-    background-color: red;
-    color: #fff;
+    background-color: var(--blue);
+    color: #fff !important;
     border-radius: 50%;
     width: 20px;
     height: 20px;

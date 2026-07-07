@@ -45,13 +45,13 @@ export default function Sidebar({ isOpen, setIsOpen, navigationList, phone, addr
                     </svg>
                 </button>
 
-                <Image className={styles.sidebar_logo} src="/logo.svg" alt="logo" width={131} height={65} />
-                <Link href="/catalog" className={styles.sidebar_link}>Каталог</Link>
+                <Image className={styles.sidebar_logo} src="/logo-white.svg" alt="logo" width={131} height={65} />
+                <Link href="/catalog" className={styles.sidebar_link} onClick={() => setIsOpen(false)}>Каталог</Link>
                 <nav className={styles.sidebar_navigation}>
                     <ul>
                         {navigationList.map((item: NavigationItem) => (
                             <li key={item.id}>
-                                <Link href={item.link}>{item.title}</Link>
+                                <Link className={styles.nav_link} href={item.link} onClick={() => setIsOpen(false)}>{item.title}</Link>
                             </li>
                         ))}
                     </ul>

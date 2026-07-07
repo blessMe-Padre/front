@@ -4,14 +4,22 @@
 .headerCatalogMenuButton {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 10px;
     background: none;
     border: none;
     cursor: pointer;
 
-    background-color: #515151;
-    padding: 15px 25px;
+    background-color: var(--blue);
+    color: var(--white);
+    font-weight: 500;
+    font-size: 18px;
+    padding: 13px 30px;
     border-radius: 10px;
+
+    @media screen and (max-width: 768px) {
+        display: none;
+    }
 }
 
 .headerCatalogMenu {
@@ -45,4 +53,10 @@
     align-items: center;
     gap: 10px;
     color: #000;
+}
+
+.headerCatalogMenuWrapper {
+    @media screen and (max-width: 560px) {
+        display: none;
+    }
 }

@@ -5,6 +5,7 @@ import HeaderContent from "./HeaderContent";
 import styles from "./style.module.scss";
 import type { NavigationItem } from "../Navigation/Navigation";
 import { CatalogMenuItem } from "@/app/types/types";
+import { useIsMobile } from "@/app/hooks/use-mobile";
 
 type HeaderShellProps = {
     phone: string;
@@ -18,6 +19,7 @@ type HeaderShellProps = {
 
 export default function HeaderShell({ phone, navigationList, address, telegram, max, email, catalogMenu }: HeaderShellProps) {
     const [isScrolled, setIsScrolled] = useState(false);
+    const isMobile = useIsMobile();
 
     useEffect(() => {
         const handleScroll = () => {
@@ -42,19 +44,17 @@ export default function HeaderShell({ phone, navigationList, address, telegram, 
     }, []);
 
     return (
-        <header className={`${styles.header} ${isScrolled ? styles.fixed : ""}`}>
-            <div className="container">
-                <HeaderContent
-                    phone={phone}
-                    navigationList={navigationList}
-                    isScrolled={isScrolled}
-                    address={address}
-                    telegram={telegram}
-                    max={max}
-                    email={email}
-                    catalogMenu={catalogMenu}
-                />
-            </div>
+        <header className={`${styles.header} ${isScrolled ? styles.fixed : ""} ${isMobile ? styles.fixed : ""}`}>
+            <HeaderContent
+                phone={phone}
+                navigationList={navigationList}
+                isScrolled={isScrolled}
+                address={address}
+                telegram={telegram}
+                max={max}
+                email={email}
+                catalogMenu={catalogMenu}
+            />
         </header>
     );
 }

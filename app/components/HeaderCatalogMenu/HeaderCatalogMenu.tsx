@@ -29,7 +29,7 @@ export default function HeaderCatalogMenu({ catalogMenu }: HeaderCatalogMenuProp
     }, []);
 
     return (
-        <div className="relative" ref={menuRef}>
+        <div className={styles.headerCatalogMenuWrapper} ref={menuRef}>
             <button 
             className={styles.headerCatalogMenuButton}
             onClick={() => setIsActive(!isActive)}

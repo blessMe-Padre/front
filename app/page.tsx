@@ -11,9 +11,6 @@ type HeroResponse = {
 };
 
 export default async function Home() {
-    // const contacts = await fetchData<StrapiSingleResponse<Contact>>("/api/kontakty");
-    // console.log("contacts", contacts.data);
-
     const heroData = await fetchData<HeroResponse>(
         "/api/sekcziya-glavnyj-slajders?populate[slides][populate]=image"
     );
@@ -21,9 +18,9 @@ export default async function Home() {
 
     return (
         <div className="container">
-            <Hero slides={slides} />
+            {/* <Hero slides={slides} /> */}
             <HomeCategory />
-            <WhyChoose />
+            {/* <WhyChoose /> */}
         </div>
     );
 }

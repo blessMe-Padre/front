@@ -35,6 +35,15 @@
     gap: 20px;
     background: #E9E9E9;
     padding: 45px 55px;
+    overflow: auto;
+
+    background-color: var(--blue);
+    color: var(--white);
+
+    @media screen and (max-width: 560px) {
+        width: 100%;
+        padding: 20px;
+    }
 }
 
 .sidebar_closeButton {
@@ -59,9 +68,9 @@
 
 .sidebar_link {
     text-decoration: none;
-    color: #ffffff;
-    background-color: #3d3d3d;
-    border-radius: 15px;
+    color: var(--blue);
+    background-color: var(--white);
+    border-radius: 10px;
     padding: 15px 20px;
     display: block;
     width: 100%;
@@ -95,24 +104,29 @@
     margin-bottom: 30px;
 }
 
+.nav_link {
+    text-decoration: none;
+    color: var(--white);
+}
+
 .sidebar_address {
     font-weight: 500;
     font-size: 24px;
     line-height: 1.2;
-    color: #313131;
+    color: var(--white);
     margin-bottom: 20px;
 }
 
 .sidebar_phone {
     font-weight: 500;
     font-size: 24px;
-    color: #313131;
+    color: var(--white);
 }
 
 .sidebar_email {
     font-weight: 500;
     font-size: 24px;
-    color: #313131;
+    color: var(--white);
     text-decoration: none;
     margin-bottom: 30px;
 }

@@ -3,17 +3,24 @@
 // @include adaptiv-value("margin-top", 100, 30);
 .search_wrapper {
     width: 100%;
+
+    @media screen and (max-width: 768px) {
+        position: absolute;
+        top: 74px;
+        left: 0;
+    }
 }
 
 .wrapper {
+    position: relative;
     display: flex;
     flex-direction: column;
     gap: 10px;
-    background-color: #fff;
-    position: relative;
 }
 
 .input_area {
+    background-color: var(--gray);
+    border-radius: 10px;
     display: flex;
     align-items: center;
     gap: 20px;
@@ -22,12 +29,10 @@
 .input {
     display: flex;
     width: 100%;
-    background: linear-gradient(90deg, #e6ecf3 0%, #fff 100%);
+    background-color: var(--gray);
+    border-radius: 10px;
     padding: 15px 30px;
     color: var(--black);
-    border-radius: 100px;
-    color: #000;
-
     font-family: "Montserrat", sans-serif;
     font-weight: 400;
     font-size: 16px;
@@ -59,6 +64,7 @@
     border: 1px solid var(--button-border);
     border-radius: 30px;
     cursor: pointer;
+    flex: 0 0 auto;
 }
 
 

@@ -4,33 +4,51 @@
 
 .header {
     max-width: 100%;
+
+    @media screen and (max-width: 768px) {
+        padding: 10px 0;
+    }
 }
 
 .fixed {
     position: fixed;
     top: 0;
     left: 0;
-    width: 99%;
+    width: 100%;
     z-index: 100;
     padding: 10px 0;
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
-    background-color: #0a0a0a;
+    background-color: var(--white);
+
+    .header_top {
+        margin-bottom: 0;
+    }
 }
 
 .header_top {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 20px;
-    padding: 10px 0;
     max-height: 60px;
+    width: 100vw;
     opacity: 1;
     overflow: hidden;
+    background-color: var(--gray);
     transition:
         max-height 0.3s ease,
         opacity 0.3s ease,
         padding 0.3s ease,
         transform 0.3s ease;
+    margin-bottom: 20px;
+
+    @media screen and (max-width: 768px) {
+        display: none;
+    }
+}
+
+.header_top_wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    padding: 10px 0;
 }
 
 .header_top_hidden {
@@ -46,6 +64,10 @@
     display: flex;
     align-items: center;
 
+    @media screen and (max-width: 768px) {
+        justify-content: space-between;
+    }
+
     >* {
         &:not(:last-child) {
             margin-right: 20px;
@@ -58,16 +80,23 @@
 }
 
 .headerPopupButton {
-    background-color: #c7c7c7;
+    background-color: var(--blue);
+    color: var(--white);
     padding: 15px 25px;
     border-radius: 10px;
     border: none;
     cursor: pointer;
     font-size: 16px;
     font-weight: 400;
-    line-height: 23px;
+    line-height: 1.1;
     color: #fff;
     transition: background-color 0.3s ease;
+
+    flex: 0 0 auto;
+
+    @media screen and (max-width: 560px) {
+        display: none;
+    }
 }
 
 .header_menu_button {
@@ -81,6 +110,15 @@
         transform 0.3s ease;
     width: 0;
     margin-right: 0;
+
+    flex: 0 0 auto;
+
+    @media screen and (max-width: 768px) {
+        opacity: 1;
+        pointer-events: auto;
+        width: auto;
+        margin-right: 20px !important;
+    }
 }
 
 .header_menu_button_visible {
@@ -88,4 +126,17 @@
     pointer-events: auto;
     width: auto;
     margin-right: 20px !important;
+}
+
+.header_top_right {
+    a {
+        font-weight: 500;
+    }
+}
+
+.header_logo {
+    @media screen and (max-width: 560px) {
+        width: 90px;
+        height: 45px;
+    }
 }

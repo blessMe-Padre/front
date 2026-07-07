@@ -160,7 +160,7 @@ export default function Search({ setSearchOpened }: SearchProps) {
 
   return (
     <div className={styles.search_wrapper}>
-      <div className="container">
+      {/* <div className="container"> */}
         <div className={styles.wrapper}>
           <div className={styles.input_area}>
             <input
@@ -328,7 +328,7 @@ export default function Search({ setSearchOpened }: SearchProps) {
             </ul>
           )}
         </div>
-      </div>
+      {/* </div> */}
     </div>
   );
 }
