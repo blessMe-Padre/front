@@ -93,10 +93,10 @@ export default async function CatalogSlugPage({ params, searchParams }: CatalogS
                 subcategories={subcategories}
                 filters={appliedFilters}
                 filterOptions={filterOptions}
+                products={products}
             />
 
-            <h2>Товары</h2>
-            <ProductGrid products={products} />
+            {products.length > 0 ? <ProductGrid products={products} /> : <p>В данной категории пока нет товаров</p>}
         </div>
         </>
     );

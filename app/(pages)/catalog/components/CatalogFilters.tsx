@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useRef } from "react";
-import { CatalogMenuItem } from "@/app/types/types";
+import { CatalogMenuItem, Product } from "@/app/types/types";
 import { CatalogFilters as CatalogFilterValues } from "@/app/utils/catalogQueries";
 
 import styles from "../style.module.scss";
@@ -16,6 +16,7 @@ type CatalogFiltersProps = {
         countries: string[];
         uvResistances: string[];
     };
+    products: Product[];
 };
 
 const getCategoryHref = (currentSlug: string, filters: CatalogFilterValues, categorySlug?: string) => {
@@ -71,7 +72,7 @@ const getOptions = (options: string[], selectedValues: string[] = []) => {
     return [...missingSelectedValues, ...options];
 };
 
-export default function CatalogFilters({ currentSlug, subcategories, filters, filterOptions }: CatalogFiltersProps) {
+export default function CatalogFilters({ currentSlug, subcategories, filters, filterOptions, products }: CatalogFiltersProps) {
     const isPriceActive = Boolean(filters.priceFrom || filters.priceTo || filters.inStock);
     const isManufacturerActive = hasSelectedValues(filters.manufacturer);
     const isCountryActive = hasSelectedValues(filters.country);
@@ -119,6 +120,7 @@ export default function CatalogFilters({ currentSlug, subcategories, filters, fi
             </nav>
         )}
 
+        {products?.length > 0 && (
         <form className={styles.filters} action={`/catalog/${currentSlug}`} method="get">
             {filters.category && <input type="hidden" name="category" value={filters.category} />}
 
@@ -271,6 +273,7 @@ export default function CatalogFilters({ currentSlug, subcategories, filters, fi
                 )}
             </div>
         </form>
+        )}
         </>
     );
 }

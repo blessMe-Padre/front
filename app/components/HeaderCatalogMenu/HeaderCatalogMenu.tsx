@@ -46,7 +46,10 @@ export default function HeaderCatalogMenu({ catalogMenu }: HeaderCatalogMenuProp
 
                         return (
                             <li key={item.id} className={styles.headerCatalogMenuItem}>
-                                <Link href={`/catalog/${item?.slug || ""}`}>
+                                <Link 
+                                    href={`/catalog/${item?.slug || ""}`}
+                                    onClick={() => setIsActive(false)}
+                                >
 
                                     <Image src={imageSrc}
                                         width={61}

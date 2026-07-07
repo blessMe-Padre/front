@@ -13,10 +13,13 @@ export default function ProductGrid({ products }: ProductGridProps) {
     }
 
     return (
+        <>
+        <h2>Товары</h2>
         <ul className={styles.products_list}>
             {products.map((product) => (
                 <ProductCard key={product.id} product={product} />
             ))}
         </ul>
+        </>
     );
 }
