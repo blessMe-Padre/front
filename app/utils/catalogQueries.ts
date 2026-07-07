@@ -5,6 +5,9 @@ export type CatalogFilters = {
     priceFrom?: string;
     priceTo?: string;
     inStock?: boolean;
+    manufacturer?: string[];
+    country?: string[];
+    uvResistance?: string[];
 };
 
 const withQuery = (pathname: string, params: URLSearchParams) => {
@@ -22,11 +25,19 @@ const numberParam = (value: string | string[] | undefined) => {
     return param && /^\d+$/.test(param) ? param : undefined;
 };
 
+const paramList = (value: string | string[] | undefined) => {
+    const params = Array.isArray(value) ? value : value ? [value] : [];
+    return params.map((param) => param.trim()).filter(Boolean);
+};
+
 export const getCatalogFilters = (searchParams: CatalogSearchParams): CatalogFilters => ({
     category: firstParam(searchParams.category),
     priceFrom: numberParam(searchParams.priceFrom),
     priceTo: numberParam(searchParams.priceTo),
     inStock: firstParam(searchParams.inStock) === "1",
+    manufacturer: paramList(searchParams.manufacturer),
+    country: paramList(searchParams.country),
+    uvResistance: paramList(searchParams.uvResistance),
 });
 
 export const buildRootCategoriesUrl = () => {
@@ -34,7 +45,6 @@ export const buildRootCategoriesUrl = () => {
 
     params.append("populate[0]", "image");
     params.append("filters[parent][$null]", "true");
-    params.append("filters[isMainParent][$eq]", "true");
     params.append("sort[0]", "name:asc");
 
     return withQuery("/api/kategoriis", params);

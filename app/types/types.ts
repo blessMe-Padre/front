@@ -142,4 +142,7 @@ export type CatalogSearchParams = {
     priceFrom?: string | string[];
     priceTo?: string | string[];
     inStock?: string | string[];
+    manufacturer?: string | string[];
+    country?: string | string[];
+    uvResistance?: string | string[];
 };
