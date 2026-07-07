@@ -214,3 +214,8 @@
     background-color: var(--white);
     color: var(--blue);
 }
+
+.filter_row {
+    display: flex;
+    gap: 10px;
+}

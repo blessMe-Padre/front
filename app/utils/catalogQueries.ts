@@ -30,6 +30,12 @@ const paramList = (value: string | string[] | undefined) => {
     return params.map((param) => param.trim()).filter(Boolean);
 };
 
+const appendInFilter = (params: URLSearchParams, field: string, values?: string[]) => {
+    values?.forEach((value, index) => {
+        params.append(`filters[${field}][$in][${index}]`, value);
+    });
+};
+
 export const getCatalogFilters = (searchParams: CatalogSearchParams): CatalogFilters => ({
     category: firstParam(searchParams.category),
     priceFrom: numberParam(searchParams.priceFrom),
@@ -80,6 +86,23 @@ export const buildProductsByCategoryUrl = (categorySlug: string, filters: Catalo
     if (filters.inStock) {
         params.append("filters[amount][$gt]", "0");
     }
+
+    appendInFilter(params, "manufacturer", filters.manufacturer);
+    appendInFilter(params, "country", filters.country);
+    appendInFilter(params, "uvResistance", filters.uvResistance);
+
+    return withQuery("/api/tovars", params);
+};
+
+export const buildCatalogFilterOptionsUrl = (categorySlug: string, page = 1) => {
+    const params = new URLSearchParams();
+
+    params.append("fields[0]", "manufacturer");
+    params.append("fields[1]", "country");
+    params.append("fields[2]", "uvResistance");
+    params.append("filters[kategoriis][slug][$eq]", categorySlug);
+    params.append("pagination[page]", String(page));
+    params.append("pagination[pageSize]", "100");
 
     return withQuery("/api/tovars", params);
 };

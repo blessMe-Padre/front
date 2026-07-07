@@ -1,7 +1,12 @@
 import Breadcrumbs from "@/app/components/Breadcrumbs/Breadcrumbs";
 import fetchData from "@/app/utils/fetchData";
 import { CatalogMenuItem, CatalogSearchParams, Product, StrapiListResponse } from "@/app/types/types";
-import { buildCategoryBySlugUrl, buildProductsByCategoryUrl, getCatalogFilters } from "@/app/utils/catalogQueries";
+import {
+    buildCatalogFilterOptionsUrl,
+    buildCategoryBySlugUrl,
+    buildProductsByCategoryUrl,
+    getCatalogFilters,
+} from "@/app/utils/catalogQueries";
 import { notFound } from "next/navigation";
 import CatalogFilters from "../components/CatalogFilters";
 import ProductGrid from "../components/ProductGrid";
@@ -11,56 +16,30 @@ type CatalogSlugPageProps = {
     searchParams: Promise<CatalogSearchParams>;
 };
 
-const characteristicLabels = {
-    manufacturer: ["производитель", "бренд"],
-    country: ["страна происхождения", "страна"],
-    uvResistance: ["уф-стойкость", "уф стойкость", "uv"],
-};
-
-const normalizeCharacteristic = (value: string) =>
-    value
-        .toLowerCase()
-        .replaceAll("ё", "е")
-        .replace(/[^a-zа-я0-9]+/gi, " ")
-        .trim();
-
-const getCharacteristicValue = (product: Product, labels: string[]) => {
-    const normalizedLabels = labels.map(normalizeCharacteristic);
-    const characteristic = product.characteristics?.find((item) => {
-        const label = normalizeCharacteristic(item.label);
-        return normalizedLabels.some((normalizedLabel) => label === normalizedLabel || label.includes(normalizedLabel));
-    });
-
-    return characteristic?.value?.trim();
-};
-
-const getCharacteristicOptions = (products: Product[], labels: string[]) =>
-    Array.from(
-        new Set(
-            products
-                .map((product) => getCharacteristicValue(product, labels))
-                .filter((value): value is string => Boolean(value))
-        )
-    ).sort((first, second) => first.localeCompare(second, "ru"));
-
-const matchesCharacteristicFilter = (product: Product, labels: string[], selectedValues?: string[]) => {
-    if (!selectedValues?.length) {
-        return true;
-    }
-
-    const value = getCharacteristicValue(product, labels);
-    const normalizedValue = normalizeCharacteristic(value ?? "");
-
-    return selectedValues.some((selectedValue) => normalizedValue === normalizeCharacteristic(selectedValue));
-};
-
-const applyCharacteristicFilters = (products: Product[], filters: ReturnType<typeof getCatalogFilters>) =>
-    products.filter(
-        (product) =>
-            matchesCharacteristicFilter(product, characteristicLabels.manufacturer, filters.manufacturer) &&
-            matchesCharacteristicFilter(product, characteristicLabels.country, filters.country) &&
-            matchesCharacteristicFilter(product, characteristicLabels.uvResistance, filters.uvResistance)
+const getUniqueOptions = (values: Array<string | undefined>) =>
+    Array.from(new Set(values.map((value) => value?.trim()).filter((value): value is string => Boolean(value)))).sort(
+        (first, second) => first.localeCompare(second, "ru")
     );
+
+const getCatalogFilterOptions = async (categorySlug: string) => {
+    const firstPage = await fetchData<StrapiListResponse<Product[]>>(buildCatalogFilterOptionsUrl(categorySlug));
+    const pageCount = firstPage.meta.pagination.pageCount;
+    const otherPages =
+        pageCount > 1
+            ? await Promise.all(
+                  Array.from({ length: pageCount - 1 }, (_, index) =>
+                      fetchData<StrapiListResponse<Product[]>>(buildCatalogFilterOptionsUrl(categorySlug, index + 2))
+                  )
+              )
+            : [];
+    const products = [firstPage, ...otherPages].flatMap((response) => response.data);
+
+    return {
+        manufacturers: getUniqueOptions(products.map((product) => product.manufacturer)),
+        countries: getUniqueOptions(products.map((product) => product.country)),
+        uvResistances: getUniqueOptions(products.map((product) => product.uvResistance)),
+    };
+};
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
     const { slug } = await params;
@@ -96,15 +75,11 @@ export default async function CatalogSlugPage({ params, searchParams }: CatalogS
     };
     const activeCategorySlug = selectedSubcategory?.slug ?? slug;
 
-    const response = await fetchData<StrapiListResponse<Product[]>>(
-        buildProductsByCategoryUrl(activeCategorySlug, appliedFilters)
-    );
-    const products = applyCharacteristicFilters(response.data, appliedFilters);
-    const filterOptions = {
-        manufacturers: getCharacteristicOptions(response.data, characteristicLabels.manufacturer),
-        countries: getCharacteristicOptions(response.data, characteristicLabels.country),
-        uvResistances: getCharacteristicOptions(response.data, characteristicLabels.uvResistance),
-    };
+    const [response, filterOptions] = await Promise.all([
+        fetchData<StrapiListResponse<Product[]>>(buildProductsByCategoryUrl(activeCategorySlug, appliedFilters)),
+        getCatalogFilterOptions(activeCategorySlug),
+    ]);
+    const products = response.data;
 
     return (
         <>

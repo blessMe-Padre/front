@@ -117,6 +117,9 @@ export type Product = {
     price?: number;
     priceSales?: number;
     amount?: number;
+    manufacturer?: string;
+    country?: string;
+    uvResistance?: string;
     createdAt?: string;
     updatedAt?: string;
     publishedAt?: string;

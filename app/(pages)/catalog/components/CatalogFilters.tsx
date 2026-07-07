@@ -132,29 +132,31 @@ export default function CatalogFilters({ currentSlug, subcategories, filters, fi
                 >
                     <summary className={getToggleClassName(isPriceActive)}>Цена</summary>
                     <div className={styles.filter_panel}>
-                        <label className={styles.filter_field}>
-                            <span>Цена от</span>
-                            <input
-                                type="number"
-                                name="priceFrom"
-                                min="0"
-                                inputMode="numeric"
-                                placeholder="0"
-                                defaultValue={filters.priceFrom ?? ""}
-                            />
-                        </label>
+                        <div className={styles.filter_row}>
+                            <label className={styles.filter_field}>
+                                <input
+                                    type="number"
+                                    name="priceFrom"
+                                    min="0"
+                                    step="100"
+                                    inputMode="numeric"
+                                    placeholder="от"
+                                    defaultValue={filters.priceFrom ?? ""}
+                                />
+                            </label>
 
-                        <label className={styles.filter_field}>
-                            <span>Цена до</span>
-                            <input
-                                type="number"
-                                name="priceTo"
-                                min="0"
-                                inputMode="numeric"
-                                placeholder="10000"
-                                defaultValue={filters.priceTo ?? ""}
-                            />
-                        </label>
+                            <label className={styles.filter_field}>
+                                <input
+                                    type="number"
+                                    name="priceTo"
+                                    min="0"
+                                    step="100"
+                                    inputMode="numeric"
+                                    placeholder="до"
+                                    defaultValue={filters.priceTo ?? ""}
+                                />
+                            </label>
+                        </div>
 
                         <label className={styles.filter_checkbox}>
                             <input
