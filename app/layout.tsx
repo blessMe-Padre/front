@@ -42,11 +42,12 @@ export default function RootLayout({
       lang="ru"
       className={`${Involve.variable} ${Bounded.variable} h-full antialiased`}
     >
-      <body className="grid grid-rows-[auto_1fr_auto] min-h-screen">
-          {/* <Header /> */}
-        <main>
+      <body className="flex flex-col w-full min-h-screen">
+          <Header />
+        <main className="flex-1">
           {children}
         </main>
+        <div>footer</div>
           {/* <Footer /> */}
         <AppPopup />
       </body>

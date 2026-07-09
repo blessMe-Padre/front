@@ -47,7 +47,6 @@ export default function Form({
     active = false,
     submitLabel = 'Отправить',
     formStyle,
-    buttonStyle,
     buttonClassName,
 }: FormProps) {
     const { register, handleSubmit, formState: { errors }, setFocus, reset } = useForm<FormData>();
@@ -94,7 +93,6 @@ export default function Form({
                 className={`${styles.form_button} ${buttonClassName ?? ''}`}
                 type="submit"
                 disabled={isSending}
-                style={buttonStyle}
                 >
                     {isSending ? 'Отправка...' : submitLabel}
             </button>

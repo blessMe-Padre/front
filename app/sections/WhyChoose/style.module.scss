@@ -1,12 +1,13 @@
 @use '@/app/mixins' as *;
 
 .whyChoose {
-    @include adaptiv-value("padding-top", 60, 24);
-    @include adaptiv-value("padding-bottom", 60, 24);
+    padding: 30px 0;
 }
 
 .panel {
-    background-color: #d9d9d9;
+    background-image: url('/bg/bg-1.webp');
+    background-size: cover;
+    background-position: center;
     border-radius: 35px;
     @include adaptiv-value("padding", 44, 20);
     @include adaptiv-value("padding-bottom", 36, 24);
@@ -14,9 +15,10 @@
 
 .title {
     @include adaptiv-value("font-size", 24, 18);
-    font-weight: 400;
-    line-height: normal;
-    color: #000;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 1.2;
+    color: var(--black);
     margin-bottom: 24px;
 }
 
@@ -26,7 +28,7 @@
     align-items: center;
     text-align: center;
     gap: 24px;
-    max-width: 996px;
+    max-width: 900px;
     margin: 0 auto;
     @include adaptiv-value("margin-bottom", 48, 32);
 }
@@ -68,7 +70,7 @@
 }
 
 .card {
-    background-color: #fff;
+    background: linear-gradient(37deg, #314077 56%, #fff 100%);
     border-radius: 15px;
     min-height: 240px;
     @include adaptiv-value("padding", 18, 16);
@@ -79,17 +81,17 @@
 
 .cardValue {
     @include adaptiv-value("font-size", 40, 28);
-    font-weight: 400;
-    line-height: normal;
-    color: #000;
+    font-family: var(--second-family);
+    font-weight: 566;
     white-space: nowrap;
+    color: var(--white);
 }
 
 .cardText {
     @include adaptiv-value("font-size", 16, 14);
-    font-weight: 400;
-    line-height: normal;
-    color: #000;
+    font-family: var(--font-family);
+    font-weight: 500;
+    color: var(--white);
     margin-top: auto;
 }
 

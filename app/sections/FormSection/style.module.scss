@@ -1,0 +1,53 @@
+@use '@/app/mixins' as *;
+
+// @include adaptiv-value("margin-top", 100, 30);
+
+
+.section {
+    padding: 30px 0;
+}
+
+.spam_section_wrapper {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    gap: 20px;
+
+    @media screen and (max-width: 768px) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.spam_section_content {
+    border-radius: 15px;
+    padding: 40px 50px;
+    font-family: var(--second-family);
+    color: var(--black);
+    background-color: var(--gray);
+    line-height: 1.1;
+
+    @media screen and (max-width: 768px) {
+        padding: 20px;
+    }
+
+    text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.8),
+    -1px -1px 2px rgba(255, 255, 255, 0.8);
+}
+
+.title {
+    font-weight: 566;
+    @include adaptiv-value("font-size", 36, 24);
+    margin-bottom: 40px;
+}
+
+.description {
+    font-weight: 500;
+    font-size: 16px;
+    max-width: 500px;
+}
+
+.background_1 {
+    background-image: url('/bg/form_section_bg.png');
+    background-size: contain;
+    background-position: right top;
+    background-repeat: no-repeat;
+}

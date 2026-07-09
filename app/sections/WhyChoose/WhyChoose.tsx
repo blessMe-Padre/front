@@ -38,7 +38,7 @@ export default function WhyChoose() {
     return (
         <section className={styles.whyChoose} aria-labelledby="why-choose-title">
             <div className={styles.panel}>
-                <h2 id="why-choose-title" className={styles.title}>
+                <h2 className={styles.title}>
                     Почему выбирают РИФ
                 </h2>
 

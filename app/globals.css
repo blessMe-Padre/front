@@ -66,11 +66,6 @@ ul {
   position: relative;
 }
 
-.swiper-slide {
-  width: 100% !important;
-  height: auto !important;
-}
-
 .swiper-pagination-bullet {
   background: var(--white) !important;
   width: 15px !important;
@@ -140,6 +135,7 @@ ul {
 
 .button_ghost {
   display: block;
+  width: 100%;
   background-color: var(--white);
   color: var(--blue);
   border: 1px solid var(--white);

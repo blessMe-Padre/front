@@ -1,6 +1,6 @@
 import fetchData from "./utils/fetchData";
 import type { HeroSlider } from "./sections/Hero/Hero";
-import { Hero, WhyChoose, HomeCategory } from "./sections";
+import { Hero, WhyChoose, HomeCategory, FormSection } from "./sections";
 
 type HeroResponse = {
     data?: {
@@ -16,9 +16,14 @@ export default async function Home() {
 
     return (
         <div className="container">
-            <Hero slides={slides} />
+            {/* <Hero slides={slides} /> */}
             {/* <HomeCategory /> */}
-            {/* <WhyChoose /> */}
+            <FormSection 
+                background={1} 
+                title="Не знаете, что выбрать?" 
+                description="Оставьте заявку и мы подберем решение под вашу задачу с учетом условий эксплуатации, нагрузок и технологии производства" 
+            />
+            <WhyChoose />
         </div>
     );
 }
