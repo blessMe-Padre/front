@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import { Footer, Header } from "./components";
+import { AppPopup, Footer, Header } from "./components";
 
 const Involve = localFont({
   src: [
@@ -43,11 +43,12 @@ export default function RootLayout({
       className={`${Involve.variable} ${Bounded.variable} h-full antialiased`}
     >
       <body className="grid grid-rows-[auto_1fr_auto] min-h-screen">
-          <Header />
+          {/* <Header /> */}
         <main>
           {children}
         </main>
           {/* <Footer /> */}
+        <AppPopup />
       </body>
     </html>
   );

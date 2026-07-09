@@ -2,8 +2,7 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { Popup, SocialIcon } from '..';
-import { usePopupStore } from '@/app/store/popupStore';
+import { SocialIcon } from '..';
 import styles from './style.module.scss';
 
 const footerNav = [
@@ -23,8 +22,6 @@ const legalLinks = [
 
 
 export default function Footer() {
-    const { popupOpened, togglePopupState } = usePopupStore();
-
     return (
         <footer className={styles.footer}>
             <div className={`container ${styles.grid}`}>
@@ -115,7 +112,6 @@ export default function Footer() {
                     </div>
                 </div>
             </div>
-            <Popup active={popupOpened} setActive={togglePopupState} />
         </footer>
     );
 }
