@@ -1,4 +1,4 @@
-import { WhyChoose, HomePromos, FormSection, Hero, HomeCategory } from "./sections";
+import { WhyChoose, HomePromos, FormSection, Hero, HomeCategory, HomeNews } from "./sections";
 import fetchData from "./utils/fetchData";
 
 type HeroResponse = {
@@ -35,6 +35,7 @@ export default async function Home() {
             />
             <WhyChoose />
             <HomePromos />
+            <HomeNews />
         </div>
     );
 }

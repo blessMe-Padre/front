@@ -33,14 +33,13 @@ export default async function NewsPage({ params }: { params: Promise<{ slug: str
         <Breadcrumbs secondLink='/news' secondLabel='Новости' thirdLabel={newsData?.title} />
 
         <div className="container">
-            <h1 className={styles.title}>{newsData?.title}</h1>
-
             <div className={styles.news_wrapper}>
                 <div className={styles.news_mainimage}>
                     <Image src={imageSrc} alt={newsData?.title ?? ""} width={460} height={300} />
                 </div>
 
                 <div className={styles.news_content}>
+                <h1 className={styles.page_title}>{newsData?.title}</h1>
                     <ContentRenderer content={newsData?.content ?? []} />
 
                     <div className={styles.news_back_wrapper}>
@@ -57,7 +56,7 @@ export default async function NewsPage({ params }: { params: Promise<{ slug: str
                 <div className={styles.news_aside}>
                     <h2 className={styles.news_aside_title}>Хотите первыми узнавать о новостях и акциях?</h2>
                     <p className={styles.news_aside_text}>Подпишитесь на рассылку</p>
-                    <Form />
+                    <Form formClassName="aside_form" buttonClassName="aside_button" />
                 </div>
             </div>
             

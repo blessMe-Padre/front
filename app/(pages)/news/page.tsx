@@ -1,11 +1,6 @@
-
-
 import Breadcrumbs from '@/app/components/Breadcrumbs/Breadcrumbs';
 import ContentPage from './ContentPage';
 import { Metadata } from 'next';
-import { SpamSection } from '@/app/sections';
-
-
 
 export const metadata: Metadata = {
     title: 'RiftVL | Новости',
@@ -21,7 +16,6 @@ export default async function NewsPage() {
         <>
             <Breadcrumbs secondLabel='Новости' />
             <ContentPage />
-            <SpamSection />
         </>
     )
 }

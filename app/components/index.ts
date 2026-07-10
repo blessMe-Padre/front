@@ -6,6 +6,7 @@ export { default as Form } from "./Form/Form";
 export { default as Navigation } from "./Navigation/Navigation";
 export { default as HeaderCatalogMenu } from "./HeaderCatalogMenu/HeaderCatalogMenu";
 export { default as Search } from "./Search/Search";
+export { default as NewsCard } from "./NewsCard/NewsCard";
 export { default as Sidebar } from "./Sidebar/Sidebar";
 export { default as SocialIcon } from "./SocialIcon.tsx/SocialIcon";
 export { default as Breadcrumbs } from "./Breadcrumbs/Breadcrumbs";

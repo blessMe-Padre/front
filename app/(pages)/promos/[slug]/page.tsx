@@ -54,8 +54,6 @@ export default async function NewsPage({ params }: { params: Promise<{ slug: str
         <Breadcrumbs secondLink='/promos' secondLabel='Акции' thirdLabel={newsData?.title} />
 
         <div className="container">
-            <h1 className="visually-hidden">{newsData?.title}</h1>
-
             <div className={styles.news_wrapper}>
                 <div className={styles.news_mainimage}>
                     <Image src={imageSrc} alt={newsData?.title ?? ""} width={460} height={300} />

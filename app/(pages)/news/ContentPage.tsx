@@ -1,18 +1,16 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
 import { ViewTransition } from 'react';
 
+import NewsCard from '@/app/components/NewsCard/NewsCard';
 import fetchData from '@/app/utils/fetchData';
 import { KategoriyaNovosti, Novost, StrapiListResponse } from '@/app/types/types';
-import formatDate from '@/app/utils/formatDate';
 
 import styles from './style.module.scss';
+import { FormSection } from '@/app/sections';
 
 const pageSize = 4;
-const imageServer = process.env.NEXT_PUBLIC_IMAGE_SERVER ?? "";
 
 const buildUrl = (page: number, categorySlug?: string) =>
     `/api/novostis?populate[0]=image&populate[1]=kategorii_novostejs&pagination[page]=${page}&pagination[pageSize]=${pageSize}&sort[0]=createdAt:desc${categorySlug ? `&filters[kategorii_novostejs][slug][$eq]=${categorySlug}` : ''}`;
@@ -129,38 +127,33 @@ export default function ContentPage() {
             ) : null}
 
             <ul className={styles.news_list}>
-                {!loading && data.map((item) => {
-                    const imageSrc = item.image?.url
-                        ? `${imageServer}${item.image.url}`
-                        : "/placeholder.svg";
-
-                return(
+                {!loading && data.map((item) => (
                     <li className={styles.news_item} key={item.id}>
-                        <Link href={`/news/${item.slug}`}>
-                            <div className={styles.news_image}>
-                                <Image
-                                    src={imageSrc}
-                                    fill
-                                    sizes="(max-width: 560px) 100vw, 25vw"
-                                    alt={item.title}
-                                />
-                            </div>
-                            <p className={styles.news_date}>{formatDate(item.createdAt)}</p>
-                            <h2 className={styles.newsTitle}>{item.title}</h2>
-                        </Link>
+                        <NewsCard
+                            item={item}
+                            titleAs="h2"
+                            imageSizes="(max-width: 560px) 100vw, 25vw"
+                        />
                     </li>
-                )})}
+                ))}
             </ul>
 
             {hasMore ? (
                 <button
-                    className={styles.loadMore}
+                    className={`button_primary ${styles.loadMore}`}
                     onClick={loadMore}
                     disabled={loadingMore || loading}
                 >
                     {loadingMore ? 'Загрузка...' : 'Загрузить еще'}
                 </button>
             ) : null}
+
+            <FormSection 
+                background={2}
+                textColor="white" 
+                title="Хотите быть в курсе всех новинок?" 
+                description="Подпишитесь на нашу рассылку и получайте свежие новости и статьи о последних тенденциях в мире композитных материалов, а также эксклюзивные предложения от компании РИФ" 
+            />
 
         </div>
        </ViewTransition>
