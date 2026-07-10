@@ -23,6 +23,7 @@ export default function ContentPage() {
     const [loadingMore, setLoadingMore] = useState(false);
     const [page, setPage] = useState(1);
     const [hasMore, setHasMore] = useState(false);
+    const isInitialLoading = loading && data.length === 0;
 
     useEffect(() => {
         const loadCategories = async () => {
@@ -120,14 +121,14 @@ export default function ContentPage() {
                 </ul>
             ) : null}
 
-            {loading ? <div className={styles.loading}>Загрузка...</div> : null}
+            {isInitialLoading ? <div className={styles.loading}>Загрузка...</div> : null}
 
             {!loading && data.length === 0 ? (
                 <div className={styles.empty}>Новости не найдены</div>
             ) : null}
 
-            <ul className={styles.news_list}>
-                {!loading && data.map((item) => (
+            <ul className={styles.news_list} aria-busy={loading}>
+                {data.map((item) => (
                     <li className={styles.news_item} key={item.id}>
                         <NewsCard
                             item={item}
