@@ -1,6 +1,9 @@
 @use '@/app/mixins' as *;
 
 // @include adaptiv-value("margin-top", 100, 30);
+.page_content {
+    margin-bottom: 50px;
+}
 
 .title {
     @include adaptiv-value("font-size", 46, 24);

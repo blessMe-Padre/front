@@ -10,6 +10,7 @@ import { Novost, StrapiListResponse } from '@/app/types/types';
 import formatDate from '@/app/utils/formatDate';
 
 import styles from './style.module.scss';
+import { FormSection } from '@/app/sections';
 
 const pageSize = 4;
 const imageServer = process.env.NEXT_PUBLIC_IMAGE_SERVER ?? "";
@@ -76,6 +77,7 @@ export default function ContentPage() {
     return (
         <ViewTransition name="promos">
         <div className="container">
+            <div className={styles.page_content}>
             <h1 className={styles.title}>Акции</h1>
             <p className={styles.description}>Успейте воспользоваться выгодными предложениями на композитные материалы!</p>
 
@@ -116,8 +118,15 @@ export default function ContentPage() {
                     {loadingMore ? 'Загрузка...' : 'Загрузить еще'}
                 </button>
             ) : null}
+            </div>
 
-        </div>
+            <FormSection 
+                background={2}
+                textColor="white" 
+                title="Хотите быть в курсе всех новинок?" 
+                description="Подпишитесь на нашу рассылку и получайте свежие новости и статьи о последних тенденциях в мире композитных материалов, а также эксклюзивные предложения от компании РИФ" 
+                />
+            </div>
        </ViewTransition>
     )
 }
