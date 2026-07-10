@@ -22,6 +22,7 @@ export type Contact = {
     id: number;
     documentId?: string;
     phone?: string;
+    phone_2?: string;
     address?: string;
     telegram?: string;
     max?: string;

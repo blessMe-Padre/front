@@ -6,3 +6,5 @@ export { default as HomeCategory } from "./HomeCategory/HomeCategory";
 export { default as HomeNews } from "./HomeNews/HomeNews";
 export { default as HomePromos } from "./HomePromos/HomePromos";
 export { default as FormSection } from "./FormSection/FormSection";
+export { default as Contacts } from "./Contacts/Contacts";
+
