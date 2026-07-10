@@ -130,7 +130,7 @@ ul {
 .button_primary:hover {
   background-color: var(--white);
   color: var(--blue);
-  border: 1px solid var(--white);
+  border: 1px solid var(--blue);
 }
 
 .button_ghost {

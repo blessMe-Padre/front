@@ -92,9 +92,9 @@ export default function ContentPage() {
                         : "/placeholder.svg";
 
                 return(
-                    <li className={styles.news_item} key={item.id}>
+                    <li className={styles.promo_item} key={item.id}>
                         <Link href={`/promos/${item.slug}`}>
-                            <div className={styles.news_image}>
+                            <div className={styles.promo_image}>
                                 <Image
                                     src={imageSrc}
                                     fill
@@ -102,8 +102,6 @@ export default function ContentPage() {
                                     alt={item.title}
                                 />
                             </div>
-                            <p className={styles.news_date}>{formatDate(item.createdAt)}</p>
-                            <h2 className={styles.newsTitle}>{item.title}</h2>
                         </Link>
                     </li>
                 )})}
@@ -111,7 +109,7 @@ export default function ContentPage() {
 
             {hasMore ? (
                 <button
-                    className={styles.loadMore}
+                    className={`button_primary ${styles.loadMore}`}
                     onClick={loadMore}
                     disabled={loadingMore || loading}
                 >

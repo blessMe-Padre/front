@@ -6,16 +6,39 @@ import Image from 'next/image';
 import styles from '../style.module.scss';
 import { ContentItem } from '@/app/components/ContentRenderer/ContentRenderer';
 import Link from 'next/link';
+import { Metadata } from 'next';
 
 type NewsResponse = {
     data?: {
         title?: string;
+        meta_title?: string;
+        meta_description?: string;
         image?: {
             url?: string;
         };
         content?: ContentItem[];
     }[];
 };
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+    const { slug } = await params;
+    const news = await fetchData<NewsResponse>(`/api/akcziis?populate[0]=image&filters[slug][$eq]=${slug}`);
+    const newsData = news?.data?.[0];
+    return {
+        title: newsData?.meta_title,
+        description: newsData?.meta_description,
+
+        openGraph: {
+            title: newsData?.meta_title,
+            description: newsData?.meta_description,
+            images: [
+                {
+                    url: newsData?.image?.url ? `${imageServer}${newsData.image.url}` : "/placeholder.svg",
+                },
+            ],
+        },
+    };
+}
 
 const imageServer = process.env.NEXT_PUBLIC_IMAGE_SERVER ?? "";
 
@@ -31,7 +54,7 @@ export default async function NewsPage({ params }: { params: Promise<{ slug: str
         <Breadcrumbs secondLink='/promos' secondLabel='Акции' thirdLabel={newsData?.title} />
 
         <div className="container">
-            <h1 className={styles.title}>{newsData?.title}</h1>
+            <h1 className="visually-hidden">{newsData?.title}</h1>
 
             <div className={styles.news_wrapper}>
                 <div className={styles.news_mainimage}>
@@ -39,6 +62,7 @@ export default async function NewsPage({ params }: { params: Promise<{ slug: str
                 </div>
 
                 <div className={styles.news_content}>
+                    <h1 className={styles.page_title}>{newsData?.title}</h1>
                     <ContentRenderer content={newsData?.content ?? []} />
 
                     <div className={styles.news_back_wrapper}>
@@ -55,7 +79,7 @@ export default async function NewsPage({ params }: { params: Promise<{ slug: str
                 <div className={styles.news_aside}>
                     <h2 className={styles.news_aside_title}>Хотите первыми узнавать о новостях и акциях?</h2>
                     <p className={styles.news_aside_text}>Подпишитесь на рассылку</p>
-                    <Form />
+                    <Form formClassName="aside_form" buttonClassName="aside_button" />
                 </div>
             </div>
             

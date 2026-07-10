@@ -1,0 +1,70 @@
+@use '@/app/mixins' as *;
+
+.section {
+    padding: 30px 0;
+}
+
+.title {
+    @include adaptiv-value("font-size", 24, 20);
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 15px;
+}
+
+.item {
+    min-width: 0;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    color: inherit;
+    transition: transform 0.3s ease;
+
+    &:hover {
+        transform: translateY(-5px);
+    }
+}
+
+.imageWrapper {
+    position: relative;
+    aspect-ratio: 1 / 1.18;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: #eef0f5;
+}
+
+.image {
+    object-fit: cover;
+}
+
+.date {
+    margin-top: 12px;
+    color: #8c8c8c;
+    font-size: 12px;
+    line-height: 1.2;
+}
+
+.cardTitle {
+    margin-top: 4px;
+    font-size: 16px;
+    line-height: 1.2;
+    font-weight: 700;
+}
+
+.allLink {
+    display: block;
+    width: fit-content;
+    margin: 14px 0 0 auto;
+    color: var(--black);
+    font-size: 12px;
+    line-height: 1.2;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}

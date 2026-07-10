@@ -41,12 +41,13 @@ type FormProps = {
     formStyle?: CSSProperties;
     buttonStyle?: CSSProperties;
     buttonClassName?: string;
+    formClassName?: string;
 };
 
 export default function Form({
     active = false,
     submitLabel = 'Отправить',
-    formStyle,
+    formClassName,
     buttonClassName,
 }: FormProps) {
     const { register, handleSubmit, formState: { errors }, setFocus, reset } = useForm<FormData>();
@@ -78,7 +79,7 @@ export default function Form({
     };
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)} style={formStyle}>
+        <form onSubmit={handleSubmit(onSubmit)} className={formClassName ? styles[formClassName] : ''}>
             <div className={styles.form_item}>
                 <input 
                     type="text" 
@@ -90,7 +91,7 @@ export default function Form({
             </div>
 
             <button 
-                className={`${styles.form_button} ${buttonClassName ?? ''}`}
+                className={`${styles.form_button} ${buttonClassName ? styles[buttonClassName] : ''}`}
                 type="submit"
                 disabled={isSending}
                 >

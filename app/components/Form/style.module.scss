@@ -58,6 +58,8 @@
     }
 }
 
+.form_button_aside {}
+
 .checkbox_wrapper {
     display: flex;
     gap: 10px;
@@ -108,4 +110,22 @@
     color: green;
 
     margin-top: 20px;
+}
+
+// стили для формы в aside
+
+.aside_button {
+    background-color: var(--white);
+    color: var(--blue);
+    border-color: var(--white);
+}
+
+.aside_form {
+    span {
+        color: var(--white) !important;
+    }
+
+    a {
+        color: var(--white) !important;
+    }
 }
