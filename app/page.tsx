@@ -26,7 +26,7 @@ export default async function Home() {
 
     return (
         <div className="container">
-            {/* <Hero slides={slides} />
+            <Hero slides={slides} />
             <HomeCategory />
             <FormSection 
                 background={1} 
@@ -42,7 +42,7 @@ export default async function Home() {
                 textColor="white"
                 title="Подберем материалы под вашу задачу" 
                 description="Оставьте заявку — подберем оптимальное решение и рассчитаем стоимость" 
-            /> */}
+            />
         </div>
     );
 }

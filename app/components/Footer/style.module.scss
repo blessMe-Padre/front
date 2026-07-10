@@ -11,14 +11,14 @@
 .grid {
     display: grid;
     grid-template-columns: minmax(250px, 420px) minmax(150px, 220px) minmax(280px, 1fr) minmax(160px, 220px);
-    gap: 48px;
+    gap: clamp(24px, 3.2vw, 48px);
     align-items: start;
 }
 
 .companyRows {
     display: flex;
-    gap: 48px;
-    margin-bottom: 65px;
+    gap: clamp(18px, 2.5vw, 48px);
+    margin-bottom: clamp(28px, 4.4vw, 65px);
     color: #a19e9e;
     font-size: 16px;
     font-weight: 500;
@@ -54,18 +54,20 @@
 .contacts {
     display: grid;
     gap: 18px;
+    min-width: 0;
 }
 
 .email {
     font-size: clamp(28px, 3vw, 36px);
     font-weight: 400;
     line-height: 1.2;
+    overflow-wrap: anywhere;
 }
 
 .phones {
     display: grid;
     gap: 12px;
-    font-size: 24px;
+    font-size: clamp(20px, 2vw, 24px);
     font-weight: 500;
     line-height: 1.25;
 }
@@ -74,7 +76,7 @@
     display: flex;
     align-items: flex-start;
     gap: 16px;
-    margin-top: 85px;
+    margin-top: clamp(28px, 5.8vw, 85px);
     font-size: 16px;
     font-weight: 400;
     font-style: normal;
@@ -97,14 +99,23 @@
 
 .brandColumn {
     display: grid;
-    gap: 50px;
+    gap: clamp(24px, 3.4vw, 50px);
+    justify-items: end;
+    min-width: 0;
+}
+
+.brandColumn img {
+    max-width: 100%;
+    height: auto;
 }
 
 .social {
     display: flex;
     align-items: center;
+    justify-content: flex-end;
+    flex-wrap: wrap;
     gap: 10px;
-    margin-top: 76px;
+    margin-top: clamp(28px, 5.2vw, 76px);
     margin-bottom: 20px;
 }
 
@@ -128,6 +139,11 @@
     gap: 17px;
 }
 
+.payments img {
+    max-width: 100%;
+    height: auto;
+}
+
 .payment {
     display: flex;
     align-items: center;
@@ -138,4 +154,118 @@
     font-size: 12px;
     font-weight: 700;
     line-height: 1;
+}
+
+@media (max-width: 1200px) {
+    .grid {
+        grid-template-columns: minmax(0, 1.1fr) minmax(150px, 0.8fr) minmax(260px, 1fr);
+    }
+
+    .brandColumn {
+        grid-column: 1 / -1;
+        grid-template-columns: minmax(140px, 180px) minmax(0, 1fr);
+        align-items: end;
+        justify-items: start;
+    }
+
+    .brandColumn > div {
+        justify-self: end;
+    }
+
+    .social {
+        margin-top: 0;
+    }
+}
+
+@media (max-width: 900px) {
+    .footer {
+        padding: 30px 0;
+    }
+
+    .grid {
+        grid-template-columns: minmax(0, 1fr) minmax(240px, 0.9fr);
+    }
+
+    .contacts {
+        grid-column: 1 / -1;
+        grid-row: 2;
+    }
+
+    .address {
+        margin-top: 12px;
+    }
+
+    .brandColumn {
+        grid-column: 1 / -1;
+    }
+}
+
+@media (max-width: 640px) {
+    .grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .companyRows {
+        flex-direction: column;
+        gap: 10px;
+        margin-bottom: 24px;
+        font-size: 14px;
+    }
+
+    .legalList,
+    .copyright,
+    .navList,
+    .address {
+        font-size: 14px;
+    }
+
+    .legalList {
+        gap: 12px;
+    }
+
+    .copyright {
+        margin-top: 20px;
+    }
+
+    .contacts {
+        grid-column: auto;
+        grid-row: auto;
+        gap: 14px;
+    }
+
+    .email {
+        font-size: 24px;
+    }
+
+    .phones {
+        gap: 8px;
+        font-size: 20px;
+    }
+
+    .address {
+        gap: 12px;
+        margin-top: 6px;
+    }
+
+    .address img {
+        width: 28px;
+        height: auto;
+    }
+
+    .brandColumn {
+        grid-column: auto;
+        grid-template-columns: 1fr;
+        gap: 22px;
+        justify-items: start;
+    }
+
+    .brandColumn > div {
+        justify-self: stretch;
+    }
+
+    .social,
+    .payments {
+        justify-content: flex-start;
+    }
 }
