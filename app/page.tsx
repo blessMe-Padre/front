@@ -34,9 +34,15 @@ export default async function Home() {
                 description="Оставьте заявку и мы подберем решение под вашу задачу с учетом условий эксплуатации, нагрузок и технологии производства" 
             />
             <WhyChoose />
-            <HomePromos /> */}
+            <HomePromos />
             <HomeNews />
             <Contacts />
+            <FormSection 
+                background={3} 
+                textColor="white"
+                title="Подберем материалы под вашу задачу" 
+                description="Оставьте заявку — подберем оптимальное решение и рассчитаем стоимость" 
+            /> */}
         </div>
     );
 }

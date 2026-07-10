@@ -47,8 +47,7 @@ export default function RootLayout({
         <main className="flex-1">
           {children}
         </main>
-        <div>footer</div>
-          {/* <Footer /> */}
+        <Footer />
         <AppPopup />
       </body>
     </html>

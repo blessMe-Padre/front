@@ -59,6 +59,13 @@
     background-repeat: no-repeat;
 }
 
+.background_3 {
+    background-image: url('/bg/form_section_bg-3.webp');
+    background-size: cover;
+    background-position: right top;
+    background-repeat: no-repeat;
+}
+
 .text_white {
     color: var(--white);
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8),

@@ -8,9 +8,10 @@ export { default as HeaderCatalogMenu } from "./HeaderCatalogMenu/HeaderCatalogM
 export { default as Search } from "./Search/Search";
 export { default as NewsCard } from "./NewsCard/NewsCard";
 export { default as Sidebar } from "./Sidebar/Sidebar";
-export { default as SocialIcon } from "./SocialIcon.tsx/SocialIcon";
+export { default as SocialIcon } from "./SocialIcon/SocialIcon";
 export { default as Breadcrumbs } from "./Breadcrumbs/Breadcrumbs";
 export { default as ContentRenderer } from "./ContentRenderer/ContentRenderer";
 export { default as ProductCard } from "./ProductCard/ProductCard";
 export { default as CartNotification } from "./CartNotification/CartNotification";
 export { default as CheckoutForm } from "./CheckoutForm/CheckoutForm";
+

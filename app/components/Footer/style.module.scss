@@ -3,8 +3,8 @@
 // @include adaptiv-value("margin-top", 100, 30);
 
 .footer {
-    background: #fff;
-    color: #000;
+    background-color: var(--blue);
+    color: var(--white);
     padding: 25px 0 22px;
 }
 
@@ -98,7 +98,6 @@
 .brandColumn {
     display: grid;
     gap: 50px;
-    justify-items: end;
 }
 
 .social {
@@ -106,6 +105,7 @@
     align-items: center;
     gap: 10px;
     margin-top: 76px;
+    margin-bottom: 20px;
 }
 
 .phoneIcon {

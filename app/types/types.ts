@@ -27,6 +27,8 @@ export type Contact = {
     telegram?: string;
     max?: string;
     email?: string;
+    ip_data?: string;
+    ip_data_2?: string;
 };
 
 export type Dostavka = {

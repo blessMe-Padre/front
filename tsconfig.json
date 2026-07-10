@@ -38,7 +38,7 @@
     ".next/dev/types/**/*.ts",
     "**/*.mts",
     ".next/dev/dev/types/**/*.ts"
-  ],
+, "app/components/SocialIcon"  ],
   "exclude": [
     "node_modules"
   ]
