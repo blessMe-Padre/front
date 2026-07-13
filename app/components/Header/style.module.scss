@@ -3,40 +3,26 @@
 // @include adaptiv-value("margin-top", 100, 30);
 
 .header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
     max-width: 100%;
+    padding: 10px 0;
+    background-color: var(--white);
+    transition: box-shadow 0.2s ease;
 
     @media screen and (max-width: 768px) {
         padding: 10px 0;
     }
 }
 
-.fixed {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 100;
-    padding: 10px 0;
+.header_scrolled {
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
-    background-color: var(--white);
-
-    .header_top {
-        margin-bottom: 0;
-    }
 }
 
 .header_top {
-    max-height: 60px;
     width: 100vw;
-    opacity: 1;
-    overflow: hidden;
     background-color: var(--gray);
-    transition:
-        max-height 0.3s ease,
-        opacity 0.3s ease,
-        padding 0.3s ease,
-        transform 0.3s ease;
-    margin-bottom: 20px;
 
     @media screen and (max-width: 768px) {
         display: none;
@@ -49,14 +35,6 @@
     align-items: center;
     gap: 20px;
     padding: 10px 0;
-}
-
-.header_top_hidden {
-    transition: all 0.3s ease;
-    max-height: 0;
-    padding: 0;
-    opacity: 0;
-    pointer-events: none;
 }
 
 .header_wrapper {
