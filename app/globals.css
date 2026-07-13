@@ -79,6 +79,13 @@ ul {
   background: var(--blue) !important;
 }
 
+.title {
+  font-weight: 700;
+  font-size: 24px;
+  color: var(--black);
+  margin-bottom: 30px;
+}
+
 
 /* ===== Скроллбар для WebKit (Chrome, Edge, Safari) ===== */
 ::-webkit-scrollbar {

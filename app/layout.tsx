@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import { AppPopup, Footer, Header } from "./components";
+import { AppPopup, CookieNotice, Footer, Header } from "./components";
 
 const Involve = localFont({
   src: [
@@ -49,6 +49,7 @@ export default function RootLayout({
         </main>
         <Footer />
         <AppPopup />
+        <CookieNotice />
       </body>
     </html>
   );
