@@ -11,7 +11,7 @@ import {
   type MouseEvent,
 } from "react";
 
-// import fetchData from "../../utils/fetchData";
+import fetchData from "@/app/utils/fetchData";
 
 import styles from "./style.module.scss";
 
@@ -44,7 +44,7 @@ export default function Search({ setSearchOpened }: SearchProps) {
   const [isFocused, setIsFocused] = useState(false);
   const router = useRouter();
 
-  // console.log("dataList", dataList);
+  console.log("dataList", dataList);
 
   const domain = "";
 
@@ -117,33 +117,23 @@ export default function Search({ setSearchOpened }: SearchProps) {
     debounceTimeout.current = setTimeout(async () => {
       try {
         // Тут можно добавить другие API источники, добавить в промис и объединить результаты
-        // const newsUrl = `${domain}/api/novostis?filters[title][$containsi]=${encodeURIComponent(inputValue)}&populate=*`;
-        // const doctorsUrl = `${domain}/api/vrachis?filters[name][$containsi]=${encodeURIComponent(inputValue)}&populate=*`;
-        // const uslugaUrl = `${domain}/api/shablon-uslugis?filters[hero_title][$containsi]=${encodeURIComponent(inputValue)}&populate=*`;
-        // const podUslugaUrl = `${domain}/api/shablon-pod-uslugas?filters[hero_title][$containsi]=${encodeURIComponent(inputValue)}&populate=*`;
-        // const specializationUrl = `${domain}/api/vrachis?filters[specialization][$containsi]=${encodeURIComponent(inputValue)}&populate=*`;
+        const newsUrl = `${domain}/api/novostis?filters[title][$containsi]=${encodeURIComponent(inputValue)}&populate=*`;
+        const productsUrl = `${domain}/api/tovars?filters[title][$containsi]=${encodeURIComponent(inputValue)}&populate=*`;
 
-        // const [
-        //   newsResult,
-        //   doctorsResult,
-        //   uslugaResult,
-        //   podUslugaResult,
-        //   specializationResult,
-        // ] = await Promise.all([
-        //   fetchData<ApiListResponse<ResponseItem>>(newsUrl),
-        //   fetchData<ApiListResponse<ResponseItem>>(doctorsUrl),
-        //   fetchData<ApiListResponse<ResponseItem>>(uslugaUrl),
-        //   fetchData<ApiListResponse<ResponseItem>>(podUslugaUrl),
-        //   fetchData<ApiListResponse<ResponseItem>>(specializationUrl),
-        // ]);
-        // const combinedData = [
-        //   ...(newsResult?.data || []),
-        //   ...(doctorsResult?.data || []),
-        //   ...(uslugaResult?.data || []),
-        //   ...(podUslugaResult?.data || []),
-        //   ...(specializationResult?.data || []),
-        // ];
-        // setData(combinedData);
+        const [
+          newsResult,
+          productsResult,
+
+        ] = await Promise.all([
+          fetchData<ApiListResponse<ResponseItem>>(newsUrl),
+          fetchData<ApiListResponse<ResponseItem>>(productsUrl),
+        ]);
+        const combinedData = [
+          ...(newsResult?.data || []),
+          ...(productsResult?.data || []),
+
+        ];
+        setData(combinedData);
         setLoading(false);
       } catch (error) {
         console.error("Ошибка загрузки Объектов:", error);
@@ -227,7 +217,7 @@ export default function Search({ setSearchOpened }: SearchProps) {
                           <p className={styles.item_image_text}>Новости</p>
                           <div className={styles.item_image}>
                             <Image
-                              src="/icons/search-icon.svg"
+                              src="/icons/search.svg"
                               alt="search-icon"
                               width={22}
                               height={22}
@@ -245,78 +235,24 @@ export default function Search({ setSearchOpened }: SearchProps) {
                         </div>
                       )}
 
-                      {item.type === "doctors" && (
+                      {item.type === "product" && (
                         <div className={styles.item_image_wrapper}>
-                          <p className={styles.item_image_text}>Врачи</p>
+                          <p className={styles.item_image_text}>Товары</p>
                           <div className={styles.item_image}>
                             <Image
-                              src="/icons/search-icon.svg"
+                              src="/icons/search.svg"
                               alt="search-icon"
                               width={22}
                               height={22}
                             />
 
                             <Link
-                              href={`/doctors/${item?.slug}`}
+                              href={`/products/${item?.slug}`}
                               rel="noopener noreferrer"
                               onClick={() => setSearchOpened?.(false)}
                             >
                               <span className={styles.item_title}>
-                                {highlightText(item?.name ?? "", inputValue)}
-                              </span>
-                            </Link>
-                          </div>
-                        </div>
-                      )}
-
-                      {item.type === "usluga" && (
-                        <div className={styles.item_image_wrapper}>
-                          <p className={styles.item_image_text}>Услуги</p>
-                          <div className={styles.item_image}>
-                            <Image
-                              src="/icons/search-icon.svg"
-                              alt="search-icon"
-                              width={22}
-                              height={22}
-                            />
-
-                            <Link
-                              href={`/services/${item?.slug}`}
-                              rel="noopener noreferrer"
-                              onClick={() => setSearchOpened?.(false)}
-                            >
-                              <span className={styles.item_title}>
-                                {highlightText(
-                                  item?.hero_title ?? "",
-                                  inputValue,
-                                )}
-                              </span>
-                            </Link>
-                          </div>
-                        </div>
-                      )}
-
-                      {item.type === "pod-usluga" && (
-                        <div className={styles.item_image_wrapper}>
-                          <p className={styles.item_image_text}>Услуги</p>
-                          <div className={styles.item_image}>
-                            <Image
-                              src="/icons/search-icon.svg"
-                              alt="search-icon"
-                              width={22}
-                              height={22}
-                            />
-
-                            <Link
-                              href={`/services/service/${item?.slug}`}
-                              rel="noopener noreferrer"
-                              onClick={() => setSearchOpened?.(false)}
-                            >
-                              <span className={styles.item_title}>
-                                {highlightText(
-                                  item?.hero_title ?? "",
-                                  inputValue,
-                                )}
+                                {highlightText(item?.title ?? "", inputValue)}
                               </span>
                             </Link>
                           </div>
