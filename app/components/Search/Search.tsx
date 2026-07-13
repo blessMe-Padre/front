@@ -51,6 +51,14 @@ export default function Search({ setSearchOpened }: SearchProps) {
   const [dataList, setData] = useState<ResponseItem[]>([]);
   const [isFocused, setIsFocused] = useState(false);
   const router = useRouter();
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const closeSearch = () => {
+    setIsFocused(false);
+    inputRef.current?.blur();
+    setSearchOpened?.(false);
+    setInputValue("");
+  };
   const newsList = dataList.filter((item) => item.type === "news");
 
   const groups = new Map<
@@ -115,14 +123,15 @@ export default function Search({ setSearchOpened }: SearchProps) {
     if (inputValue.trim() === "") return;
     // Редирект
     router.push(`/search?query=${encodeURIComponent(inputValue.trim())}`);
-    setSearchOpened?.(false);
+    closeSearch();
   };
 
   const handleKeyUp = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
+      if (inputValue.trim() === "") return;
       // Редирект
       router.push(`/search?query=${encodeURIComponent(inputValue.trim())}`);
-      setSearchOpened?.(false);
+      closeSearch();
     }
   };
 
@@ -193,6 +202,7 @@ export default function Search({ setSearchOpened }: SearchProps) {
         <div className={styles.wrapper}>
           <div className={styles.input_area}>
             <input
+              ref={inputRef}
               type="text"
               value={inputValue}
               onChange={handleChange}
@@ -262,7 +272,7 @@ export default function Search({ setSearchOpened }: SearchProps) {
                         <Link
                           href={`/news/${item.documentId}`}
                           rel="noopener noreferrer"
-                          onClick={() => setSearchOpened?.(false)}
+                          onClick={closeSearch}
                         >
                           <span className={styles.item_title}>
                             {highlightText(item?.title ?? "", inputValue)}
@@ -300,7 +310,7 @@ export default function Search({ setSearchOpened }: SearchProps) {
                             <Link
                               href={`/products/${item?.slug}`}
                               rel="noopener noreferrer"
-                              onClick={() => setSearchOpened?.(false)}
+                              onClick={closeSearch}
                             >
                               <span className={styles.item_title}>
                                 {highlightText(item?.title ?? "", inputValue)}
