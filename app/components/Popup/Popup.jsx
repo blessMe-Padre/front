@@ -3,7 +3,6 @@ import { Form } from "..";
 
 export default function Popup({ active, setActive }) {
     const handleKeyDown = (event) => {
-        console.log(event.key);
         if (event.key === "Escape" || event.key === "Esc") {
             setActive(false);
         }
@@ -58,8 +57,8 @@ export default function Popup({ active, setActive }) {
                     </button>
 
                     <div className={styles.popup__content_inner}>
-                        <h2 className={styles.popup__title}>Закажите звонок</h2>
-                        <p className={styles.popup__text}>Оставьте свой номер телефона, и специалист свяжется с Вами в ближайшее время</p>
+                        <h2 className={styles.popup_title}>Закажите звонок</h2>
+                        <p className={styles.popup_text}>Оставьте свой номер телефона, и специалист свяжется с Вами в ближайшее время</p>
 
                         <Form active={active} />
                     </div>

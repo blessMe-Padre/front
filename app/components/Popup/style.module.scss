@@ -68,16 +68,6 @@
     transition: background-color 0.3s ease;
 }
 
-/* .popup__close:hover {
-      background-color: var(--light-blue);
-  } */
-
-.popup__text {
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 23px;
-}
-
 .popup__btn {
     margin-top: -10px;
     position: absolute;
@@ -111,4 +101,21 @@
     .popup__content {
         padding: 20px;
     }
+}
+
+.popup_title {
+    font-family: var(--second-family);
+    font-weight: 566;
+    @include adaptiv-value("font-size", 31, 20);
+    line-height: 1.2;
+    color: var(--black);
+    margin-bottom: 20px;
+}
+
+.popup_text {
+    font-family: var(--font-family);
+    font-weight: 500;
+    @include adaptiv-value("font-size", 16, 14);
+    color: var(--black);
+    margin-bottom: 30px;
 }

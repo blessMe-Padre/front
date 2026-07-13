@@ -1,0 +1,226 @@
+@use '@/app/mixins' as *;
+
+.page {
+    padding: 0 0 100px;
+}
+
+.eyebrow {
+    margin-bottom: 10px;
+    color: var(--blue);
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+.title {
+    @include adaptiv-value('font-size', 40, 26);
+    font-family: var(--second-family);
+    font-weight: 500;
+    line-height: 1.15;
+}
+
+.searchForm {
+    display: flex;
+    // max-width: 980px;
+    margin-top: 34px;
+    padding: 6px;
+    background: var(--gray);
+    border: 1px solid transparent;
+    border-radius: 14px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+
+    &:focus-within {
+        border-color: var(--blue);
+        box-shadow: 0 0 0 3px rgba(49, 64, 119, 0.1);
+    }
+}
+
+.searchInput {
+    flex: 1;
+    min-width: 0;
+    padding: 13px 18px;
+    color: var(--black);
+    font-family: var(--font-family);
+    font-size: 16px;
+    background: transparent;
+    border: none;
+    outline: none;
+
+    &::placeholder {
+        color: #777b86;
+    }
+
+    &::-webkit-search-cancel-button {
+        cursor: pointer;
+    }
+}
+
+.searchButton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    min-width: 132px;
+    padding: 12px 20px;
+    color: var(--white);
+    font-family: var(--font-family);
+    font-size: 16px;
+    font-weight: 600;
+    background: var(--blue);
+    border: 1px solid var(--blue);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: color 0.2s ease, background-color 0.2s ease;
+
+    &:hover {
+        color: var(--blue);
+        background: var(--white);
+    }
+
+    &:focus-visible {
+        outline: 2px solid var(--blue);
+        outline-offset: 3px;
+    }
+}
+
+.results {
+    margin-top: 42px;
+}
+
+.summary {
+    padding-bottom: 18px;
+    color: #6d7079;
+    border-bottom: 1px solid var(--gray);
+    font-size: 15px;
+
+    strong {
+        color: var(--black);
+    }
+}
+
+.resultSection {
+    margin-top: 44px;
+}
+
+.sectionHeader {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 22px;
+
+    h2 {
+        @include adaptiv-value('font-size', 28, 22);
+        font-family: var(--second-family);
+        font-weight: 500;
+    }
+
+    span {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 28px;
+        height: 24px;
+        padding: 0 8px;
+        color: var(--white);
+        background: var(--blue);
+        border-radius: 12px;
+        font-size: 12px;
+        font-weight: 600;
+    }
+}
+
+.productsGrid,
+.newsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 18px;
+}
+
+.newsGrid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.emptyState {
+    max-width: 680px;
+    margin-top: 46px;
+    padding: 36px;
+    background: #f4f5f8;
+    border-radius: 18px;
+
+    h2 {
+        font-family: var(--second-family);
+        font-size: 22px;
+        font-weight: 500;
+        line-height: 1.25;
+    }
+
+    p {
+        max-width: 520px;
+        margin-top: 12px;
+        color: #686b74;
+        line-height: 1.5;
+    }
+}
+
+.catalogLink {
+    display: inline-flex;
+    margin-top: 22px;
+    padding: 11px 18px;
+    color: var(--white);
+    background: var(--blue);
+    border: 1px solid var(--blue);
+    border-radius: 10px;
+    font-weight: 600;
+    transition: color 0.2s ease, background-color 0.2s ease;
+
+    &:hover {
+        color: var(--blue);
+        background: var(--white);
+    }
+}
+
+@media (max-width: 1000px) {
+    .newsGrid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 640px) {
+    .page {
+        padding: 34px 0 70px;
+    }
+
+    .searchForm {
+        margin-top: 24px;
+    }
+
+    .searchInput {
+        padding: 11px 12px;
+        font-size: 14px;
+    }
+
+    .searchButton {
+        min-width: 52px;
+        padding: 11px 14px;
+        font-size: 0;
+    }
+
+    .results {
+        margin-top: 32px;
+    }
+
+    .resultSection {
+        margin-top: 36px;
+    }
+
+    .productsGrid,
+    .newsGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .emptyState {
+        margin-top: 34px;
+        padding: 26px 20px;
+    }
+}
