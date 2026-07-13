@@ -1,35 +1,54 @@
 import { ViewTransition } from 'react';
+import fetchData from '@/app/utils/fetchData';
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import { Breadcrumbs } from '@/app/components';
 import { FormSection, WhyChoose } from '@/app/sections';
+import type { StrapiSingleResponse } from '@/app/types/types';
 import styles from './style.module.scss';
 
-export const metadata: Metadata = {
-    title: 'О компании | RiftVL',
-    description: 'Торговая компания РИФ — материалы для производства изделий из стеклопластика',
+
+type AboutData = {
+    id: number;
+    meta_title?: string;
+    meta_description?: string;
+    hero_image?: {
+        url: string;
+    };
+    features?: {
+        key: string;
+        value: string;
+    }[];
 };
 
-const values = [
-    {
-        title: 'Качество',
-        text: 'Мы тщательно контролируем каждый этап поставки, чтобы наши материалы соответствовали самым высоким стандартам',
-    },
-    {
-        title: 'Надёжность',
-        text: 'Мы работаем с проверенными производителями, а также предоставляем полный спектр услуг, включая консультации и подбор материалов под задачи клиента',
-    },
-    {
-        title: 'Инновации',
-        text: 'Мы следим за новыми тенденциями и постоянно совершенствуем наш ассортимент, чтобы предоставлять вам только самые передовые решения',
-    },
-    {
-        title: 'Партнёрство',
-        text: 'Стремимся к долгосрочным и взаимовыгодным отношениям с каждым клиентом. Наша цель — быть не просто поставщиком, а надёжным партнёром',
-    },
-] as const;
+const imageServer = process.env.NEXT_PUBLIC_IMAGE_SERVER ?? "";
 
-export default function About() {
+export async function generateMetadata() {
+    const response = await fetchData<StrapiSingleResponse<AboutData>>('/api/stranicza-o-kompanii?populate=*');
+    const aboutData = response.data;
+
+    return {
+        title: aboutData.meta_title ?? 'О компании | RiftVL',
+        description: aboutData.meta_description ?? 'Торговая компания РИФ — материалы для производства изделий из стеклопластика',
+
+        og: {
+            title: aboutData.meta_title ?? 'О компании | RiftVL',
+            description: aboutData.meta_description ?? 'Торговая компания РИФ — материалы для производства изделий из стеклопластика',
+            image: aboutData.hero_image?.url
+            ? `${imageServer}${aboutData.hero_image.url}`
+            : "/placeholder.svg",
+        },
+    };
+}
+
+export default async function About() {
+    const response = await fetchData<StrapiSingleResponse<AboutData>>('/api/stranicza-o-kompanii?populate=*');
+    const aboutData = response.data;
+
+    const imageSrc = aboutData.hero_image?.url
+    ? `${imageServer}${aboutData.hero_image.url}`
+    : "/placeholder.svg";
+
     return (
         <ViewTransition name="about">
             <Breadcrumbs secondLabel="О компании" />
@@ -38,23 +57,22 @@ export default function About() {
 
                 <div className={styles.imageWrap}>
                     <Image
-                        src="/about.webp"
-                        alt="Склад торговой компании РИФ"
+                        src={imageSrc}
+                        alt={aboutData.meta_title ?? ''}
                         fill
                         priority
-                        sizes="(max-width: 768px) 100vw, 1400px"
+                        sizes="(max-width: 768px) 100vw, 1000px"
                     />
                 </div>
-
                 <WhyChoose />
 
                 <section className={styles.values} aria-labelledby="values-title">
                     <h2 id="values-title" className={styles.valuesTitle}>Для нас важно</h2>
                     <ul className={styles.valuesGrid}>
-                        {values.map((value) => (
-                            <li key={value.title} className={styles.valueCard}>
-                                <h3>{value.title}</h3>
-                                <p>{value.text}</p>
+                        {aboutData.features?.map((value) => (
+                            <li key={value.key} className={styles.valueCard}>
+                                <h3>{value.key}</h3>
+                                <p>{value.value}</p>
                             </li>
                         ))}
                     </ul>
