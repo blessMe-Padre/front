@@ -1,6 +1,5 @@
 import { ViewTransition } from 'react';
 import fetchData from '@/app/utils/fetchData';
-import type { Metadata } from 'next';
 import Image from 'next/image';
 import { Breadcrumbs } from '@/app/components';
 import { FormSection, WhyChoose } from '@/app/sections';

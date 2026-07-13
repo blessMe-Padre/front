@@ -12,9 +12,6 @@ export default async function Contacts() {
     const contacts = await fetchData<StrapiSingleResponse<Contact>>("/api/kontakty");
     const data = contacts.data || "";
 
-    console.log('contacts', contacts);
-    
-
     return (
         <section className={styles.section}>
             <h2 className={styles.title}>Контакты</h2>
