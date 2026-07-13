@@ -16,7 +16,7 @@ type NavigationResponse = {
 
 const legalLinks = [
     { label: 'Политика конфиденциальности', href: '/policy' },
-    { label: 'Политика обработки персональных данных', href: '/policy' },
+    { label: 'Политика обработки персональных данных', href: '/personal-data-processing' },
     { label: 'Договор оферты', href: '/oferta' },
 ] as const;
 
