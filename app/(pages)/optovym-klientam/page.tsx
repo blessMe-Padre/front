@@ -1,6 +1,13 @@
 import { ViewTransition } from 'react';
+import type { Metadata } from 'next';
 import { Breadcrumbs, Form } from '@/app/components';
 import styles from './style.module.scss';
+import { FormSection } from '@/app/sections';
+
+export const metadata: Metadata = {
+    title: 'Оптовым клиентам | RiftVL',
+    description: 'Оптовые поставки материалов RiftVL для юридических лиц и производств',
+};
 
 const benefits = [
     {
@@ -63,27 +70,11 @@ export default function OptovymKlientam() {
                         </p>
                     </div>
 
-                    <section className={styles.request} aria-labelledby="wholesale-request-title">
-                        <div className={styles.requestText}>
-                            <div className={styles.requestInner}>
-                                <h2 id="wholesale-request-title" className={styles.requestTitle}>
-                                    Заявка на оптовое сотрудничество
-                                </h2>
-                                <p className={styles.requestDescription}>
-                                    Оставьте ваш телефон, и наш специалист перезвонит Вам в кратчайшие сроки. Подберем
-                                    лучшие условия для наших оптовых клиентов, и подготовим предложение под ваше
-                                    производство
-                                </p>
-                            </div>
-                        </div>
-
-                        <div className={styles.formWrap}>
-                            <Form
-                                submitLabel="Получить выгоду"
-                                buttonClassName={styles.requestButton}
-                            />
-                        </div>
-                    </section>
+                    <FormSection 
+                        background={1} 
+                        title="Заявка на оптовое сотрудничество" 
+                        description="Оставьте ваш телефон, и наш специалист перезвонит Вам в кратчайшие сроки. Подберем лучшие условия для наших оптовых клиентов,  и подготовим предложение под ваше производство" 
+                    />
                 </div>
             </div>
         </ViewTransition>

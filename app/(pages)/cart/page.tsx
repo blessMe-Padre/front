@@ -58,7 +58,7 @@ export default function Cart() {
                     <div className={styles.cart_total}>
                         <p className={styles.cart_total_price}>Итого: <span>{price.toLocaleString('ru-RU') ?? 0} ₽</span></p>
                         <p className={styles.cart_total_counter}>Товаров в корзине: {counter}</p>
-                        <Link href="/checkout" className={styles.cart_checkout_button}>Оформить заказ</Link>
+                        <Link href="/checkout" className="button_primary">Оформить заказ</Link>
                     </div>
                     <button 
                         type="button" 

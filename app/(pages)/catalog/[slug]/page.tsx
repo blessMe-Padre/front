@@ -10,6 +10,8 @@ import {
 import { notFound } from "next/navigation";
 import CatalogFilters from "../components/CatalogFilters";
 import ProductGrid from "../components/ProductGrid";
+import styles from "../style.module.scss";
+import FormSection from "@/app/sections/FormSection/FormSection";
 
 type CatalogSlugPageProps = {
     params: Promise<{ slug: string }>;
@@ -86,7 +88,10 @@ export default async function CatalogSlugPage({ params, searchParams }: CatalogS
         <Breadcrumbs secondLink="/catalog" secondLabel="Каталог" thirdLink={`/catalog/${slug}`} thirdLabel={category.name} />
 
         <div className="container">
-            <h1>{category.name}</h1>
+            <div className={styles.category_header}>
+                <h1 className={styles.category_title}>{category.name}</h1>
+                <span>{products.length}</span>
+            </div>
             
             <CatalogFilters
                 currentSlug={slug}
@@ -96,7 +101,13 @@ export default async function CatalogSlugPage({ params, searchParams }: CatalogS
                 products={products}
             />
 
-            {products.length > 0 ? <ProductGrid products={products} /> : <p>В данной категории пока нет товаров</p>}
+            {products.length > 0 ? <ProductGrid products={products} /> : <p className={styles.no_products_found}>В данной категории пока нет товаров</p>}
+            
+            <FormSection 
+                background={1} 
+                title="Не знаете, что выбрать?" 
+                description="Оставьте заявку и мы подберем решение под вашу задачу с учетом условий эксплуатации, нагрузок и технологии производства" 
+                />
         </div>
         </>
     );

@@ -6,18 +6,71 @@
     position: relative;
     display: grid;
     grid-template-columns: 2fr 1fr;
-    gap: 30px;
+    gap: 15px;
+    font-family: var(--font-family);
+    margin-bottom: 60px;
+
+    @media (max-width: 930px) {
+        grid-template-columns: 2fr;
+    }
+
+    @media (max-width: 600px) {
+        grid-template-columns: 1fr;
+    }
 }
 
 .total_block {
     position: sticky;
-    top: 120px;
+    top: 100px;
+    border-radius: 15px;
+    padding: 25px 30px;
+    background-color: var(--blue);
+    color: var(--white);
 }
 
 .customer_info_block {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 30px;
+    gap: 15px;
+
+    @media (max-width: 600px) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.customer_info,
+.delivery_info,
+.payment_info {
+    padding: 25px 30px;
+    border-radius: 15px;
+    background-color: var(--gray);
+
+    @media (max-width: 768px) {
+        padding: 20px 20px;
+    }
+}
+
+.delivery_info {
+    p {
+        @include adaptiv-value("font-size", 18, 14);
+        line-height: 1.1;
+        margin-bottom: 10px;
+    }
+}
+
+.payment_info {
+    grid-column: span 2;
+
+    @media (max-width: 600px) {
+        grid-column: auto;
+    }
+}
+
+.form_title {
+    font-weight: 600;
+    font-size: 20px;
+    margin-bottom: 20px;
+    line-height: 1;
 }
 
 .form_item {
@@ -28,19 +81,34 @@
         width: 100%;
         padding: 10px 15px;
         border-radius: 5px;
-        background-color: #a3a3a3;
-        color: #fff;
+        background-color: var(--white);
+        color: var(--black);
 
         &::placeholder {
-            color: #fff;
+            color: var(--black);
+        }
+    }
+
+    textarea {
+        width: 100%;
+        padding: 10px 15px;
+        border-radius: 5px;
+        background-color: var(--gray);
+        color: var(--white);
+
+        &::placeholder {
+            color: var(--black);
         }
     }
 }
 
 .comment_item {
     grid-column: span 2;
-}
 
+    @media (max-width: 600px) {
+        grid-column: auto;
+    }
+}
 
 .error_message {
     font-size: 12px;
@@ -55,15 +123,23 @@
 }
 
 .button_label {
+    width: 100%;
+    text-align: center;
     border-radius: 7px;
     padding: 10px;
-    background: #a3a3a3;
-    color: #fff;
+    background: var(--white);
+    color: var(--black);
+
+    font-family: var(--font-family);
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1;
 
     cursor: pointer;
 
     &.isActive {
-        background-color: #404040;
+        background-color: var(--blue);
+        color: var(--white);
     }
 
     input {
@@ -73,29 +149,50 @@
 
 .orders_block {
     grid-column: span 2;
+
+    @media (max-width: 600px) {
+        grid-column: auto;
+    }
 }
 
 .form_button {
     width: 100%;
     border-radius: 10px;
     padding: 17px;
-    background-color: #555555;
-    color: #fff;
-    font-size: 16px;
-    text-transform: uppercase;
+    background-color: var(--white);
+    color: var(--black);
     border: none;
     cursor: pointer;
+
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 16px;
+
+    transition: all 0.3s ease;
 
     &:disabled {
         background-color: #a3a3a3;
         cursor: not-allowed;
     }
+
+    &:hover {
+        background-color: var(--blue);
+        color: var(--white);
+        box-shadow: 0 0 0 1px rgba(255, 255, 255, 1);
+    }
+
+    margin-bottom: 30px;
 }
 
 .agreement_item_row {
     display: flex;
     align-items: center;
     gap: 10px;
+    font-size: 12px;
+
+    a {
+        font-size: 12px;
+    }
 
     input {
         width: 21px !important;
@@ -104,4 +201,42 @@
         background-color: #a3a3a3;
         color: #fff;
     }
+}
+
+.total_summary_item {
+    font-family: var(--font-family);
+    font-weight: 700;
+    font-size: 24px;
+    margin-bottom: 15px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.total_block_item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 10px;
+
+    span {
+        background-color: var(--blue);
+        padding: 5px;
+        z-index: 1;
+    }
+
+    &::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 10px;
+        width: 100%;
+        height: 2px;
+        border-bottom: 1px dashed var(--white);
+    }
+
 }

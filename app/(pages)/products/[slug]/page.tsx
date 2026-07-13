@@ -3,6 +3,8 @@ import fetchData from "@/app/utils/fetchData";
 import { Product, StrapiListResponse } from "@/app/types/types";
 import { notFound } from "next/navigation";
 import ContentPage from "./ContentPage";
+import {  FormSection, HomeCategory } from "@/app/sections";
+import styles from "./style.module.scss";
 
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
@@ -32,11 +34,19 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
     }
 
     return (
-        <>
+        <div className={styles.product_page}>
             <Breadcrumbs secondLink="/catalog" secondLabel="Каталог" thirdLabel={product?.title} />
             <div className="container">
                 <ContentPage product={product}/>
+
+                <FormSection 
+                background={1} 
+                title="Не знаете, что выбрать?" 
+                description="Оставьте заявку и мы подберем решение под вашу задачу с учетом условий эксплуатации, нагрузок и технологии производства" 
+            />
+
+                <HomeCategory />
             </div>
-        </>
+        </div>
     );
 }

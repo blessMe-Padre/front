@@ -23,6 +23,10 @@ export default function CartItem({ item, increaseQuantity, decreaseQuantity, rem
 
             <div className={styles.cart_item_content}>
                 <h2 className={styles.cart_item_title}>{item.title}</h2>
+                <div>
+                    <p>Фасовка</p>
+                    <p className={styles.cart_item_packing}>Фасовка</p>
+                </div>
             </div>
         </div>
 
@@ -41,7 +45,7 @@ export default function CartItem({ item, increaseQuantity, decreaseQuantity, rem
                         </svg>
                     </button>
                 </div>
-                <span>{(item.price ?? 0).toLocaleString('ru-RU')} ₽</span>
+                <span className={styles.counter_price}>{(item.price ?? 0).toLocaleString('ru-RU')} ₽</span>
             </div>
 
             <div className={styles.price_wrapper}>

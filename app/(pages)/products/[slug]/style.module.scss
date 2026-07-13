@@ -1,18 +1,39 @@
 @use '@/app/mixins' as *;
-
 // @include adaptiv-value("margin-top", 100, 30);
 
+.product_page {
+
+    @media screen and (max-width: 768px) {
+        padding-top: 50px;
+    }
+}
 
 .title {
-    @include adaptiv-value("font-size", 46, 24);
+    font-family: var(--font-family);
     font-weight: 700;
+    font-size: 24px;
+    line-height: 1.2;
+    margin-bottom: 10px;
+}
+
+.info_header {
+    border-bottom: 1px solid #d7d7d7;
+    margin-bottom: 15px;
 }
 
 .wrapper {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    gap: 30px;
+    gap: 20px;
     margin-bottom: 60px;
+
+    @media screen and (max-width: 1023px) {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    @media screen and (max-width: 720px) {
+        grid-template-columns: 1fr;
+    }
 }
 
 .swiper {
@@ -21,6 +42,10 @@
     min-height: 450px;
     border-radius: 10px;
     position: relative;
+
+    @media screen and (max-width: 560px) {
+        min-height: 250px;
+    }
 }
 
 .swiper_slide {
@@ -29,7 +54,24 @@
 }
 
 .image_wrapper {
+    position: relative;
     border-radius: 10px;
+    width: 100%;
+    height: 100%;
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    @media screen and (max-width: 720px) {
+        height: 400px;
+    }
+
+    @media screen and (max-width: 560px) {
+        height: 250px;
+    }
 }
 
 .custom_pagination {
@@ -47,23 +89,27 @@
     display: flex;
     gap: 10px;
     margin-bottom: 20px;
+
+    @media screen and (max-width: 720px) {
+        flex-wrap: wrap;
+    }
 }
 
 .tab_button {
     border-radius: 5px;
     padding: 7px 15px;
-    background-color: #cfcfcf;
+    background-color: var(--gray);
     border: none;
     cursor: pointer;
     font-size: 14px;
     font-weight: 400;
     color: #000;
     transition: background-color 0.3s ease;
-    margin-right: 10px;
+    line-height: 1;
 
     &.active {
-        background-color: #000;
-        color: #fff;
+        background-color: var(--blue);
+        color: var(--white);
     }
 }
 
@@ -90,12 +136,78 @@
         bottom: 5px;
         width: 100%;
         height: 2px;
-        border-bottom: 1px dashed #fff;
+        border-bottom: 1px dashed var(--gray);
     }
 
     span {
-        background-color: #000;
+        background-color: var(--white);
         padding: 0 5px;
         z-index: 1;
     }
+}
+
+.counter_block {
+    background-color: var(--gray);
+    padding: 25px;
+    border-radius: 15px;
+    margin-bottom: 30px;
+}
+
+.price {
+    font-family: var(--font-family);
+    font-weight: 700;
+    font-size: 24px;
+    color: var(--black);
+    margin-bottom: 10px;
+}
+
+.counter_wrapper {
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    background-color: var(--white);
+    margin-bottom: 10px;
+    padding: 15px;
+}
+
+.add_to_cart_button {
+    width: 100%;
+}
+
+.delivery_block {
+    font-family: var(--font-family);
+    padding: 25px 30px;
+    border-radius: 15px;
+    background-color: var(--gray);
+}
+
+.delivery_title {
+    font-weight: 700;
+    font-size: 24px;
+    color: var(--black);
+    margin-bottom: 25px;
+}
+
+.delivery_label {
+    font-weight: 500;
+    font-size: 14px;
+    color: #919191;
+}
+
+.delivery_row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: space-between;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #bcbcbc;
+    margin-bottom: 10px;
+}
+
+.delivery_icon_wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }

@@ -280,7 +280,7 @@ export default function CheckoutForm() {
                     </div>
 
                     <div className={`${styles.form_item} ${styles.comment_item}`}>
-                        <textarea placeholder="Комментарий к заказу" {...register('comment')} className={`${styles.input} ${errors.comment ? styles.error : ''}`} />
+                        <textarea placeholder="Комментарий к заказу" {...register('comment')} className={`${errors.comment ? styles.error : ''}`} />
                         <div className={styles.error_message}>{errors.comment?.message}</div>
                     </div>
 
@@ -331,13 +331,15 @@ export default function CheckoutForm() {
                 {/* Итого */}
                 <div className={styles.total_block_wrapper}>
                     <div className={styles.total_block}>
-                        <div className={styles.total_block_item}>
-                            Итого: <span>{price} руб.</span>
+                        <div className={styles.total_summary_item}>
+                            <span>Итого:</span>
+                            <span>{price.toLocaleString('ru-RU')} ₽</span>
                         </div>
                         <div className={styles.total_block_item}>
-                            Товаров: {counter}
+                            <span>Товаров:</span>
+                            <span>{counter}</span>
                         </div>
-                        <div className={styles.total_delivery_item}>
+                        <div className={styles.total_block_item}>
                             <span>Доставка:</span>
                             <span>{deliveryType === 'pickup' ? 'Самовывоз' : 'Транспортная компания'}</span>
                         </div>

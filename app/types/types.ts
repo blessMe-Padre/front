@@ -128,6 +128,8 @@ export type Product = {
     publishedAt?: string;
     characteristics?: ProductCharacteristic[];
     images?: StrapiImage[];
+    novinka?: boolean;
+    akciya?: boolean;
 };
 
 

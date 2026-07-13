@@ -98,7 +98,7 @@ export default function CatalogFilters({ currentSlug, subcategories, filters, fi
         {subcategories.length > 0 && (
             <nav aria-label="Фильтр по подкатегориям">
                 <ul className={styles.list}>
-                    <li className={styles.item}>
+                    <li className={styles.item_category_button}>
                         <Link
                             href={getCategoryHref(currentSlug, filters)}
                             aria-current={!filters.category ? "page" : undefined}
@@ -107,7 +107,7 @@ export default function CatalogFilters({ currentSlug, subcategories, filters, fi
                         </Link>
                     </li>
                     {subcategories.map((category) => (
-                        <li key={category.id} className={styles.item}>
+                        <li key={category.id} className={styles.item_category_button}>
                             <Link
                                 href={getCategoryHref(currentSlug, filters, category.slug)}
                                 aria-current={filters.category === category.slug ? "page" : undefined}

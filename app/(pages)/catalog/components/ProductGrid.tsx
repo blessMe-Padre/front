@@ -9,17 +9,14 @@ type ProductGridProps = {
 
 export default function ProductGrid({ products }: ProductGridProps) {
     if (products.length === 0) {
-        return <p>Товары не найдены</p>;
+        return <p className={styles.no_products_found}>Товары не найдены</p>;
     }
 
     return (
-        <>
-        <h2>Товары</h2>
         <ul className={styles.products_list}>
             {products.map((product) => (
                 <ProductCard key={product.id} product={product} />
             ))}
         </ul>
-        </>
     );
 }
