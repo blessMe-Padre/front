@@ -26,7 +26,15 @@ type ResponseItem = {
   name?: string;
   slug?: string;
   hero_title?: string;
+  kategoriis?: SearchCategory[];
   // сюда дописывать другие поля из API
+};
+
+type SearchCategory = {
+  id?: number;
+  documentId?: string;
+  name?: string;
+  slug?: string;
 };
 
 type ApiListResponse<T> = {
@@ -43,8 +51,39 @@ export default function Search({ setSearchOpened }: SearchProps) {
   const [dataList, setData] = useState<ResponseItem[]>([]);
   const [isFocused, setIsFocused] = useState(false);
   const router = useRouter();
+  const newsList = dataList.filter((item) => item.type === "news");
 
-  console.log("dataList", dataList);
+  const groups = new Map<
+    string,
+    { category: SearchCategory; products: ResponseItem[] }
+  >();
+
+  dataList
+    .filter((item) => item.type === "product")
+    .forEach((product) => {
+      const categories =
+        product.kategoriis && product.kategoriis.length > 0
+          ? product.kategoriis
+          : [{ name: "Без категории" }];
+
+      categories.forEach((category) => {
+        const groupKey =
+          category.documentId ?? category.slug ?? category.name ?? "no-category";
+        const currentGroup = groups.get(groupKey);
+
+        if (currentGroup) {
+          currentGroup.products.push(product);
+          return;
+        }
+
+        groups.set(groupKey, {
+          category,
+          products: [product],
+        });
+      });
+    });
+
+  const productGroups = Array.from(groups.values());
 
   const domain = "";
 
@@ -205,40 +244,52 @@ export default function Search({ setSearchOpened }: SearchProps) {
                 dataList.length === 0 &&
                 inputValue.trim() !== "" && <li>Ничего не найдено</li>}
 
+              {!loading && newsList.length > 0 && (
+                <li className={styles.item}>
+                  <div className={styles.item_image_wrapper}>
+                    <p className={styles.item_image_text}>Новости</p>
+                    {newsList.map((item, index) => (
+                      <div
+                        key={`${item.documentId}-${index}`}
+                        className={styles.item_image}
+                      >
+                        <Image
+                          src="/icons/search.svg"
+                          alt="search-icon"
+                          width={22}
+                          height={22}
+                        />
+                        <Link
+                          href={`/news/${item.documentId}`}
+                          rel="noopener noreferrer"
+                          onClick={() => setSearchOpened?.(false)}
+                        >
+                          <span className={styles.item_title}>
+                            {highlightText(item?.title ?? "", inputValue)}
+                          </span>
+                        </Link>
+                      </div>
+                    ))}
+                  </div>
+                </li>
+              )}
+
               {!loading &&
-                dataList.map((item, index) => {
+                productGroups.map(({ category, products }) => {
                   return (
                     <li
-                      key={`${item.documentId}-${index}`}
+                      key={category.documentId ?? category.slug ?? category.name}
                       className={styles.item}
                     >
-                      {item.type === "news" && (
-                        <div className={styles.item_image_wrapper}>
-                          <p className={styles.item_image_text}>Новости</p>
-                          <div className={styles.item_image}>
-                            <Image
-                              src="/icons/search.svg"
-                              alt="search-icon"
-                              width={22}
-                              height={22}
-                            />
-                            <Link
-                              href={`/news/${item.documentId}`}
-                              rel="noopener noreferrer"
-                              onClick={() => setSearchOpened?.(false)}
-                            >
-                              <span className={styles.item_title}>
-                                {highlightText(item?.title ?? "", inputValue)}
-                              </span>
-                            </Link>
-                          </div>
-                        </div>
-                      )}
-
-                      {item.type === "product" && (
-                        <div className={styles.item_image_wrapper}>
-                          <p className={styles.item_image_text}>Товары</p>
-                          <div className={styles.item_image}>
+                      <div className={styles.item_image_wrapper}>
+                        <p className={styles.item_image_text}>
+                          {category.name ?? "Без категории"}
+                        </p>
+                        {products.map((item, index) => (
+                          <div
+                            key={`${item.documentId}-${category.documentId ?? category.slug ?? category.name}-${index}`}
+                            className={styles.item_image}
+                          >
                             <Image
                               src="/icons/search.svg"
                               alt="search-icon"
@@ -256,8 +307,8 @@ export default function Search({ setSearchOpened }: SearchProps) {
                               </span>
                             </Link>
                           </div>
-                        </div>
-                      )}
+                        ))}
+                      </div>
                     </li>
                   );
                 })}
