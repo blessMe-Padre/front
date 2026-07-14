@@ -1,19 +1,16 @@
 'use client';
 
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { useForm, type SubmitHandler } from 'react-hook-form';
 
 import CartItem from "@/app/components/CartItem/CartItem";
 import useCartStore from "@/app/store/cartStore";
+import { initPhoneMask } from '@/app/utils/phone-mask';
 
 import styles from './style.module.scss';
 import Link from 'next/link';
-
-// Иван
-// ivan@gmail.com
-// +79999999999
 
 type FormData = {
     name?: string;
@@ -69,19 +66,55 @@ export async function sendOrderService(orderData: FormData) {
 }
 
 export default function CheckoutForm() {
-    const { register, handleSubmit, formState: { errors }, watch, reset } = useForm<FormData>({
+    const { register, handleSubmit, formState: { errors }, watch, reset, setValue } = useForm<FormData>({
         shouldUnregister: true,
         // Задаем значение по умолчанию для поля customer_type
         defaultValues: {
             customer_type: 'individual', 
             delivery_type: 'pickup',
             payment_method: 'order',
+            phone: '', // Инициализируем phone пустой строкой для маски
         }
     });
 
     const customerType = watch('customer_type');
     const deliveryType = watch('delivery_type');
     const payment_method = watch('payment_method');
+
+    const phoneMaskInitialized = useRef(new WeakSet<HTMLInputElement>());
+    const { ref: phoneRef, ...phoneRegister } = register('phone', {
+        required: { value: true, message: 'Укажите телефон' },
+    });
+
+    const setPhoneInputRef = (el: HTMLInputElement | null) => {
+        phoneRef(el);
+
+        if (!el || phoneMaskInitialized.current.has(el)) {
+            return;
+        }
+
+        phoneMaskInitialized.current.add(el);
+        initPhoneMask(el);
+
+        const handleInput = () => {
+            setValue('phone', el.value, { shouldValidate: true, shouldDirty: true });
+        };
+
+        el.addEventListener('input', handleInput);
+    };
+
+    const phoneInput = (
+        <div className={styles.form_item}>
+            <input
+                type="tel"
+                placeholder="+ 7 (000) 000 00 00*"
+                {...phoneRegister}
+                ref={setPhoneInputRef}
+                className={`${styles.input} ${errors.phone ? styles.error : ''}`}
+            />
+            <div className={styles.error_message}>{errors.phone?.message}</div>
+        </div>
+    );
 
     const [isSending, setIsSending] = useState(false);
     const router = useRouter();
@@ -193,15 +226,7 @@ export default function CheckoutForm() {
                                 <div className={styles.error_message}>{errors.email?.message}</div>
                             </div>
 
-                            <div className={styles.form_item}>
-                                <input 
-                                    type="tel" 
-                                    placeholder="+ 7 (000) 000 00 00*" 
-                                    {...register('phone', { required: { value: true, message: 'Укажите телефон' } })} 
-                                    className={`${styles.input} ${errors.phone ? styles.error : ''}`}
-                                />
-                                <div className={styles.error_message}>{errors.phone?.message}</div>
-                            </div>
+                            {phoneInput}
                         </div>
                         )}
 
@@ -238,15 +263,7 @@ export default function CheckoutForm() {
                                     <div className={styles.error_message}>{errors.email?.message}</div>
                                 </div>
 
-                                <div className={styles.form_item}>
-                                    <input 
-                                        type="tel" 
-                                        placeholder="+ 7 (000) 000 00 00*" 
-                                        {...register('phone', { required: { value: true, message: 'Укажите телефон' } })} 
-                                        className={`${styles.input} ${errors.phone ? styles.error : ''}`}
-                                    />
-                                    <div className={styles.error_message}>{errors.phone?.message}</div>
-                                </div>
+                                {phoneInput}
                             </div>
                         )}
                     </div>
