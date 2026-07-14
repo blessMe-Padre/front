@@ -48,12 +48,16 @@ const url = `${process.env.NEXT_PUBLIC_API_SERVER}/api/zakazies`;
 
 export async function sendOrderService(orderData: FormData) {
     try {
+        const payload = { ...orderData };
+        delete payload.policy_agreement;
+        delete payload.oferta_agreement;
+
         const response = await fetch(url, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({ data: { ...orderData } }),
+            body: JSON.stringify({ data: payload }),
         });
 
         const data = await response.json();
@@ -66,6 +70,7 @@ export async function sendOrderService(orderData: FormData) {
 
 export default function CheckoutForm() {
     const { register, handleSubmit, formState: { errors }, watch, reset } = useForm<FormData>({
+        shouldUnregister: true,
         // Задаем значение по умолчанию для поля customer_type
         defaultValues: {
             customer_type: 'individual', 
@@ -203,7 +208,7 @@ export default function CheckoutForm() {
                         {customerType === 'legal' && (
                             <div className={`${styles.legal_info}`}>
                                 <div className={styles.form_item}>
-                                    <input type="text" placeholder="Название компании*" {...register('company_name', { required: { value: true, message: 'Укажите название компании' } })} className={`${styles.input} ${errors.company_name ? styles.error : ''}`} />
+                                    <input type="text" placeholder="Название компании*" {...register('company_name', { required: customerType === 'legal' ? 'Укажите название компании' : false })} className={`${styles.input} ${errors.company_name ? styles.error : ''}`} />
                                     <div className={styles.error_message}>{errors.company_name?.message}</div>
                                 </div>
                                 <div className={styles.form_item}>
@@ -212,15 +217,15 @@ export default function CheckoutForm() {
                                 </div>
 
                                 <div className={styles.form_item}>
-                                    <input type="text" placeholder="ИНН*" {...register('inn', { required: { value: true, message: 'Укажите ИНН' } })} className={`${styles.input} ${errors.inn ? styles.error : ''}`} />
+                                    <input type="text" placeholder="ИНН*" {...register('inn', { required: customerType === 'legal' ? 'Укажите ИНН' : false })} className={`${styles.input} ${errors.inn ? styles.error : ''}`} />
                                     <div className={styles.error_message}>{errors.inn?.message}</div>
                                 </div>
                                 <div className={styles.form_item}>
-                                    <input type="text" placeholder="КПП*" {...register('kpp', { required: { value: true, message: 'Укажите КПП' } })} className={`${styles.input} ${errors.kpp ? styles.error : ''}`} />
+                                    <input type="text" placeholder="КПП*" {...register('kpp', { required: customerType === 'legal' ? 'Укажите КПП' : false })} className={`${styles.input} ${errors.kpp ? styles.error : ''}`} />
                                     <div className={styles.error_message}>{errors.kpp?.message}</div>
                                 </div>
                                 <div className={styles.form_item}>
-                                    <input type="text" placeholder="Юридический адрес*" {...register('legal_address', { required: { value: true, message: 'Укажите Юридический адрес' } })} className={`${styles.input} ${errors.legal_address ? styles.error : ''}`} />
+                                    <input type="text" placeholder="Юридический адрес*" {...register('legal_address', { required: customerType === 'legal' ? 'Укажите Юридический адрес' : false })} className={`${styles.input} ${errors.legal_address ? styles.error : ''}`} />
                                     <div className={styles.error_message}>{errors.legal_address?.message}</div>
                                 </div>
                                 <div className={styles.form_item}>
