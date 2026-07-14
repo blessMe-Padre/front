@@ -35,9 +35,40 @@ export type Dostavka = {
     id?: number;
     documentId?: string;
     title?: string | null;
+    order_title?: string | null;
+    order_steps?: KeyValueItem[];
+    payment_title?: string | null;
+    payment_options?: KeyValueItem[];
+    notice_label?: string | null;
+    notice_text?: string | null;
+    payment_methods_title?: string | null;
+    payment_methods?: TextItem[];
+    delivery_title?: string | null;
+    delivery_steps?: KeyValueItem[];
+    companies_title?: string | null;
+    transport_companies?: NavLinkItem[];
+    meta_title?: string | null;
     description?: string | null;
     keywords?: string | null;
 }
+
+type KeyValueItem = {
+    id?: number;
+    key: string;
+    value: string;
+};
+
+type TextItem = {
+    id?: number;
+    text: string;
+};
+
+type NavLinkItem = {
+    id?: number;
+    title: string;
+    link: string;
+    isBlank: boolean;
+};
 
 export type KategoriyaNovosti = {
     id: number;
