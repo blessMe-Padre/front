@@ -29,9 +29,10 @@ export default async function Home() {
             <Hero slides={slides} />
             <HomeCategory />
             <FormSection 
-                background={1} 
+                background={2} 
                 title="Не знаете, что выбрать?" 
                 description="Оставьте заявку и мы подберем решение под вашу задачу с учетом условий эксплуатации, нагрузок и технологии производства" 
+                buttonText="Получить консультацию"
             />
             <WhyChoose />
             <HomePromos />
@@ -42,6 +43,7 @@ export default async function Home() {
                 textColor="white"
                 title="Подберем материалы под вашу задачу" 
                 description="Оставьте заявку — подберем оптимальное решение и рассчитаем стоимость" 
+                buttonText="Получить консультацию"
             />
         </div>
     );

@@ -8,6 +8,7 @@
     gap: 10px;
     background: none;
     border: none;
+    border: 1px solid var(--blue);
     cursor: pointer;
 
     background-color: var(--blue);
@@ -17,8 +18,32 @@
     padding: 13px 30px;
     border-radius: 10px;
 
+    transition: all 0.3s ease;
+
     @media screen and (max-width: 768px) {
         display: none;
+    }
+
+    svg rect {
+        fill: var(--white);
+    }
+
+    &:hover {
+        color: var(--blue);
+        background-color: var(--white);
+
+        svg rect {
+            fill: var(--blue);
+        }
+    }
+
+    &.active {
+        background-color: #E3E4E7;
+        color: var(--blue);
+
+        svg rect {
+            fill: var(--blue);
+        }
     }
 }
 
@@ -27,10 +52,13 @@
     top: 65px;
     left: 0;
     width: 876px;
-    background-color: #f2f2f2;
     border-radius: 15px;
     padding: 20px;
     z-index: 1000;
+
+    border: 0.30px solid #314077;
+    background: var(--white);
+    z-index: 1;
 
     opacity: 0;
     visibility: hidden;
@@ -52,7 +80,15 @@
     display: flex;
     align-items: center;
     gap: 10px;
-    color: #000;
+    font-family: var(--font-family);
+    font-weight: 500;
+    font-size: 16px;
+    color: var(--black);
+}
+
+.headerCatalogMenuItem img {
+    background-color: var(--blue);
+    border-radius: 5px;
 }
 
 .headerCatalogMenuWrapper {

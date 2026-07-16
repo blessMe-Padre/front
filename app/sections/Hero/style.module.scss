@@ -31,12 +31,13 @@
 
 .hero_title {
     font-weight: 700;
+    font-family: var(--second-family);
     @include adaptiv-value("font-size", 36, 24);
     margin-bottom: 20px;
-    color: #ffffff;
-    text-shadow:
-        2px 2px 4px rgba(0, 0, 0, 0.8),
-        -1px -1px 2px rgba(0, 0, 0, 0.8);
+    color: var(--blue);
+    // text-shadow:
+    //     2px 2px 4px rgba(0, 0, 0, 0.8),
+    //     -1px -1px 2px rgba(0, 0, 0, 0.8);
     font-weight: bold;
     line-height: 1.1;
 
@@ -45,13 +46,13 @@
 
 .hero_description {
     max-width: 680px;
-    font-weight: 400;
+    font-weight: 600;
     font-size: 16px;
     line-height: 1.1;
-    color: #ffffff;
-    text-shadow:
-        2px 2px 4px rgba(0, 0, 0, 0.8),
-        -1px -1px 2px rgba(0, 0, 0, 0.8);
+    color: var(--blue);
+    // text-shadow:
+    //     2px 2px 4px rgba(0, 0, 0, 0.8),
+    //     -1px -1px 2px rgba(0, 0, 0, 0.8);
 }
 
 .custom_pagination {
@@ -108,11 +109,10 @@
         font-weight: 600;
         font-size: 12px;
         line-height: 1.1;
-        color: #ffffff;
         margin-bottom: 10px;
-        text-shadow:
-            2px 2px 4px rgba(0, 0, 0, 0.8),
-            -1px -1px 2px rgba(0, 0, 0, 0.8);
+        color: var(--blue);
+        // text-shadow:
+        //     2px 2px 4px rgba(0, 0, 0, 0.8),
+        //     -1px -1px 2px rgba(0, 0, 0, 0.8);
     }
-
 }

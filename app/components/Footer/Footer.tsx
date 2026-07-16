@@ -32,16 +32,16 @@ export default async function Footer() {
     return (
         <footer className={styles.footer}>
             <div className={`container ${styles.grid}`}>
-                <div>
+                <div style={{ height: "100%" }}>
                     <div className={styles.companyRows}>
-                        <p dangerouslySetInnerHTML={{ __html: contactВata?.ip_data || "" }} />
-                        <p dangerouslySetInnerHTML={{ __html: contactВata?.ip_data_2 || "" }} />
+                        <p dangerouslySetInnerHTML={{ __html: contactВata?.ip_data || "" }} style={{ color: "var(--light-blue)" }}/>
+                        <p dangerouslySetInnerHTML={{ __html: contactВata?.ip_data_2 || "" }} style={{ color: "var(--light-blue)" }} />
                     </div>
 
                     <ul className={styles.legalList}>
                         {legalLinks.map((link) => (
                             <li key={link.label}>
-                                <Link href={link.href}>{link.label}</Link>
+                                <Link href={link.href} style={{ color: "var(--light-blue)" }}>{link.label}</Link>
                             </li>
                         ))}
                     </ul>
@@ -60,12 +60,14 @@ export default async function Footer() {
                 </nav>
 
                 <div className={styles.contacts}>
+                    <div>
                     <a href={`mailto:${contactВata?.email || ""}`} className={styles.email}>
                         {contactВata?.email}
                     </a>
                     <div className={styles.phones}>
                         <a href={`tel:${normalizePhone(contactВata?.phone || "")}`}>{contactВata?.phone}</a>
                         <a href={`tel:${normalizePhone(contactВata?.phone_2 || "")}`}>{contactВata?.phone_2}</a>
+                    </div>
                     </div>
                     <address className={styles.address}>
                         <Image src="/icons/pin-icon.svg" alt="location" width={36} height={38} />

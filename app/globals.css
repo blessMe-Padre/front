@@ -2,11 +2,11 @@
 
 :root {
   --blue: #314077;
+  --light-blue: #bac1db;
   --white: #fff;
   --black: #1f1f1f;
   --gray: #E3E4E7;
-  --font-family: var(--font-family);
-  --second-family: var(--second-family);
+  --anim-function: 0.3s ease;
 }
 
 html,
@@ -72,7 +72,7 @@ ul {
   height: 15px !important;
   border-radius: 50%;
   opacity: 1 !important;
-  transition: all 0.3s ease;
+  transition: all var(--anim-function);
 }
 
 .swiper-pagination-bullet-active {

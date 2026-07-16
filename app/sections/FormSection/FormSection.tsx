@@ -4,12 +4,13 @@ import { Form } from '@/app/components';
 
 type FormSectionProps = {
     background: number;
+    buttonText: string;
     title: string;
     description: string;
     textColor?: 'black' | 'white';
 }
 
-export default function FormSection({ background = 1, title, description, textColor = 'black' }: FormSectionProps) {
+export default function FormSection({ background = 2, title, description, textColor = 'white', buttonText = 'Отправить' }: FormSectionProps) {
     return (
         <div className={styles.section}>
             <div className={styles.spam_section_wrapper}>
@@ -17,7 +18,7 @@ export default function FormSection({ background = 1, title, description, textCo
                     <h2 className={`${styles.title} ${styles[`text_${textColor}`]}`}>{title}</h2>
                     <p className={`${styles.description} ${styles[`text_${textColor}`]}`}>{description}</p>
                 </div>
-                <Form />
+                <Form buttonText={buttonText} />
             </div>
         </div>
     )

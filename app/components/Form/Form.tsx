@@ -37,7 +37,7 @@ async function sendContactFormService(formData: FormData) {
 
 type FormProps = {
     active?: boolean;
-    submitLabel?: string;
+    buttonText?: string;
     formStyle?: CSSProperties;
     buttonStyle?: CSSProperties;
     buttonClassName?: string;
@@ -46,7 +46,7 @@ type FormProps = {
 
 export default function Form({
     active = false,
-    submitLabel = 'Отправить',
+    buttonText = 'Отправить',
     formClassName,
     buttonClassName,
 }: FormProps) {
@@ -95,7 +95,7 @@ export default function Form({
                 type="submit"
                 disabled={isSending}
                 >
-                    {isSending ? 'Отправка...' : submitLabel}
+                    {isSending ? 'Отправка...' : buttonText}
             </button>
 
             <div className={styles.form_item_checkbox}>

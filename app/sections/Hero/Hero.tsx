@@ -72,7 +72,7 @@ export default function Hero({ slides }: HeroProps) {
 
                             <div className={styles.hero_item_content}>
                                 <p className={styles.hero_title}>{slide.title}</p>
-                                <p className={styles.hero_description}>{slide.descriptions}</p>
+                                <div dangerouslySetInnerHTML={{ __html: slide.descriptions ?? "" }} className={styles.hero_description} />
                             </div>
 
                             <div className={styles.hero_button_wrapper}>

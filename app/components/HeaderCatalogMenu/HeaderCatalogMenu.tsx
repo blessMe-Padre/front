@@ -31,11 +31,22 @@ export default function HeaderCatalogMenu({ catalogMenu }: HeaderCatalogMenuProp
     return (
         <div className={styles.headerCatalogMenuWrapper} ref={menuRef}>
             <button 
-            className={styles.headerCatalogMenuButton}
+            className={`${styles.headerCatalogMenuButton} ${isActive ? styles.active : ''}`}
             onClick={() => setIsActive(!isActive)}
             type="button"
             >
-                <Image src="/icons/dots.svg" alt="catalog" width={20} height={20} />
+                {/* <Image src="/icons/dots.svg" alt="catalog" width={20} height={20} /> */}
+                <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="2.82353" height="2.82353"/>
+                    <rect x="6.82352" width="2.82353" height="2.82353"/>
+                    <rect x="13.6471" width="2.82353" height="2.82353"/>
+                    <rect y="6.82353" width="2.82353" height="2.82353"/>
+                    <rect x="6.82352" y="6.82353" width="2.82353" height="2.82353"/>
+                    <rect x="13.6471" y="6.82353" width="2.82353" height="2.82353"/>
+                    <rect y="13.6471" width="2.82353" height="2.82353"/>
+                    <rect x="6.82352" y="13.6471" width="2.82353" height="2.82353"/>
+                    <rect x="13.6471" y="13.6471" width="2.82353" height="2.82353"/>
+                </svg>
                 <span>Каталог</span>
             </button>
 

@@ -68,7 +68,7 @@ export default function HeaderContent({ phone, navigationList, address, telegram
                             className={`${styles.header_menu_button} ${!isTopBarVisible ? styles.header_menu_button_visible : ""}`}
                             onClick={() => {setIsOpen(true);}}
                         >
-                            <Image src="/icons/burger.svg" alt="" width={34} height={23} />
+                            <Image src="/icons/burger.svg" alt="" width={24} height={16} />
                         </button>
                         <Link href="/" className={styles.header_logo}>
                             <Image src="/logo.svg" alt="logo" width={131} height={65} priority />

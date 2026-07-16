@@ -68,9 +68,14 @@
     font-weight: 400;
     line-height: 1.1;
     color: #fff;
-    transition: background-color 0.3s ease;
-
+    border: 1px solid var(--blue);
+    transition: color 0.3s ease, background-color 0.3s ease;
     flex: 0 0 auto;
+
+    &:hover {
+        background-color: var(--white);
+        color: var(--blue);
+    }
 
     @media screen and (max-width: 560px) {
         display: none;
@@ -85,10 +90,11 @@
     pointer-events: none;
     transition:
         opacity 0.3s ease,
+        color 0.3s ease,
+        background-color 0.3s ease,
         transform 0.3s ease;
     width: 0;
     margin-right: 0;
-
     flex: 0 0 auto;
 
     @media screen and (max-width: 768px) {

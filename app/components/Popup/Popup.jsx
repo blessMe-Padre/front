@@ -1,5 +1,8 @@
-import styles from "./style.module.scss";
+"use client";
+import { useEffect } from "react";
 import { Form } from "..";
+
+import styles from "./style.module.scss";
 
 export default function Popup({ active, setActive }) {
     const handleKeyDown = (event) => {
@@ -7,6 +10,21 @@ export default function Popup({ active, setActive }) {
             setActive(false);
         }
     };
+
+    const lockScroll = (active) => {
+        const scrollWidth = window.innerWidth - document.documentElement.clientWidth;
+        const paddingRight = active ? `${scrollWidth}px` : "0";
+
+        document.documentElement.style.overflow = active ? "hidden" : "auto";
+        document.documentElement.style.paddingRight = paddingRight;
+    };
+
+    useEffect(() => {
+        lockScroll(active);
+        return () => {
+            lockScroll(false);
+        };
+    }, [active]);
 
     return (
         <div

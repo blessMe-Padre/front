@@ -17,6 +17,10 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
+        hostname: 'showcase-inside360.ru',
+      },
+      {
+        protocol: 'https',
         hostname: 'shop.compass25.ru',
       },
       {

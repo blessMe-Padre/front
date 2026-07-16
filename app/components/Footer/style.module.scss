@@ -36,8 +36,8 @@
 }
 
 .copyright {
-    margin-top: 27px;
-    color: #a19e9e;
+    margin-top: 60px;
+    color: var(--light-blue);
     font-size: 16px;
     font-weight: 500;
     line-height: 1.2;
@@ -55,6 +55,7 @@
     display: grid;
     gap: 18px;
     min-width: 0;
+    height: 100%;
 }
 
 .email {
@@ -76,7 +77,7 @@
     display: flex;
     align-items: flex-start;
     gap: 16px;
-    margin-top: clamp(28px, 5.8vw, 85px);
+    margin-top: auto;
     font-size: 16px;
     font-weight: 400;
     font-style: normal;
@@ -168,7 +169,7 @@
         justify-items: start;
     }
 
-    .brandColumn > div {
+    .brandColumn>div {
         justify-self: end;
     }
 
@@ -260,7 +261,7 @@
         justify-items: start;
     }
 
-    .brandColumn > div {
+    .brandColumn>div {
         justify-self: stretch;
     }
 
