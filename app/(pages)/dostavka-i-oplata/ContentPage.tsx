@@ -1,5 +1,4 @@
 
-import { ViewTransition } from 'react';
 import { Dostavka } from '@/app/types/types';
 import { FormSection } from '@/app/sections';
 
@@ -7,8 +6,7 @@ import styles from './style.module.scss';
 
 export default function ContentPage({ data }: { data: Dostavka }) {
     return (
-        <ViewTransition name="dostavka-i-oplata">
-            <main className={`container ${styles.page}`}>
+        <main className={`container ${styles.page}`}>
                 <h1 className={styles.page_title}>{data.title ?? 'Доставка и оплата'}</h1>
 
                 <section className={styles.section}>
@@ -84,7 +82,6 @@ export default function ContentPage({ data }: { data: Dostavka }) {
                     title="Хотите задать вопрос?"
                     description="Оставьте ваш телефон, и наш специалист перезвонит Вам в кратчайшие сроки. Мы всегда готовы помочь вам с выбором материала или ответить на любые вопросы по нашей продукции и услугам"
                 />
-            </main>
-        </ViewTransition>
+        </main>
     );
 }

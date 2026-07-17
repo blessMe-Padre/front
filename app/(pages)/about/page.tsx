@@ -1,4 +1,3 @@
-import { ViewTransition } from 'react';
 import fetchData from '@/app/utils/fetchData';
 import Image from 'next/image';
 import { Breadcrumbs } from '@/app/components';
@@ -49,7 +48,7 @@ export default async function About() {
     : "/placeholder.svg";
 
     return (
-        <ViewTransition name="about">
+        <>
             <Breadcrumbs secondLabel="О компании" />
             <main className={`container ${styles.about}`}>
                 <h1 className={styles.title}>Торговая компания «РИФ»</h1>
@@ -84,6 +83,6 @@ export default async function About() {
                     description="Оставьте ваш телефон, и наш специалист перезвонит Вам в кратчайшие сроки. Мы всегда готовы помочь вам с выбором материала или ответить на любые вопросы по нашей продукции и услугам"
                 />
             </main>
-        </ViewTransition>
+        </>
     );
 }

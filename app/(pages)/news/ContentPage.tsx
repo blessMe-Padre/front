@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { ViewTransition } from 'react';
 
 import NewsCard from '@/app/components/NewsCard/NewsCard';
 import fetchData from '@/app/utils/fetchData';
@@ -92,7 +91,6 @@ export default function ContentPage() {
     };
 
     return (
-        <ViewTransition name="news">
         <div className="container">
             <h1 className={styles.title}>Новости и статьи</h1>
 
@@ -157,6 +155,5 @@ export default function ContentPage() {
             />
 
         </div>
-       </ViewTransition>
     )
 }

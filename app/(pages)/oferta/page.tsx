@@ -1,4 +1,3 @@
-import { ViewTransition } from 'react';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { Breadcrumbs, ContentRenderer } from '@/app/components';
@@ -25,12 +24,12 @@ export default async function Policy() {
     }
 
     return (
-        <ViewTransition name="policy">
+        <>
             <Breadcrumbs secondLabel="Договор оферты" />
             <div className="container" style={{ marginBottom: '60px' }}>
                 <h1 className='title'>Договор оферты</h1>
                 <ContentRenderer content={content} />
             </div>
-        </ViewTransition>
+        </>
     );
 }

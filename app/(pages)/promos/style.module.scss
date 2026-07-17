@@ -6,7 +6,8 @@
 }
 
 .title {
-    @include adaptiv-value("font-size", 46, 24);
+    margin: 26px 0 20px;
+    font-size: 24px;
     font-weight: 700;
 }
 

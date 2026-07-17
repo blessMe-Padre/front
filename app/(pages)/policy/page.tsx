@@ -1,4 +1,3 @@
-import { ViewTransition } from 'react';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { Breadcrumbs, ContentRenderer } from '@/app/components';
@@ -16,8 +15,6 @@ type PolicyResponse = {
     } | null;
 };
 
-
-
 ///api/politika-konfidenczialnosti
 export default async function Policy() {
     const policy = await fetchData<PolicyResponse>('/api/politika-konfidenczialnosti');
@@ -28,12 +25,12 @@ export default async function Policy() {
     }
 
     return (
-        <ViewTransition name="policy">
+        <>
             <Breadcrumbs secondLabel="Политика конфиденциальности" />
             <div className="container" style={{ marginBottom: '60px' }}>
                 <h1 className='title'>Политика конфиденциальности</h1>
                 <ContentRenderer content={content} />
             </div>
-        </ViewTransition>
+        </>
     );
 }

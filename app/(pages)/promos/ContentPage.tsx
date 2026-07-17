@@ -3,7 +3,6 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ViewTransition } from 'react';
 
 import fetchData from '@/app/utils/fetchData';
 import { Novost, StrapiListResponse } from '@/app/types/types';
@@ -75,7 +74,6 @@ export default function ContentPage() {
     };
 
     return (
-        <ViewTransition name="promos">
         <div className="container">
             <div className={styles.page_content}>
             <h1 className={styles.title}>Акции</h1>
@@ -127,6 +125,5 @@ export default function ContentPage() {
                 description="Подпишитесь на нашу рассылку и получайте свежие новости и статьи о последних тенденциях в мире композитных материалов, а также эксклюзивные предложения от компании РИФ" 
                 />
             </div>
-       </ViewTransition>
     )
 }

@@ -40,7 +40,8 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
                 <ContentPage product={product}/>
 
                 <FormSection 
-                background={1} 
+                background={2} 
+                buttonText="Получить консультацию"
                 title="Не знаете, что выбрать?" 
                 description="Оставьте заявку и мы подберем решение под вашу задачу с учетом условий эксплуатации, нагрузок и технологии производства" 
             />

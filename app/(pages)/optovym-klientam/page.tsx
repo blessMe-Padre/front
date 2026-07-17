@@ -1,4 +1,4 @@
-import { Fragment, ViewTransition } from 'react';
+import { Fragment } from 'react';
 import type { Metadata } from 'next';
 import { Breadcrumbs } from '@/app/components';
 import fetchData from '@/app/utils/fetchData';
@@ -37,8 +37,7 @@ export default async function OptovymKlientam() {
     const page = response.data;
 
     return (
-        <ViewTransition name="optovymKlientam">
-            <div className={styles.content}>
+        <div className={styles.content}>
                 <Breadcrumbs secondLabel={page.title} />
                 <div className="container">
                     <h1 className={styles.title}>{page.title}</h1>
@@ -85,7 +84,6 @@ export default async function OptovymKlientam() {
                         description="Оставьте ваш телефон, и наш специалист перезвонит Вам в кратчайшие сроки. Подберем лучшие условия для наших оптовых клиентов,  и подготовим предложение под ваше производство" 
                     />
                 </div>
-            </div>
-        </ViewTransition>
+        </div>
     );
 }
