@@ -30,7 +30,7 @@ export default function CategoryCardList({ categories }: CategoryCardListProps) 
                                 alt={item.name || ""}
                                 className={styles.image}
                             />
-                            <p>{item.name}</p>
+                            <p className={styles.category_name}>{item.name}</p>
                         </Link>
                     </li>
                 );

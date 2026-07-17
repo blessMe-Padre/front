@@ -29,6 +29,11 @@
     color: var(--black);
 }
 
+.category_name {
+    position: relative;
+    z-index: 1;
+}
+
 .title {
     font-family: var(--font-family);
     font-weight: 700;
