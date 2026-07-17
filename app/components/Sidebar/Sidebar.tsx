@@ -51,7 +51,11 @@ export default function Sidebar({ isOpen, setIsOpen, navigationList, phone, addr
                     <ul>
                         {navigationList.map((item: NavigationItem) => (
                             <li key={item.id}>
-                                <Link className={styles.nav_link} href={`/${item.link}`} onClick={() => setIsOpen(false)}>{item.title}</Link>
+                                {item.isBlank ? (
+                                    <a className={styles.nav_link} href={item.link} target="_blank" rel="noopener noreferrer" onClick={() => setIsOpen(false)}>{item.title}</a>
+                                ) : (
+                                    <Link className={styles.nav_link} href={`/${item.link}`} onClick={() => setIsOpen(false)}>{item.title}</Link>
+                                )}
                             </li>
                         ))}
                     </ul>

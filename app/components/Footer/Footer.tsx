@@ -53,7 +53,11 @@ export default async function Footer() {
                     <ul className={styles.navList}>
                         {navData.map((item) => (
                             <li key={item.id}>
-                                <Link href={item?.link}>{item?.title}</Link>
+                                {item.isBlank ? (
+                                    <a href={item.link} target="_blank" rel="noopener noreferrer">{item.title}</a>
+                                ) : (
+                                    <Link href={`/${item.link}`}>{item.title}</Link>
+                                )}
                             </li>
                         ))}
                     </ul>

@@ -172,6 +172,17 @@
     padding: 15px;
 }
 
+.counter_button {
+    width: 20px;
+    height: 20px;
+    background-color: var(--white);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .add_to_cart_button {
     width: 100%;
 }
