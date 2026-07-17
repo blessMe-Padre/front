@@ -17,7 +17,6 @@ export default async function PromosPage() {
         <>
             <Breadcrumbs secondLabel='Акции' />
             <ContentPage />
-            <SpamSection />
         </>
     )
 }

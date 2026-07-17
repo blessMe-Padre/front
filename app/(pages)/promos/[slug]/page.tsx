@@ -7,6 +7,7 @@ import styles from '../style.module.scss';
 import { ContentItem } from '@/app/components/ContentRenderer/ContentRenderer';
 import Link from 'next/link';
 import { Metadata } from 'next';
+import { notFound } from 'next/navigation';
 
 type NewsResponse = {
     data?: {
@@ -48,6 +49,10 @@ export default async function NewsPage({ params }: { params: Promise<{ slug: str
     const news = await fetchData<NewsResponse>(`/api/akcziis?populate[0]=image&filters[slug][$eq]=${slug}`);
     const newsData = news?.data?.[0];
     const imageSrc = newsData?.image?.url ? `${imageServer}${newsData.image.url}` : "/placeholder.svg";
+
+    if (!newsData) {
+        return notFound();
+    }
 
     return (
         <>
