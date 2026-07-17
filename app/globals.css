@@ -6,7 +6,7 @@
   --white: #fff;
   --black: #1f1f1f;
   --gray: #E3E4E7;
-  --anim-function: 0.3s ease;
+  --transition: 0.3s ease;
 }
 
 html,

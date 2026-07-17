@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useRef } from "react";
 import { CatalogMenuItem, Product } from "@/app/types/types";
 import { CatalogFilters as CatalogFilterValues } from "@/app/utils/catalogQueries";
+import Image from "next/image";
 
 import styles from "../style.module.scss";
 
@@ -18,6 +19,8 @@ type CatalogFiltersProps = {
     };
     products: Product[];
 };
+
+const imageServer = process.env.NEXT_PUBLIC_IMAGE_SERVER ?? "";
 
 const getCategoryHref = (currentSlug: string, filters: CatalogFilterValues, categorySlug?: string) => {
     const params = new URLSearchParams();
@@ -113,6 +116,7 @@ export default function CatalogFilters({ currentSlug, subcategories, filters, fi
                                 aria-current={filters.category === category.slug ? "page" : undefined}
                             >
                                 <p>{category.name}</p>
+                                <Image src={category.image?.url ? `${imageServer}${category.image.url}` : "/placeholder.svg"} alt={category.name} width={141} height={80} />
                             </Link>
                         </li>
                     ))}

@@ -72,7 +72,7 @@ export default function Cart() {
             ) : (
             <div className={styles.cart_empty}>
                 <div className={styles.cart_empty_wrapper}>
-                    <Image src="/icons/cart-empty.svg" alt="корзина пуста" width={220} height={206} />
+                    <Image src="/cart-empty.png" alt="корзина пуста" width={220} height={206} />
                     <p>В Вашей корзине пока нет товаров</p>
                     <p><Link href="/catalog" className={styles.cart_empty_button}>Перейти в каталог, </Link>чтобы начать покупки</p>
                 </div>

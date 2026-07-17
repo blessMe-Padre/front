@@ -4,6 +4,7 @@ import type { Contact, StrapiSingleResponse } from '@/app/types/types';
 import fetchData from '@/app/utils/fetchData';
 import normalizePhone from '@/app/utils/NormalizePhone';
 import styles from './style.module.scss';
+import FormSection from '@/app/sections/FormSection/FormSection';
 
 export const metadata: Metadata = {
     title: 'Контакты | RiftVL',
@@ -54,14 +55,13 @@ export default async function ContactsPage() {
                         allowFullScreen
                     />
                 </div>
-
-                <section className={styles.consultation}>
-                    <div className={styles.consultationContent}>
-                        <h2>Хотите задать вопрос?</h2>
-                        <p>Оставьте ваш телефон, и наш специалист перезвонит Вам в кратчайшие сроки. Мы всегда готовы помочь вам с выбором материала или ответить на любые вопросы по нашей продукции и услугам</p>
-                    </div>
-                    <Form submitLabel="Получить консультацию" />
-                </section>
+               
+                <FormSection 
+                        background={2} 
+                        buttonText="Получить консультацию"
+                        title="Хотите задать вопрос?" 
+                        description="Оставьте ваш телефон, и наш специалист перезвонит Вам в кратчайшие сроки. Мы всегда готовы помочь вам с выбором материала или ответить на любые вопросы по нашей продукции и услугам" 
+                    />
             </main>
         </>
     );

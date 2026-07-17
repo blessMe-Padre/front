@@ -8,10 +8,7 @@ export const metadata: Metadata = {
     keywords: 'Новости, статьи, RiftVL',
 }; 
 
-
-
 export default async function NewsPage() {
-
     return (
         <>
             <Breadcrumbs secondLabel='Новости' />

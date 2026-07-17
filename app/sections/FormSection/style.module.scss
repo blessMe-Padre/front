@@ -33,12 +33,14 @@
 }
 
 .title {
+    font-family: var(--second-family);
     font-weight: 566;
     @include adaptiv-value("font-size", 36, 24);
     margin-bottom: 40px;
 }
 
 .description {
+    font-family: var(--font-family);
     font-weight: 500;
     font-size: 16px;
     max-width: 500px;

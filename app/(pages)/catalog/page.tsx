@@ -24,7 +24,8 @@ export default async function CatalogPage() {
             <h1 className={styles.title}>Каталог продукции</h1>
             <CategoryCardList categories={catalogMenu.data || []} />
             <FormSection 
-                background={1} 
+                background={3} 
+                buttonText="Получить консультацию"
                 title="Не знаете, что выбрать?" 
                 description="Оставьте заявку и мы подберем решение под вашу задачу с учетом условий эксплуатации, нагрузок и технологии производства" 
             />

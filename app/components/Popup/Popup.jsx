@@ -46,31 +46,8 @@ export default function Popup({ active, setActive }) {
                             setActive(false);
                         }}
                     >
-                        <svg
-                            width="23"
-                            height="22"
-                            viewBox="0 0 23 22"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                        >
-                            <rect
-                                x="3"
-                                y="18.4463"
-                                width="21.8033"
-                                height="0.726776"
-                                rx="0.363388"
-                                transform="rotate(-45 3 18.4463)"
-                                fill="#fff"
-                            />
-                            <rect
-                                x="4.21094"
-                                y="3"
-                                width="21.8033"
-                                height="0.726776"
-                                rx="0.363388"
-                                transform="rotate(45 4.21094 3)"
-                                fill="#fff"
-                            />
+                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M14 1.41L12.59 0L7 5.59L1.41 0L0 1.41L5.59 7L0 12.59L1.41 14L7 8.41L12.59 14L14 12.59L8.41 7L14 1.41Z" fill="black" />
                         </svg>
                     </button>
 

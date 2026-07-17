@@ -79,7 +79,8 @@ export default function ContentPage({ data }: { data: Dostavka }) {
                 </section>
 
                 <FormSection
-                    background={1}
+                    background={2}
+                    buttonText="Получить консультацию"
                     title="Хотите задать вопрос?"
                     description="Оставьте ваш телефон, и наш специалист перезвонит Вам в кратчайшие сроки. Мы всегда готовы помочь вам с выбором материала или ответить на любые вопросы по нашей продукции и услугам"
                 />

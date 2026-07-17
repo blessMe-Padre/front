@@ -3,6 +3,7 @@
 }
 
 .title {
+    font-family: var(--second-family);
     margin: 26px 0 44px;
     color: var(--black);
     font-size: 24px;
@@ -56,6 +57,7 @@
 }
 
 .cardTitle {
+    font-family: var(--second-family);
     max-width: 230px;
     font-size: clamp(34px, 3vw, 44px);
     font-weight: 600;

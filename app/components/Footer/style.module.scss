@@ -59,10 +59,12 @@
 }
 
 .email {
+    display: block;
     font-size: clamp(28px, 3vw, 36px);
-    font-weight: 400;
+    font-weight: 500;
     line-height: 1.2;
     overflow-wrap: anywhere;
+    margin-bottom: 20px;
 }
 
 .phones {
