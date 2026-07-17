@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function NotFound() {
     return (
@@ -29,9 +30,14 @@ export default function NotFound() {
                 </div>
 
                 <div className="relative aspect-square w-[min(34vw,470px)] justify-self-center max-[900px]:hidden" aria-hidden="true">
-                    <span className="absolute inset-[5%] block rounded-full border-[clamp(22px,3vw,46px)] border-solid border-[var(--light-blue)]" />
-                    <span className="absolute top-[20%] right-0 block h-[55%] w-[55%] rotate-[14deg] rounded-[28%_8%_28%_8%] bg-[var(--blue)] shadow-[-30px_30px_0_rgb(49_64_119_/_12%)]" />
-                    <span className="absolute bottom-[2%] left-[2%] block aspect-square w-[18%] rounded-full bg-white shadow-[0_14px_40px_rgb(49_64_119_/_18%)]" />
+                    <Image
+                        src="/logo-big.png"
+                        alt=""
+                        fill
+                        priority
+                        sizes="(max-width: 900px) 0px, 470px"
+                        className="object-contain"
+                    />
                 </div>
             </div>
         </section>
