@@ -82,3 +82,29 @@ const orderItems = cartItems.map((item) => ({
 
 После успешного создания заказа корзина очищается через `clearCart()`.
 
+## Онлайн-оплата
+
+Для онлайн-заказа checkout сначала обращается к `POST /api/payments/checkout`.
+Strapi фиксирует позиции по опубликованным товарам, сохраняет заказ и выдаёт
+cookie гостевого доступа. `POST /api/payments/create` создаёт платёж по
+сохранённому заказу. `GET /api/payments/status/:orderId` использует ту же
+cookie. После отмены платёжная попытка закрывается.
+
+Серверные настройки в `back/.env`
+
+- `YOOKASSA_SHOP_ID` и `YOOKASSA_SECRET_KEY` из тестового магазина для локальной проверки.
+- `YOOKASSA_RETURN_URL` с адресом страницы `/checkout/return` на реальном HTTPS-домене.
+- `YOOKASSA_VAT_CODE` и `YOOKASSA_PAYMENT_MODE` по настройкам кассы магазина.
+  Код `1` означает «Без НДС». Режим чека принимает `full_prepayment` или `full_payment`.
+
+Локально направьте HTTPS-туннель на порт 3000. Next.js в режиме разработки
+проксирует `/api/payments/*` в Strapi. В кабинете тестового магазина укажите
+`https://<домен-туннеля>/api/payments/webhook` и события
+`payment.succeeded` и `payment.canceled`. Начните оформление с того же домена
+туннеля. После изменения `back/.env` пересоздайте Strapi командой
+`docker compose up -d --no-deps --force-recreate strapi`.
+
+На VPS `/api/payments/*` обслуживает существующее правило Nginx для `/api/`.
+Перед развёртыванием сохраните резервную копию MySQL. Настройте адрес возврата,
+вебхук и учётные данные для нужного магазина отдельно от локального окружения.
+

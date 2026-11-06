@@ -43,6 +43,17 @@ type OrderItem = {
 
 const url = `${process.env.NEXT_PUBLIC_API_SERVER}/api/zakazies`;
 
+async function paymentRequest<T>(path: string, body: object): Promise<T> {
+    const response = await fetch(`/api/payments/${path}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+    });
+    const result = await response.json();
+    if (!response.ok) throw new Error(result.message ?? 'Не удалось выполнить онлайн-оплату');
+    return result;
+}
+
 export async function sendOrderService(orderData: FormData) {
     try {
         const payload = { ...orderData };
@@ -117,6 +128,9 @@ export default function CheckoutForm() {
     );
 
     const [isSending, setIsSending] = useState(false);
+    const [submitError, setSubmitError] = useState('');
+    const sending = useRef(false);
+    const checkout = useRef<{ token: string; orderId?: string } | null>(null);
     const router = useRouter();
 
 
@@ -128,22 +142,54 @@ export default function CheckoutForm() {
 
     const { counter, price } = useMemo(() => {
         return cartItems.reduce(
-            (totals, item) => ({
-                counter: totals.counter + item.quantity,
-                price: totals.price + (item.price ?? 0) * item.quantity,
-            }),
+            (totals, item) => {
+                const base = item.price ?? 0;
+                const sale = item.priceSales ?? 0;
+                const unitPrice = payment_method === 'online' && sale > 0 && sale < base ? sale : base;
+                return {
+                    counter: totals.counter + item.quantity,
+                    price: totals.price + unitPrice * item.quantity,
+                };
+            },
             { counter: 0, price: 0 }
         );
-    }, [cartItems]);
+    }, [cartItems, payment_method]);
 
     const isCartEmpty = cartItems.length === 0;
 
     const onSubmit: SubmitHandler<FormData> = async (formData) => {
-        if (isCartEmpty) return;
+        if (isCartEmpty || sending.current) return;
 
+        sending.current = true;
         setIsSending(true);
+        setSubmitError('');
 
         try {
+            if (formData.payment_method === 'online') {
+                const pending = checkout.current ??= { token: crypto.randomUUID() };
+                if (!pending.orderId) {
+                    const order = await paymentRequest<{ orderId: string }>('checkout', {
+                        token: pending.token,
+                        data: {
+                            ...formData,
+                            orderItems: cartItems.map(({ documentId, quantity }) => ({ documentId, quantity })),
+                        },
+                    });
+                    pending.orderId = order.orderId;
+                }
+                const payment = await paymentRequest<{ confirmationUrl?: string; status: string }>('create', {
+                    orderId: pending.orderId,
+                });
+                clearCart();
+                checkout.current = null;
+                if (payment.confirmationUrl) {
+                    window.location.assign(payment.confirmationUrl);
+                } else {
+                    router.push(`/checkout/return?order=${encodeURIComponent(pending.orderId)}`);
+                }
+                return;
+            }
+
             const orderItems = cartItems.map((item) => {
                 const price = item.price ?? 0;
 
@@ -165,8 +211,6 @@ export default function CheckoutForm() {
                 orderItems,
             });
 
-            console.log(data);
-
             if (response.ok) {
                 reset();
                 clearCart();
@@ -176,8 +220,13 @@ export default function CheckoutForm() {
                     : '/checkout/success';
 
                 router.push(successUrl);
+            } else {
+                setSubmitError('Не удалось сохранить заказ. Попробуйте ещё раз.');
             }
+        } catch (error) {
+            setSubmitError(error instanceof Error ? error.message : 'Не удалось оформить заказ');
         } finally {
+            sending.current = false;
             setIsSending(false);
         }
     };
@@ -372,6 +421,7 @@ export default function CheckoutForm() {
                             >
                                 {isSending ? 'Отправка...' : 'Оформить заказ'}
                         </button>
+                        {submitError && <p role="alert">{submitError}</p>}
 
                         <div className={`${styles.form_item} ${styles.agreement_item}`}>
                             <div className={styles.agreement_item_row}>

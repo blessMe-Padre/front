@@ -1,6 +1,14 @@
 import type { NextConfig } from "next";
 
+const devTunnelHost = process.env.DEV_TUNNEL_HOST;
+
 const nextConfig: NextConfig = {
+  allowedDevOrigins: devTunnelHost ? [devTunnelHost] : [],
+  async rewrites() {
+    if (process.env.NODE_ENV !== 'development') return [];
+    const api = process.env.API_SERVER ?? 'http://localhost:1337';
+    return [{ source: '/api/payments/:path*', destination: `${api}/api/payments/:path*` }];
+  },
   // API_SERVER в Docker = http://strapi:1337 — для next/image на сервере frontend
   env: {
     NEXT_PUBLIC_IMAGE_SERVER:
